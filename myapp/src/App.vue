@@ -4,12 +4,17 @@
     <!-- <router-link to="/about">About</router-link>|
     <router-link to="/">Home</router-link> -->
     <router-view />
-  </div>  
+  </div>
 </template>
+<script lang="ts">
+import { defineComponent } from 'vue'
+export default defineComponent({
+  name: 'app'
+})
+</script>
+
 <style scoped lang="scss">
-    #app{
-      min-width: 1080px;
-
-    }
+#app {
+  min-width: 1080px;
+}
 </style>
-
