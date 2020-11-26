@@ -11,12 +11,13 @@
 </template>
 
 <script lang='ts'>
-export default {
+import { defineComponent } from 'vue'
+export default defineComponent({
   name: 'login',
   props: {
     msg: String
   }
-}
+})
 </script>
 
 <style scoped lang="scss">
