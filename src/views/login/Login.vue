@@ -11,7 +11,6 @@
 </template>
 
 <script lang='ts'>
-import { Button } from 'ant-design-vue'
 export default {
   name: 'login',
   props: {
