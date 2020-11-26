@@ -10,6 +10,21 @@ const routes = [
     path: '/login',
     name: 'me',
     component: () => import('../views/login/Login.vue')
+  },
+  {
+    path: '/sendQuery',
+    name: 'sendQuery',
+    component: () => import('../views/querySystem/SendQuery.vue')
+  },
+  {
+    path: '/sendStatistics',
+    name: 'sendStatistics',
+    component: () => import('../views/querySystem/SendStatistics.vue')
+  },
+  {
+    path: '/leadingIn',
+    name: 'leadingIn',
+    component: () => import('../views/querySystem/LeadingIn.vue')
   }
 ]
 
