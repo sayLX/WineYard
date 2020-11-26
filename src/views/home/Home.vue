@@ -6,8 +6,9 @@
 
 <script lang='ts'>
 // @ is an alias to /src
+import { defineComponent } from 'vue'
 
-export default {
+export default defineComponent({
   name: 'Home'
-}
+})
 </script>
