@@ -1,12 +1,12 @@
 <template>
     <div class="title">
-        <div class="t">{{title}}</div>
+        <span class="t">{{title}}</span>
     </div>
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
 export default defineComponent({
-  name: 'Title',
+  name: 'ChartTitle',
   props: {
     title: {
       type: String,
@@ -18,12 +18,13 @@ export default defineComponent({
 <style lang="scss" scoped>
 .title {
     width: 100%;
-    background-color: #ecf6f7;
+    height: 36px;
     padding: 5px 10px;
+    border-bottom: solid 1px #e2e2e2;
     .t {
         font-weight: 600;
-        border-left: 4px solid #28a2fd;
-        padding-left: 10px;
+        border-bottom: 2px solid #28a2fd;
+        padding: 9px 5px;
     }
 }
 </style>
