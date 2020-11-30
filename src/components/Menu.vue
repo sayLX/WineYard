@@ -73,6 +73,12 @@
 import { MailOutlined, SettingOutlined } from '@ant-design/icons-vue'
 import { defineComponent, reactive, toRefs } from 'vue'
 import { useRouter } from 'vue-router'
+interface MenuData {
+    key: string;
+    keyPath: string[];
+    item: object;
+    domEvent: object;
+}
 export default defineComponent({
   components: {
     MailOutlined,
@@ -94,7 +100,8 @@ export default defineComponent({
       }
     }
     const router = useRouter()
-    const clickItem = (e: object) => {
+    const clickItem = (e: MenuData) => {
+      console.log(e)
       const url = e.key
       router.push({
         name: url

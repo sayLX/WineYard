@@ -81,6 +81,9 @@
                     </a-row>
                 </a-form>
             </div>
+            <div class="column">
+                <send-table></send-table>
+            </div>
         </div>
     </div>
 </template>
@@ -89,11 +92,13 @@
 import { defineComponent, reactive, ref } from 'vue'
 import Title from './components/Title.vue'
 import { SearchOutlined } from '@ant-design/icons-vue'
+import SendTable from './components/SendTable.vue'
 export default defineComponent({
   name: '',
   components: {
     Title,
-    SearchOutlined
+    SearchOutlined,
+    SendTable
   },
   setup () {
     const form = reactive({})
@@ -126,8 +131,14 @@ export default defineComponent({
         top: 12px;
         bottom: 12px;
         border: solid 1px #d8d7d7;
+        flex-direction: column;
+        overflow: hidden;
         .form {
-            padding: 10px 20px;
+            margin: 10px 20px;
+            border-bottom: 1px solid #a9c4df;
+        }
+        .column {
+            margin: 10px 20px;
         }
     }
 }
