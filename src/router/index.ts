@@ -25,6 +25,31 @@ const routes = [
     path: '/leadingIn',
     name: 'leadingIn',
     component: () => import('../views/querySystem/LeadingIn.vue')
+  },
+  {
+    path: '/user',
+    name: 'user',
+    component: () => import('../views/sysConfig/User.vue')
+  },
+  {
+    path: '/organization',
+    name: 'organization',
+    component: () => import('../views/sysConfig/Organization.vue')
+  },
+  {
+    path: '/dictionary',
+    name: 'dictionary',
+    component: () => import('../views/sysConfig/Dictionary.vue')
+  },
+  {
+    path: '/function',
+    name: 'function',
+    component: () => import('../views/sysConfig/Function.vue')
+  },
+  {
+    path: '/lawyer',
+    name: 'lawyer',
+    component: () => import('../views/userInfo/Lawyer.vue')
   }
 ]
 

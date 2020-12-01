@@ -13,19 +13,44 @@
 import { defineComponent } from 'vue'
 const columns = [
   {
-    title: '短信模板名称',
+    title: '工号',
     dataIndex: 'infoName',
     key: 'infoName'
   },
   {
-    title: '接收人姓名',
+    title: '姓名',
     dataIndex: 'name',
     key: 'name'
   },
   {
-    title: '接收人电话号码',
-    dataIndex: 'phone',
-    key: 'phone'
+    title: '性别',
+    dataIndex: 'xb',
+    key: 'xb'
+  },
+  {
+    title: '登陆别名',
+    dataIndex: 'dlbm',
+    key: 'dlbm'
+  },
+  {
+    title: '工作证号',
+    dataIndex: 'gzzh',
+    key: 'gzzh'
+  },
+  {
+    title: '联系电话',
+    dataIndex: 'lxdh',
+    key: 'lxdh'
+  },
+  {
+    title: '电子邮件',
+    dataIndex: 'dzyj',
+    key: 'dzyj'
+  },
+  {
+    title: '操作',
+    dataIndex: 'cz',
+    key: 'cz'
   }
 ]
 
@@ -36,7 +61,12 @@ const dataCol = () => {
       key: '1',
       infoName: '自定义模板',
       name: '张三',
-      phone: 110
+      xb: '男',
+      dlbm: '管理员',
+      gzzh: '0001',
+      lxdh: '110',
+      dzyj: '123',
+      cz: '详情'
     })
   }
   return arr
@@ -49,7 +79,7 @@ export default defineComponent({
       return className
     }
     const pagination = {
-      defaultPageSize: 13,
+      defaultPageSize: 14,
       showTotal: (total: number) => `共 ${total} 条数据`,
       showQuickJumper: true
     }

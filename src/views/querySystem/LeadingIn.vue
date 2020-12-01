@@ -1,7 +1,7 @@
 <template>
     <div class="ctx">
         <div class="body">
-            <Title title="导入统计"></Title>
+            <page-title title="导入统计"></page-title>
             <div class="box">
                 <div class="chart-item">
                     <chart-title title="已调用接口"></chart-title>
@@ -32,6 +32,9 @@
                 </div>
                 <div class="chart-item">
                     <chart-title title="发送记录"></chart-title>
+                    <div class="mrgr">
+                        <leading-table-r></leading-table-r>
+                    </div>
                 </div>
             </div>
         </div>
@@ -39,16 +42,28 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import Title from './components/Title.vue'
+import { defineComponent, reactive, ref } from 'vue'
+import PageTitle from '../../components/PageTitle.vue'
 import ChartTitle from './components/ChartTitle.vue'
 import LeadingTableL from './components/LeadingTableL.vue'
+import LeadingTableR from './components/LeadingTableR.vue'
 export default defineComponent({
   name: '',
   components: {
-    Title,
+    PageTitle,
     ChartTitle,
-    LeadingTableL
+    LeadingTableL,
+    LeadingTableR
+  },
+  setup () {
+    const form = reactive({})
+    const startTime = ref(null)
+    const endTime = ref(null)
+    return {
+      form,
+      startTime,
+      endTime
+    }
   }
 })
 </script>
@@ -83,6 +98,10 @@ export default defineComponent({
                 }
                 .mrg {
                     margin: 0 10px;
+                }
+                .mrgr {
+                    margin: 0 10px;
+                    margin-top: 3px;
                 }
             }
         }

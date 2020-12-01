@@ -1,7 +1,7 @@
 <template>
     <div class="ctx">
         <div class="body">
-            <Title title="发送记录统计"></Title>
+            <page-title title="发送记录统计"></page-title>
             <div class="form">
                 <a-form
                     layout="inline"
@@ -43,14 +43,14 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import Title from './components/Title.vue'
+import PageTitle from '../../components/PageTitle.vue'
 import ChartTitle from './components/ChartTitle.vue'
 import { SearchOutlined } from '@ant-design/icons-vue'
 import StatisticsTable from './components/StatisticsTable.vue'
 export default defineComponent({
   name: '',
   components: {
-    Title,
+    PageTitle,
     SearchOutlined,
     ChartTitle,
     StatisticsTable

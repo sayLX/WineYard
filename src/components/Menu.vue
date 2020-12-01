@@ -49,17 +49,17 @@
                     <template #title>
                     <span><SettingOutlined /><span>人员信息管理</span></span>
                     </template>
-                    <a-menu-item key="10">律师管理</a-menu-item>
+                    <a-menu-item key="lawyer">律师管理</a-menu-item>
                     <a-menu-item key="11">单位人员管理</a-menu-item>
                 </a-sub-menu>
                 <a-sub-menu key="sub7">
                     <template #title>
                     <span><SettingOutlined /><span>系统配置</span></span>
                     </template>
-                    <a-menu-item key="12">用户管理</a-menu-item>
-                    <a-menu-item key="13">组织机构</a-menu-item>
-                    <a-menu-item key="14">数据字典</a-menu-item>
-                    <a-menu-item key="15">功能管理</a-menu-item>
+                    <a-menu-item key="user">用户管理</a-menu-item>
+                    <a-menu-item key="organization">组织机构</a-menu-item>
+                    <a-menu-item key="dictionary">数据字典</a-menu-item>
+                    <a-menu-item key="function">功能管理</a-menu-item>
                 </a-sub-menu>
                 </a-menu>
             </div>

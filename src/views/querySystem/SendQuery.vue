@@ -1,7 +1,7 @@
 <template>
     <div class="ctx">
         <div class="body">
-            <Title title="发送记录查询"></Title>
+            <page-title title="发送记录查询"></page-title>
             <div class="form">
                 <a-form
                 :model="form"
@@ -90,13 +90,13 @@
 
 <script lang="ts">
 import { defineComponent, reactive, ref } from 'vue'
-import Title from './components/Title.vue'
+import PageTitle from '../../components/PageTitle.vue'
 import { SearchOutlined } from '@ant-design/icons-vue'
 import SendTable from './components/SendTable.vue'
 export default defineComponent({
   name: '',
   components: {
-    Title,
+    PageTitle,
     SearchOutlined,
     SendTable
   },
@@ -131,6 +131,7 @@ export default defineComponent({
         top: 12px;
         bottom: 12px;
         border: solid 1px #d8d7d7;
+        display: flex;
         flex-direction: column;
         overflow: hidden;
         .form {
@@ -138,6 +139,7 @@ export default defineComponent({
             border-bottom: 1px solid #a9c4df;
         }
         .column {
+            flex: 1;
             margin: 10px 20px;
         }
     }

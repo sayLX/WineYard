@@ -1,5 +1,5 @@
 <template>
-  <a-table :columns="columns" :data-source="data" :pagination='{pageSize: 9}'>
+  <a-table class="a-table" :columns="columns" :data-source="data" :pagination='pagination'>
     <template #name="{text}">
       <a>{{ text }}</a>
     </template>
@@ -106,6 +106,66 @@ const data = [
     result: '成功',
     ctx: '你好',
     options: '详情'
+  },
+  {
+    key: '1',
+    infoName: '自定义模板',
+    name: '张三',
+    phone: 110,
+    time: '2020-11-27',
+    result: '成功',
+    ctx: '你好',
+    options: '详情'
+  },
+  {
+    key: '1',
+    infoName: '自定义模板',
+    name: '张三',
+    phone: 110,
+    time: '2020-11-27',
+    result: '成功',
+    ctx: '你好',
+    options: '详情'
+  },
+  {
+    key: '1',
+    infoName: '自定义模板',
+    name: '张三',
+    phone: 110,
+    time: '2020-11-27',
+    result: '成功',
+    ctx: '你好',
+    options: '详情'
+  },
+  {
+    key: '1',
+    infoName: '自定义模板',
+    name: '张三',
+    phone: 110,
+    time: '2020-11-27',
+    result: '成功',
+    ctx: '你好',
+    options: '详情'
+  },
+  {
+    key: '1',
+    infoName: '自定义模板',
+    name: '张三',
+    phone: 110,
+    time: '2020-11-27',
+    result: '成功',
+    ctx: '你好',
+    options: '详情'
+  },
+  {
+    key: '1',
+    infoName: '自定义模板',
+    name: '张三',
+    phone: 110,
+    time: '2020-11-27',
+    result: '成功',
+    ctx: '你好',
+    options: '详情'
   }
 ]
 
@@ -113,8 +173,18 @@ export default {
   data () {
     return {
       data,
-      columns
+      columns,
+      pagination: {
+        defaultPageSize: 9,
+        showTotal: total => `共 ${total} 条数据`
+      }
     }
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.a-table {
+  height: 100%;
+}
+</style>
