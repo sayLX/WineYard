@@ -3,13 +3,12 @@
         <div class="ctx">
             <div class="left">
                 <a-menu
-                mode="inline"
-                :openKeys="openKeys"
-                theme="light"
-                v-model:selectedKeys="selectedKeys"
-                @openChange="onOpenChange"
-                @click="clickItem"
-                class="l-menu"
+                  mode="inline"
+                  theme="light"
+                  v-model:selectedKeys="selectedKeys"
+                  @openChange="onOpenChange"
+                  @click="clickItem"
+                  class="l-menu"
                 >
                 <a-sub-menu key="sub1">
                     <template #title>
