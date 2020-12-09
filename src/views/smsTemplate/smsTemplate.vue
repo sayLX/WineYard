@@ -12,7 +12,7 @@
       <span>模板内容</span>
       <span>操作</span>
     </li>
-    <li class="history_item" v-for="(history,index1) in importHistory_list" :key="index1" v-show="index1<maxLength" >
+    <li class="history_item" v-for="(history,index1) in importHistoryList" :key="index1" v-show="index1<maxLength" >
       <span v-for="(item,index2) in Object.keys(history)"
             :key="index2"
             :class="item">{{history[item]}}
@@ -44,7 +44,8 @@ export default defineComponent({
     return {
       maxLength:13,
       more:"更多",
-      importHistory_list:[
+      importHistoryList:
+      [
         {'type':'案件公开信息导入','time':'2020-10-10','file':'案件公开信息导入测试1.zip'},
         {'type':'案件公开信息导入','time':'2020-10-11','file':'案件公开信息导入测试2.zip'},
         {'type':'案件公开信息导入','time':'2020-10-11','file':'案件公开信息导入测试2.zip'},
@@ -66,7 +67,7 @@ export default defineComponent({
   methods: {
     lookAll(){
       if(this.maxLength===13){
-        this.maxLength=this.importHistory_list.length
+        this.maxLength=this.importHistoryList.length
         this.more='收起'
       }
       else{

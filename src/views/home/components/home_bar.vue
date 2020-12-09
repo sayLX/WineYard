@@ -6,7 +6,7 @@
       </div>
       <div id="signOut">
         <img src="@\assets\img\signout.png" alt="">
-        <button>退出</button>
+        <button @click="signOut">退出</button>
 
       </div>
       <div id="userInfo">
@@ -23,6 +23,14 @@ export default defineComponent({
   data () {
     return {
       username:''
+    }
+  },
+  methods: {
+    signOut(){
+      // 销毁takon
+      window.sessionStorage.setItem('takon','')
+      // 跳转到登录页面
+      this.$router.push('/login')
     }
   }
 

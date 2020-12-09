@@ -16,13 +16,17 @@
             <span>短信模板</span>
             <select name="" id="sms-template">
               <option value=""></option>
-              <option value="">模板1</option>
-              <option value="">模板2</option>
+              <option v-for="(templateName,index) in templateNames" :key="index" :value="templateName">{{templateName}}</option>
             </select>
           </div>
           <div class="template-content">
             <span class="template-title">模板内容</span>
-            <textarea cols="10"></textarea>
+            <textarea cols="10" v-model="templateContent"></textarea>
+          </div>
+          <p>注：如果短信内容超过140个字符，将分多个短信发送</p>
+          <div class="btns">
+            <button class="send">发送</button>
+            <button class="reset" @click="resetTemplateContent">重置</button>
           </div>
         </div>
       </div>
@@ -77,6 +81,8 @@ export default defineComponent({
   data () {
     return {
       value:'',
+      templateNames:['模板1','模板2'],
+      templateContent:'模板内容',
       tabPosition: 'left',
       activeKey: ['1'],
       receiverList:[],
@@ -94,6 +100,9 @@ export default defineComponent({
     },
     changeResult(e){
       this.receiver=e.currentTarget.innerHTML
+    },
+    resetTemplateContent(){
+      this.templateContent=''
     }
   },
 })
@@ -161,6 +170,22 @@ export default defineComponent({
           }
           span{
             position: absolute;
+          }
+        }
+        .btns{
+          margin-left: 80px;
+          margin-top: 49px;
+          button{
+            width: 110px;
+            height: 34px;
+            background-color:#1890ff;
+            border: none;
+            border-radius: 3px;
+
+          }
+          .reset{
+            background-color: #c4dcf4;
+            margin-left: 15px;
           }
         }
 
