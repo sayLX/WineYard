@@ -1,11 +1,11 @@
 <template>
     <ul class="shortcuts">
-      <li class="shortcut caseinfoImport" :style="background">案件公开信息导入</li>
-      <li class="shortcut AgentInfoImport" :style="background">辩护代理信息导入</li>
-      <li class="shortcut AgentBind" :style="background">辩护代理绑定</li>
-      <li class="shortcut localSMS" :style="background">本地通知</li>
-      <li class="shortcut customSMS" :style="background">自定义短信</li>
-      <li class="shortcut sendQuery" :style="background">发送记录查询</li>
+      <li class="shortcut caseinfoImport" @click="goTo('caseinfoImport')" :style="background">案件公开信息导入</li>
+      <li class="shortcut AgentInfoImport" @click="goTo('AgentInfoImport')"  :style="background">辩护代理信息导入</li>
+      <li class="shortcut AgentBind" @click="goTo('AgentBind')"  :style="background">辩护代理绑定</li>
+      <li class="shortcut localSMS" @click="goTo('localSMS')"  :style="background">本地通知</li>
+      <li class="shortcut customSMS" @click="goTo('customSMS')"  :style="background">自定义短信</li>
+      <li class="shortcut sendQuery" @click="goTo('sendQuery')"  :style="background">发送记录查询</li>
     </ul>
 </template>
 
@@ -16,6 +16,13 @@ export default defineComponent({
   data () {
     return {
     }
+  },
+  methods: {
+    goTo(url){
+      let path='/'+url
+      console.log(path)
+      this.$router.push(path)
+    }
   }
 })
 </script>
@@ -23,7 +30,6 @@ export default defineComponent({
 <style lang="scss" scoped>
   .shortcuts{
     width: 100%;
-    margin-top: -10px;
     display: flex;
     justify-content: space-between;
     padding:9px;

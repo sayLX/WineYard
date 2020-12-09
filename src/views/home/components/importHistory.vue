@@ -28,7 +28,7 @@ import Title from './Title.vue'
 
 
 export default defineComponent({
-  name: 'shortCut',
+  name: 'importHistory',
   components: {
     importHistoryDetail,
     Title
@@ -83,6 +83,7 @@ export default defineComponent({
     // 表头
     .history-title{
       border-top: solid 1px #d8d7d7;
+      margin-top: 10px;
       font-weight: bold;
     }
     // 每行历史记录

@@ -1,46 +1,55 @@
 <template>
-<div class="container" style="min-width:400px;height:230px"></div>
+  <div class="container" :id="id" style="min-width:400px;height:230px"></div>
 </template>
 
 <script>
-import { defineComponent } from 'vue'
-import HighCharts from 'highcharts'
-export default defineComponent({
+import HCharts from 'highcharts'
+export default{
   name: 'caseInfoOpen',
-  data () {
-    return {
-      id:'container',
-      options:{
-        chart: {
-          type: 'bar'                          //指定图表的类型，默认是折线图（line）
-        },
-        title: {
-          text: '我的第一个图表'                 // 标题
-        },
-        xAxis: {
-          categories: ['苹果', '香蕉', '橙子']   // x 轴分类
-        },
-        yAxis: {
-          title: {
-            text: '吃水果个数'                // y 轴标题
-          }
-        },
-        series: [{                              // 数据列
-          name: '小明',                        // 数据列名
-          data: [1, 5, 4]                     // 数据
-        }, {
-          name: '小红',
-          data: [5, 7, 3]
-        }]
+data () {
+      return {
+        id:'caseInfoOpen',
+        option:{
+          chart:{
+            type:'column',
+          },
+          title:{text:''},
+          xAxis:{
+            categories: ['苹果', '橘子', '梨', '葡萄']},
+          yAxis:{title:''},
+          plotOptions:{
+            pie:{
+              allowPointSelect:true,
+              cursor:'pointer',
+              depth:35,
+              innerSize: 80,
+              dataLabels:{
+                enabled:true,
+              }
+            }
+          },
+          legend:{squareSymbol:true,align:'right',verticalAlign: 'top',symbolRadius:0},
+          credits: {enabled:false},
+          series:[
+            {name:'测试1',data: [12,23,19,29]},
+            {name:'测试2',data: [12,23,19,29]},
+            {name:'测试3',data: [12,23,19,29]},
+          ]
+        }
       }
+    },
+    mounted() {
+        HCharts.chart(this.id, this.option)
     }
-  },
-  mounted() {
-    HighCharts.chart(this.id, this.option)
-  }
-})
+}
 </script>
 
 <style lang="scss" scoped>
+/* 容器 */
+.container{
+  width: 100%;
+  height: 206px;
+  margin: 0 auto;
 
+}
 </style>

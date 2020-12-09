@@ -20,7 +20,6 @@ export default defineComponent({
     width: 100%;
     background-color: #ecf6f7;
     padding: 5px 10px;
-    margin-bottom: 10px;
     .t {
         font-weight: 600;
         border-left: 4px solid #28a2fd;
