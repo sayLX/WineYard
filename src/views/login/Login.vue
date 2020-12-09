@@ -100,12 +100,13 @@ export default ({
         })
         .then(
           (response) => {
-            if(response.organization==this.loginForm.organization
-              &&response.username==this.loginForm.username
-              &&response.password==this.loginForm.password)
+            if(respose.success)
               {
+                // 将takon储存
+                window.sessionStorage.setItem('takon',response.tokon)
+                // 登陆成功跳转
+                this.$router.push('/homePage')
               }
-
           },function (err) {
               console.log(err);
           }

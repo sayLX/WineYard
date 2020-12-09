@@ -19,6 +19,7 @@ export default defineComponent({
 .title {
     width: 100%;
     background-color: #ecf6f7;
+    border-bottom: 1px solid #d8d7d7;
     padding: 5px 10px;
     margin-bottom: 10px;
     .t {
