@@ -49,7 +49,7 @@
                     <span><SettingOutlined /><span>人员信息管理</span></span>
                     </template>
                     <a-menu-item key="lawyer">律师管理</a-menu-item>
-                    <a-menu-item key="11">单位人员管理</a-menu-item>
+                    <a-menu-item key="person">单位人员管理</a-menu-item>
                 </a-sub-menu>
                 <a-sub-menu key="sub7">
                     <template #title>
