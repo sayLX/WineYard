@@ -40,6 +40,11 @@ const routes = [
     name: 'customSMS',
     component: () => import('../views/smsOperation/customSMS.vue')
   },
+  {
+    path: '/smsTemplate',
+    name: 'smsTemplate',
+    component: () => import('../views/smsTemplate/smsTemplate.vue')
+  },
 
   {
     path: '/sendQuery',

@@ -1,13 +1,15 @@
 <template>
-  <ul class="importHistory" style="list-style:none">
+<div class="smsTemplate">
+  <Title title="短信模板管理"></Title>
+  <ul class="template_list" style="list-style:none">
     <div id="moreHistory">
       共{{importHistory_list.length}}条&nbsp;&nbsp;
       <a href="javascript:;" @click="lookAll">{{more}}</a>
     </div>
     <li class="history-title">
-      <span>导入类型</span>
-      <span>导入时间</span>
-      <span>导入文件</span>
+      <span>模板类型</span>
+      <span>模板名称</span>
+      <span>模板内容</span>
       <span>操作</span>
     </li>
     <li class="history_item" v-for="(history,index1) in importHistory_list" :key="index1" v-show="index1<maxLength" >
@@ -15,25 +17,32 @@
             :key="index2"
             :class="item">{{history[item]}}
       </span>
-      <span id="detailBtn"><importHistoryDetail></importHistoryDetail></span>
+      <span class="operate">
+        <button id="add_template"><addTemplate></addTemplate></button>
+        <button id="delete_template">删除</button>
+        <button id="edit_template"><editTemplate></editTemplate></button>
+      </span>
     </li>
   </ul>
+</div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import importHistoryDetail from './importHistoryDetail.vue'
-
-
+import Title from './components/Title.vue'
+import editTemplate from './components/editTemplate.vue'
+import addTemplate from './components/addTemplate.vue'
 
 export default defineComponent({
   name: 'importHistory',
   components: {
-    importHistoryDetail,
+    editTemplate,
+    addTemplate,
+    Title
   },
   data () {
     return {
-      maxLength:3,
+      maxLength:13,
       more:"更多",
       importHistory_list:[
         {'type':'案件公开信息导入','time':'2020-10-10','file':'案件公开信息导入测试1.zip'},
@@ -56,12 +65,12 @@ export default defineComponent({
   },
   methods: {
     lookAll(){
-      if(this.maxLength===3){
+      if(this.maxLength===13){
         this.maxLength=this.importHistory_list.length
         this.more='收起'
       }
       else{
-        this.maxLength=3
+        this.maxLength=13
         this.more='更多'
       }
     }
@@ -75,8 +84,10 @@ export default defineComponent({
       right: 20px;
       top: 6px;
     }
-  .importHistory{
-    height: calc(100% - 35px);
+
+  .template_list{
+    margin: 12px;
+    border: 1px solid #dcdfe6;;;
     padding: 0 12px 15px 12px;
     overflow: auto;
     // 表头
@@ -98,16 +109,27 @@ export default defineComponent({
         width: 200px;
         text-align: left;
       }
-      // 详情按钮
-      #detailBtn{
-      /deep/  button{
+      //
+      .operate{
+        /deep/ button{
+          height: 38px;
+          width: 40px;
+          padding: 0;
           background-color:#fff;
           border: none;
           color: #1890ff;
           box-shadow: none;
           text-shadow: none;
-          padding-left: 0;
-        }
+          margin-right: 10px;
+
+          cursor: pointer;
+          &:focus{
+            outline: none;
+          };
+          &:hover{
+            color: rgb(138, 115, 115);
+          }
+          }
       }
     }
     // 偶数行的样式

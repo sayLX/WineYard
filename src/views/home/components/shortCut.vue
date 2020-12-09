@@ -9,7 +9,7 @@
     </ul>
 </template>
 
-<script lang="ts">
+<script>
 import { defineComponent } from 'vue'
 export default defineComponent({
   name: 'shortCut',
@@ -19,7 +19,7 @@ export default defineComponent({
   },
   methods: {
     goTo(url){
-      let path='/'+url
+      const path='/'+url
       console.log(path)
       this.$router.push(path)
     }
