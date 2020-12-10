@@ -28,13 +28,7 @@
 import { defineComponent } from 'vue'
 import Title from './components/Title.vue'
 import bindResult from './components/bindResult.vue'
-import bindBox from './components/bindBox.vue'
-
 import '@/assets/font/css/all.css'
-import {MailOutlined,
-        QqOutlined,
-        AppstoreOutlined,
-        SettingOutlined } from '@ant-design/icons-vue'
 const searchConditions= new Object
 export default defineComponent({
   name: 'AgentBind',

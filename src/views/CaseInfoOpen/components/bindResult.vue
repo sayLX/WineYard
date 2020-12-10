@@ -58,16 +58,13 @@
   </div>
 </template>
 <script>
-import { MailOutlined, QqOutlined, AppstoreOutlined, SettingOutlined } from '@ant-design/icons-vue';
+import {SettingOutlined } from '@ant-design/icons-vue';
 import BindBox from './bindBox.vue'
 import Detail from './detail.vue'
 
 export default {
   name:'bindResult',
   components: {
-    MailOutlined,
-    QqOutlined,
-    AppstoreOutlined,
     SettingOutlined,
     BindBox,
     Detail

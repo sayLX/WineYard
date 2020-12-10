@@ -32,7 +32,7 @@ import caseInfoOpen from './components/caseInfoOpen.vue'
 import importHistory from './components/importHistory.vue'
 
 import highcharts from 'highcharts'
-import VueHighCharts from 'vue-highcharts'
+// import VueHighCharts from 'vue-highcharts'
 
 // 引入以上两项之后，因为我们需要使用3d图表，还需要引入：
 

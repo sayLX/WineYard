@@ -50,7 +50,7 @@ export default ({
       orgs: ['北京', '上海', '南京'],
       labelCol: { span: 4 },
       wrapperCol: { span: 14 },
-      loginUrl:'',
+      loginApi:'',
       loginForm: {
         organization: '',
         username: '',

@@ -1,7 +1,7 @@
 <template>
   <ul class="importHistory" style="list-style:none">
     <div id="moreHistory">
-      共{{importHistory_list.length}}条&nbsp;&nbsp;
+      共{{importHistoryList.length}}条&nbsp;&nbsp;
       <a href="javascript:;" @click="lookAll">{{more}}</a>
     </div>
     <li class="history-title">
@@ -10,7 +10,7 @@
       <span>导入文件</span>
       <span>操作</span>
     </li>
-    <li class="history_item" v-for="(history,index1) in importHistory_list" :key="index1" v-show="index1<maxLength" >
+    <li class="history_item" v-for="(history,index1) in importHistoryList" :key="index1" v-show="index1<maxLength" >
       <span v-for="(item,index2) in Object.keys(history)"
             :key="index2"
             :class="item">{{history[item]}}
@@ -35,7 +35,7 @@ export default defineComponent({
     return {
       maxLength:3,
       more:"更多",
-      importHistory_list:[
+      importHistoryList:[
         {'type':'案件公开信息导入','time':'2020-10-10','file':'案件公开信息导入测试1.zip'},
         {'type':'案件公开信息导入','time':'2020-10-11','file':'案件公开信息导入测试2.zip'},
         {'type':'案件公开信息导入','time':'2020-10-11','file':'案件公开信息导入测试2.zip'},
@@ -57,7 +57,7 @@ export default defineComponent({
   methods: {
     lookAll(){
       if(this.maxLength===3){
-        this.maxLength=this.importHistory_list.length
+        this.maxLength=this.importHistoryList.length
         this.more='收起'
       }
       else{
