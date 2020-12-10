@@ -12,12 +12,10 @@
           @click="clickItem"
           class="l-menu"
         >
-          <a-sub-menu key="sub1">
-            <template #title>
-              <span><HomeOutlined /><span>主页</span></span>
-            </template>
-            <a-menu-item key="homePage">主页</a-menu-item>
-          </a-sub-menu>
+          <a-menu-item key="homePage">
+              <HomeOutlined />
+              <span>主页</span>
+          </a-menu-item>
           <a-sub-menu key="sub2">
             <template #title>
               <span><UnlockOutlined /><span>案件信息公开</span></span>
@@ -106,7 +104,7 @@ export default defineComponent({
   setup() {
     const menu = reactive({
       rootSubmenuKeys: ["sub1", "sub2", "sub3", "sub4", "sub5", "sub6", "sub7"],
-      openKeys: ["sub1"],
+      openKeys: ["sub2"],
       selectedKeys: []
     })
     const onOpenChange = (openKeys: string[]) => {
