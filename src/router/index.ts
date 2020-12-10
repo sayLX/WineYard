@@ -3,14 +3,49 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: () => import('../views/home/Home.vue')
+    redirect: '/login'
   },
   {
     path: '/login',
-    name: 'me',
+    name: 'login',
     component: () => import('../views/login/Login.vue')
   },
+  {
+    path: '/homePage',
+    name: 'homePage',
+    component: () => import('../views/home/Home.vue')
+  },
+  {
+    path: '/CaseInfoImport',
+    name: 'CaseInfoImport',
+    component: () => import('../views/CaseInfoOpen/CaseInfoImport.vue')
+  },
+  {
+    path: '/AgentInfoImport',
+    name: 'AgentInfoImport',
+    component: () => import('../views/CaseInfoOpen/AgentInfoImport.vue')
+  },
+  {
+    path: '/AgentBind',
+    name: 'AgentBind',
+    component: () => import('../views/CaseInfoOpen/AgentBind.vue')
+  },
+  {
+    path: '/localSMS',
+    name: 'localSMS',
+    component: () => import('../views/smsOperation/localSMS.vue')
+  },
+  {
+    path: '/customSMS',
+    name: 'customSMS',
+    component: () => import('../views/smsOperation/customSMS.vue')
+  },
+  {
+    path: '/smsTemplate',
+    name: 'smsTemplate',
+    component: () => import('../views/smsTemplate/smsTemplate.vue')
+  },
+
   {
     path: '/sendQuery',
     name: 'sendQuery',

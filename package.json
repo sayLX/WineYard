@@ -11,7 +11,10 @@
     "ant-design-vue": "^2.0.0-rc.2",
     "axios": "^0.21.0",
     "element-plus": "^1.0.1-beta.4",
+    "highcharts": "^8.2.2",
+    "highcharts-3d": "^0.1.7",
     "vue": "^3.0.0",
+    "vue-highcharts": "^0.2.0",
     "vue-router": "^4.0.0-0",
     "vuex": "^4.0.0-0"
   },
