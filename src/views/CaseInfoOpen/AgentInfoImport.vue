@@ -37,14 +37,12 @@
 </template>
 <script>
 import { message } from 'ant-design-vue';
-import { UploadOutlined } from '@ant-design/icons-vue';
 import Title from './components/Title.vue'
 import axios from 'axios'
-var myDate=new Date
+const myDate=new Date
 export default {
   name:'AgentInfoImport',
   components: {
-    UploadOutlined,
     Title
   },
   data() {

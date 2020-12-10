@@ -81,7 +81,6 @@ import {
   PieChartOutlined,
   UsergroupDeleteOutlined,
   SettingOutlined,
-  CaretRightOutlined
 } from "@ant-design/icons-vue"
 import { defineComponent, reactive, toRefs } from "vue"
 import { useRouter } from "vue-router"

@@ -35,7 +35,6 @@
 <script>
 import axios from 'axios'
 import {UserOutlined,LockOutlined } from'@ant-design/icons-vue'
-const loginApi = 'www.baidu.com'
 export default ({
   name: 'login',
   components: {
@@ -47,7 +46,7 @@ export default ({
       orgs: ['北京', '上海', '南京'],
       labelCol: { span: 4 },
       wrapperCol: { span: 14 },
-      loginUrl:'',
+      loginApi:'',
       loginForm: {
         organization: '',
         username: '',
@@ -90,9 +89,10 @@ export default ({
       })
     },
     getmusic(){
+      url=this.loginApi
       axios({
         method:'post',
-        url:that.loginUrl,
+        url:url,
         data:{
           organization:that.loginForm.organization,
           username:that.loginForm.username,

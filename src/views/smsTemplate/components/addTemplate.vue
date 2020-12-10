@@ -4,53 +4,41 @@
            添加
         </a-button>
         <a-modal
-                title="添加短信模板"
-                :visible="visible"
-                :confirm-loading="confirmLoading"
-                @ok="handleOk"
-                @cancel="handleCancel"
-                width='740px'
+            title="添加短信模板"
+            :visible="visible"
+            :confirm-loading="confirmLoading"
+            @ok="handleOk"
+            @cancel="handleCancel"
+            width='740px'
         >
         <div class="sms">
-          <div class="receiver">
+          <div class="type1">
             <span>模板类型</span>
-            <input type="text" class="receiver" placeholder="请输入">
+            <input type="text" :value="newTemplate['type']" placeholder="请输入模板类型">
           </div>
             <br>
           <div class="sms-template">
             <span>模板名称</span>
-            <select name="" id="sms-template">
-              <option value=""></option>
-              <option value="">模板1</option>
-              <option value="">模板2</option>
-            </select>
+            <input type='text' v-model="newTemplate['name']" placeholder="请输入模板名字">
           </div>
           <div class="template-content">
             <span class="template-title">模板内容</span>
-            <textarea cols="10"></textarea>
+            <textarea cols="10" v-model="newTemplate['content']" placeholder="请输入模板内容"></textarea>
           </div>
         </div>
         </a-modal>
     </div>
 </template>
 <script>
+import { message } from 'ant-design-vue';
     export default {
         name:'addTemplate',
         data() {
             return {
+              test:"lcdc",
                 visible: false,
                 confirmLoading: false,
-                labelCol: { span: 4 },
-                wrapperCol: { span: 14 },
-                form: {
-                  name: '',
-                  region: undefined,
-                  date1: undefined,
-                  delivery: false,
-                  type: [],
-                  resource: '',
-                  desc: '',
-                },
+                newTemplate:{type:'',name:'',content:''}
             };
         },
         methods: {
@@ -60,21 +48,19 @@
             },
             //点击ok
             handleOk() {
-                this.ModalText = 'The modal will be closed after two seconds';
                 this.confirmLoading = true;
+                setTimeout(() => {
+                  this.visible = false;
+                    this.confirmLoading = false;
+                  message.info('添加成功！')
+                }, 1000);
+            },
+            handleCancel() {
                 setTimeout(() => {
                     this.visible = false;
                     this.confirmLoading = false;
-                }, 10);
+                }, 1000);
             },
-            //点击cancel
-            handleCancel() {
-                console.log('Clicked cancel button');
-                this.visible = false;
-            },
-            onSubmit() {
-               console.log('submit!', this.form);
-    },
         },
     };
 </script>

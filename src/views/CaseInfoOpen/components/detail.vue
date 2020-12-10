@@ -105,7 +105,7 @@
                 this.visible = true;
             },
             //点击ok
-            handleOk(e) {
+            handleOk() {
                 this.ModalText = 'The modal will be closed after two seconds';
                 this.confirmLoading = true;
                 setTimeout(() => {
@@ -114,7 +114,7 @@
                 }, 10);
             },
             //点击cancel
-            handleCancel(e) {
+            handleCancel() {
                 console.log('Clicked cancel button');
                 this.visible = false;
             },

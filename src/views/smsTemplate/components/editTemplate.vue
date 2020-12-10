@@ -12,15 +12,15 @@
                 width='740px'
         >
         <div class="sms">
-          <div class="receiver">
+          <div>
             <span>模板类型</span>
-            <input type="text" class="receiver" placeholder="请输入">
+            <input type="text" placeholder="请输入">
           </div>
             <br>
-          <div class="sms-template">
+          <div>
             <span>模板名称</span>
-            <select name="" id="sms-template">
-              <option value=""></option>
+            <select aria-placeholder="请选择模板">
+              <option disabled aria-placeholder="请选择模板"></option>
               <option value="">模板1</option>
               <option value="">模板2</option>
             </select>
