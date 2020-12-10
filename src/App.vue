@@ -1,19 +1,15 @@
 <template>
 <a-config-provider :locale="locale">
   <div id="app">
-      <Menu></Menu>
+      <router-view></router-view>
   </div>
 </a-config-provider>
 </template>
 <script lang='ts'>
 import { defineComponent } from 'vue'
-import Menu from './components/Menu.vue'
 import zhCN from 'ant-design-vue/es/locale/zh_CN'
 export default defineComponent({
   name: '',
-  components: {
-    Menu
-  },
   setup () {
     return {
       locale: zhCN

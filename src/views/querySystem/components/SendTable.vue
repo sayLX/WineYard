@@ -1,11 +1,12 @@
 <template>
-  <a-table class="a-table" :columns="columns" :data-source="data" :pagination='pagination'>
+  <a-table class="a-table" :columns="columns" :data-source="data" size="middle"
+    :rowClassName="rowClassName" :pagination='pagination'>
     <template #name="{text}">
       <a>{{ text }}</a>
     </template>
   </a-table>
 </template>
-<script>
+<script lang='ts'>
 const columns = [
   {
     title: '短信模板名称',
@@ -170,14 +171,21 @@ const data = [
 ]
 
 export default {
-  data () {
+  setup () {
+    const rowClassName = (record: object, index: number): string => {
+      const className = index % 2 === 0 ? 'shallow_gray' : 'deep_gray'
+      return className
+    }
+    const pagination = {
+      defaultPageSize: 10,
+      showTotal: (total: number) => `共 ${total} 条数据`,
+      showQuickJumper: true
+    }
     return {
       data,
       columns,
-      pagination: {
-        defaultPageSize: 9,
-        showTotal: total => `共 ${total} 条数据`
-      }
+      rowClassName,
+      pagination
     }
   }
 }
@@ -185,6 +193,11 @@ export default {
 
 <style lang="scss" scoped>
 .a-table {
-  height: 100%;
+  .shallow_gray {
+    background-color: #fff;
+  }
+  .deep_gray {
+    background-color: #f8f8fa;
+  }
 }
 </style>

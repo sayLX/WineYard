@@ -82,11 +82,11 @@ import {
   UsergroupDeleteOutlined,
   SettingOutlined,
   CaretRightOutlined
-} from "@ant-design/icons-vue"
-import { defineComponent, reactive, toRefs } from "vue"
-import { useRouter } from "vue-router"
-import "../assets/font/css/all.css"
-import homeBar from "../views/home/components/home_bar.vue"
+} from "@ant-design/icons-vue";
+import { defineComponent, reactive, toRefs } from "vue";
+import { useRouter } from "vue-router";
+import "../assets/font/css/all.css";
+import homeBar from "../views/home/components/home_bar.vue";
 interface MenuData {
   key: string;
   keyPath: string[];
@@ -109,35 +109,35 @@ export default defineComponent({
       rootSubmenuKeys: ["sub1", "sub2", "sub3", "sub4", "sub5", "sub6", "sub7"],
       openKeys: ["sub1"],
       selectedKeys: []
-    })
+    });
     const onOpenChange = (openKeys: string[]) => {
-      console.log(openKeys)
+      console.log(openKeys);
       const latestOpenKey: string | undefined = openKeys.find(
         (key: string) => menu.openKeys.indexOf(key) === -1
-      )
-      console.log(latestOpenKey)
+      );
+      console.log(latestOpenKey);
       if (menu.rootSubmenuKeys.indexOf(latestOpenKey as string) === -1) {
-        menu.openKeys = openKeys
+        menu.openKeys = openKeys;
       } else {
-        menu.openKeys = latestOpenKey ? [latestOpenKey] : []
+        menu.openKeys = latestOpenKey ? [latestOpenKey] : [];
       }
-    }
-    const router = useRouter()
+    };
+    const router = useRouter();
     const clickItem = (e: MenuData) => {
-      console.log("==============")
-      console.log(e)
-      const url = e.key
+      console.log("==============");
+      console.log(e);
+      const url = e.key;
       router.push({
         name: url
-      })
-    }
+      });
+    };
     return {
       ...toRefs(menu),
       onOpenChange,
       clickItem
-    }
+    };
   }
-})
+});
 </script>
 
 <style lang="scss" scoped>

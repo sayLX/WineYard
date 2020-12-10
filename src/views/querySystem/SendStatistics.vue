@@ -25,14 +25,14 @@
             </div>
             <div class="chart">
               <div class="chart-item">
-                <chart-title title="短信记录"></chart-title>
+                <page-title title="短信记录"></page-title>
               </div>
               <div class="chart-item">
-                <chart-title title="案件信息公开"></chart-title>
+                <page-title title="案件信息公开"></page-title>
               </div>
             </div>
             <div class="table">
-              <chart-title title="短信发送记录"></chart-title>
+              <page-title title="短信发送记录"></page-title>
               <div class="table-ctx">
                 <statistics-table></statistics-table>
               </div>
@@ -44,7 +44,6 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import PageTitle from '../../components/PageTitle.vue'
-import ChartTitle from './components/ChartTitle.vue'
 import { SearchOutlined } from '@ant-design/icons-vue'
 import StatisticsTable from './components/StatisticsTable.vue'
 export default defineComponent({
@@ -52,7 +51,6 @@ export default defineComponent({
   components: {
     PageTitle,
     SearchOutlined,
-    ChartTitle,
     StatisticsTable
   },
   setup () {
