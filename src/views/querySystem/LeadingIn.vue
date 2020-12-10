@@ -4,7 +4,7 @@
             <page-title title="导入统计"></page-title>
             <div class="box">
                 <div class="chart-item">
-                    <chart-title title="已调用接口"></chart-title>
+                    <page-title title="已调用接口"></page-title>
                     <div class="form">
                         <a-form
                             layout="inline"
@@ -31,7 +31,7 @@
                     </div>
                 </div>
                 <div class="chart-item">
-                    <chart-title title="发送记录"></chart-title>
+                    <page-title title="发送记录"></page-title>
                     <div class="mrgr">
                         <leading-table-r></leading-table-r>
                     </div>
@@ -44,14 +44,12 @@
 <script lang="ts">
 import { defineComponent, reactive, ref } from 'vue'
 import PageTitle from '../../components/PageTitle.vue'
-import ChartTitle from './components/ChartTitle.vue'
 import LeadingTableL from './components/LeadingTableL.vue'
 import LeadingTableR from './components/LeadingTableR.vue'
 export default defineComponent({
   name: '',
   components: {
     PageTitle,
-    ChartTitle,
     LeadingTableL,
     LeadingTableR
   },
