@@ -160,11 +160,31 @@ export default defineComponent({
         color: #baedfe;
         background-color: rgb(40, 162, 253);
         &:hover {
-          color: #baedfe !important;
+          color: #fff !important;
+        }
+        .ant-menu-submenu:hover {
+          background:rgb(68, 103, 131);
+          color:#fff;
+        }
+        .ant-menu-submenu {
+          margin: 0;
+          .ant-menu-submenu-selected {
+            color: #fff;
+            background:rgb(68, 103, 131);
+          }
         }
         .ant-menu {
           color: #baedfe;
           background-color: rgb(14, 139, 235);
+          .ant-menu-item::after {
+            border: none;
+          }
+          .ant-menu-item {
+            margin-bottom: 0;
+            margin-top: 0;
+            height: 45px;
+            line-height: 45px;
+          }
         }
         .ant-menu-submenu-title {
           i {
