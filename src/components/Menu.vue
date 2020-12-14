@@ -12,12 +12,10 @@
           @click="clickItem"
           class="l-menu"
         >
-          <a-sub-menu key="sub1">
-            <template #title>
-              <span><HomeOutlined /><span>主页</span></span>
-            </template>
-            <a-menu-item key="homePage">主页</a-menu-item>
-          </a-sub-menu>
+          <a-menu-item key="homePage">
+              <HomeOutlined />
+              <span>主页</span>
+          </a-menu-item>
           <a-sub-menu key="sub2">
             <template #title>
               <span><UnlockOutlined /><span>案件信息公开</span></span>
@@ -81,7 +79,6 @@ import {
   PieChartOutlined,
   UsergroupDeleteOutlined,
   SettingOutlined,
-  CaretRightOutlined
 } from "@ant-design/icons-vue";
 import { defineComponent, reactive, toRefs } from "vue";
 import { useRouter } from "vue-router";
@@ -107,15 +104,13 @@ export default defineComponent({
   setup() {
     const menu = reactive({
       rootSubmenuKeys: ["sub1", "sub2", "sub3", "sub4", "sub5", "sub6", "sub7"],
-      openKeys: ["sub1"],
+      openKeys: ["sub2"],
       selectedKeys: []
     });
     const onOpenChange = (openKeys: string[]) => {
-      console.log(openKeys);
       const latestOpenKey: string | undefined = openKeys.find(
         (key: string) => menu.openKeys.indexOf(key) === -1
       );
-      console.log(latestOpenKey);
       if (menu.rootSubmenuKeys.indexOf(latestOpenKey as string) === -1) {
         menu.openKeys = openKeys;
       } else {
@@ -124,8 +119,6 @@ export default defineComponent({
     };
     const router = useRouter();
     const clickItem = (e: MenuData) => {
-      console.log("==============");
-      console.log(e);
       const url = e.key;
       router.push({
         name: url
@@ -176,14 +169,8 @@ export default defineComponent({
         .ant-menu {
           color: #baedfe;
           background-color: rgb(14, 139, 235);
-          .ant-menu-item::after {
+          .ant-menu-item:after{
             border: none;
-          }
-          .ant-menu-item {
-            margin-bottom: 0;
-            margin-top: 0;
-            height: 45px;
-            line-height: 45px;
           }
         }
         .ant-menu-submenu-title {

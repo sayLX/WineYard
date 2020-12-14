@@ -95,7 +95,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .resultTitle{
-  padding: 5px 106px 5px 50px;
+  padding: 5px 0px 5px 50px;
 }
  .ant-menu-item,.resultTitle{
   margin: 0;

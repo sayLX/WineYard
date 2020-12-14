@@ -33,9 +33,8 @@
 </template>
 
 <script>
-import axios from 'axios'
 import {UserOutlined,LockOutlined } from'@ant-design/icons-vue'
-const loginApi = 'www.baidu.com'
+// const loginApi = 'www.baidu.com'
 import { useStore } from 'vuex'
 import { useRouter } from "vue-router"
 import { reactive, toRefs } from 'vue'
@@ -74,7 +73,7 @@ export default ({
           {required:true,message:'请输入密码',trigger:'blur'},
         ]
       }
-    }) 
+    })
     const store = useStore()
     const router = useRouter()
     const login = () => {
@@ -204,7 +203,7 @@ export default ({
       background-color: rgba(196, 228, 226, 0.2);
       border-radius: 50%;
       position: absolute;
-      left: 95%;
+      left: 110%;
       top: 60%;
       button{
         width: 80px;

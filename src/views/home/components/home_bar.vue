@@ -80,6 +80,7 @@ export default defineComponent({
 
     #signOut{
       float: right;
+      margin-right: 11px;
       img{
         width: 20px;
         height: 17px;

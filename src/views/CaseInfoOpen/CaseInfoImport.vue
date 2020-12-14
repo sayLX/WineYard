@@ -3,7 +3,7 @@
     <div class="body">
       <Title id="title" title="案件信息公开导入" ></Title>
       <div class="import clearfix">
-        <span class="nowPath"></span>
+        <span class="nowPath">&nbsp;&nbsp;{{latestFile}}</span>
         <a-upload :fileList="fileList" :remove="handleRemove" :beforeUpload="beforeUpload">
         <a-button id="search" >  浏览 </a-button>
         </a-upload>
@@ -25,11 +25,12 @@
       <ul id="fileList" v-show="fileList.length">
         <li id='listTitle'>导入列表明细</li>
         <li class="fileItem" v-for="(file,index) in fileList" :key="index" >
-          {{index+1}}&nbsp;&nbsp;
-          <span>{{importTime.toLocaleDateString()}}&nbsp;&nbsp;{{importTime.toLocaleTimeString()}}</span>
-          <span>文件{{file.name}}</span>
+          <span>{{index+1}}&nbsp;&nbsp;{{importTime.toLocaleDateString()}}&nbsp;&nbsp;{{importTime.toLocaleTimeString()}}</span>
+          <span class="fileName">{{file.name}}</span>
           <span> {{ uploading ? '' : 'Start Upload' }}</span>
-          <span></span>
+        </li>
+        <li class="fileItem">
+          <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;嫌疑人/当事人共{{importResult.total}}个，解析成功{{importResult.success}}个，失败{{importResult.failed}}个</span>
         </li>
       </ul>
     </div>
@@ -48,7 +49,9 @@ export default {
   data() {
     return {
       importTime:myDate,
+      latestFile:'',
       fileList: [],
+      importResult:{total:'5',success:'5',failed:'0'},
       uploading: false,
       headers: {
         authorization: 'authorization-text'
@@ -65,6 +68,8 @@ export default {
       beforeUpload(file) {
         this.file=file
         this.fileList = [...this.fileList, file];
+        // 获得当前选择文件名
+        this.latestFile=file.name
         return false;
       },
       handleUpload() {
@@ -104,7 +109,7 @@ export default {
 
     // 导入文件模块
     .import{
-      margin: 12px 0;
+      margin: 12px 10px;
       display: flex;
       #search,#import{
         margin-right: 11px;
@@ -154,7 +159,6 @@ export default {
         margin-top: 10px;
         border-top: 1px solid rgb(229,236,244);
         border-bottom: 1px solid rgb(229,236,244);
-
         padding-left: 36px;
         font-size: 14px;
         font-weight:bold;
@@ -165,12 +169,16 @@ export default {
 
       }
       .fileItem {
-        display: inline-block;
+        overflow: hidden;
         width: 100%;
         border-bottom: 1px solid rgb(229,236,244);
+        &:last-child span{
+          width: 500px;
+        }
         span{
+          float: left;
           height: 41px;
-          width: 100%;
+          width: 300px;
           padding-left: 16px;
           line-height: 41px;
           font-size: 14px;

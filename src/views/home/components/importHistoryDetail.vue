@@ -13,10 +13,10 @@
         >
         <div>
     <a-menu
-      v-model:openKeys="openKeys"
+      :openKeys="openKeys"
       v-model:selectedKeys="selectedKeys"
       mode="inline"
-      @click="handleClick"
+      @openChange="onOpenChange"
     >
       <a-sub-menu key="sub1">
         <template #title>
@@ -45,11 +45,11 @@
           </table>
         </a-menu-item>
       </a-sub-menu>
-      <a-sub-menu key="sub4">
+      <a-sub-menu key="sub2">
         <template #title>
           <span><SettingOutlined /><span>二审上诉</span></span>
         </template>
-        <a-menu-item key="9">
+        <a-menu-item key="2">
           <table>
             <tbody border="1">
               <tr>
@@ -81,6 +81,7 @@
     export default {
         data() {
             return {
+                rootSubmenuKeys: ['sub1', 'sub2'],
                 visible: false,
                 confirmLoading: false,
                 labelCol: { span: 4 },
@@ -100,26 +101,34 @@
             };
         },
         methods: {
-            //显示模态框
-            showModal() {
-                this.visible = true;
-            },
-            //点击ok
-            handleOk() {
-                this.ModalText = 'The modal will be closed after two seconds';
-                this.confirmLoading = true;
-                setTimeout(() => {
-                    this.visible = false;
-                    this.confirmLoading = false;
-                }, 10);
-            },
-            //点击cancel
-            handleCancel() {
-                console.log('Clicked cancel button');
-                this.visible = false;
-            },
-            onSubmit() {
-               console.log('submit!', this.form);
+          //显示模态框
+          showModal() {
+              this.visible = true;
+          },
+          //点击ok
+          handleOk() {
+              this.ModalText = 'The modal will be closed after two seconds';
+              this.confirmLoading = true;
+              setTimeout(() => {
+                  this.visible = false;
+                  this.confirmLoading = false;
+              }, 10);
+          },
+          //点击cancel
+          handleCancel() {
+              console.log('Clicked cancel button');
+              this.visible = false;
+          },
+          onSubmit() {
+              console.log('submit!', this.form);
+          },
+          onOpenChange(openKeys) {
+      const latestOpenKey = openKeys.find(key => this.openKeys.indexOf(key) === -1);
+      if (this.rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
+        this.openKeys = openKeys;
+      } else {
+        this.openKeys = latestOpenKey ? [latestOpenKey] : [];
+      }
     },
         },
     };
