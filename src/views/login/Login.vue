@@ -203,7 +203,7 @@ export default ({
       background-color: rgba(196, 228, 226, 0.2);
       border-radius: 50%;
       position: absolute;
-      left: 95%;
+      left: 110%;
       top: 60%;
       button{
         width: 80px;

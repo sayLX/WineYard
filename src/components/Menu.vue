@@ -108,11 +108,9 @@ export default defineComponent({
       selectedKeys: []
     });
     const onOpenChange = (openKeys: string[]) => {
-      console.log(openKeys);
       const latestOpenKey: string | undefined = openKeys.find(
         (key: string) => menu.openKeys.indexOf(key) === -1
       );
-      console.log(latestOpenKey);
       if (menu.rootSubmenuKeys.indexOf(latestOpenKey as string) === -1) {
         menu.openKeys = openKeys;
       } else {
@@ -121,8 +119,6 @@ export default defineComponent({
     };
     const router = useRouter();
     const clickItem = (e: MenuData) => {
-      console.log("==============");
-      console.log(e);
       const url = e.key;
       router.push({
         name: url
@@ -162,6 +158,9 @@ export default defineComponent({
         .ant-menu {
           color: #baedfe;
           background-color: rgb(14, 139, 235);
+          .ant-menu-item:after{
+            border: none;
+          }
         }
         .ant-menu-submenu-title {
           i {

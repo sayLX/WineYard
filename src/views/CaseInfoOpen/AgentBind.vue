@@ -47,9 +47,6 @@ export default defineComponent({
       conditionsLength:Object.keys(searchConditions).length,
       searchResults:''
     }
-  },
-  mounted () {
-    console.log(this.conditionsLength)
   }
 })
 </script>
@@ -59,6 +56,7 @@ export default defineComponent({
   height: 100%;
   position: relative;
   .body {
+    min-width:1080px ;
     position: absolute;
     left: 11px;
     right: 11px;

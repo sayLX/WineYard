@@ -3,8 +3,8 @@
     <div class="body">
       <Title id="title" title="辩护代理信息导入" ></Title>
       <div class="import clearfix">
-        <span class="nowPath"></span>
-        <a-upload :fileList="fileList" :remove="handleRemove" :beforeUpload="beforeUpload">
+        <span class="nowPath" >&nbsp;&nbsp;{{latestFile}} </span>
+        <a-upload :fileList="fileList" v-model:name=latestFile :remove="handleRemove" :beforeUpload="beforeUpload">
         <a-button id="search" >  浏览 </a-button>
         </a-upload>
         <a-button
@@ -14,6 +14,7 @@
           :loading="uploading"
           @click="handleUpload"
         >
+          <!-- <template #icon><ImportOutlined /></template> -->
           导入
         </a-button>
       </div>
@@ -25,31 +26,34 @@
       <ul id="fileList" v-show="fileList.length">
         <li id='listTitle'>导入列表明细</li>
         <li class="fileItem" v-for="(file,index) in fileList" :key="index" >
-          {{index+1}}&nbsp;&nbsp;
-          <span>{{importTime.toLocaleDateString()}}&nbsp;&nbsp;{{importTime.toLocaleTimeString()}}</span>
-          <span>文件{{file.name}}</span>
+          <span>{{index+1}}&nbsp;&nbsp;{{importTime.toLocaleDateString()}}&nbsp;&nbsp;{{importTime.toLocaleTimeString()}}</span>
+          <span class="fileName">{{file.name}}</span>
           <span> {{ uploading ? '' : 'Start Upload' }}</span>
-          <span></span>
+        </li>
+        <li class="fileItem">
+          <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;嫌疑人/当事人共{{importResult.total}}个，解析成功{{importResult.success}}个，失败{{importResult.failed}}个</span>
         </li>
       </ul>
     </div>
   </div>
 </template>
 <script>
-import { message } from 'ant-design-vue';
+import { message } from 'ant-design-vue'
 import Title from './components/Title.vue'
 import axios from 'axios'
 const myDate=new Date
 export default {
   name:'AgentInfoImport',
   components: {
-    Title
+    Title,
   },
   data() {
     return {
       importTime:myDate,
+      latestFile:'',
       fileList: [],
       uploading: false,
+      importResult:{total:'5',success:'5',failed:'0'},
       headers: {
         authorization: 'authorization-text'
       }
@@ -65,6 +69,8 @@ export default {
       beforeUpload(file) {
         this.file=file
         this.fileList = [...this.fileList, file];
+        // 获得当前选择文件名
+        this.latestFile=file.name
         return false;
       },
       handleUpload() {
@@ -104,7 +110,7 @@ export default {
 
     // 导入文件模块
     .import{
-      margin: 12px 0;
+      margin: 12px 10px;
       display: flex;
       #search,#import{
         margin-right: 11px;
@@ -154,7 +160,6 @@ export default {
         margin-top: 10px;
         border-top: 1px solid rgb(229,236,244);
         border-bottom: 1px solid rgb(229,236,244);
-
         padding-left: 36px;
         font-size: 14px;
         font-weight:bold;
@@ -165,12 +170,16 @@ export default {
 
       }
       .fileItem {
-        display: inline-block;
+        overflow: hidden;
         width: 100%;
         border-bottom: 1px solid rgb(229,236,244);
+        &:last-child span{
+          width: 500px;
+        }
         span{
+          float: left;
           height: 41px;
-          width: 100%;
+          width: 300px;
           padding-left: 16px;
           line-height: 41px;
           font-size: 14px;
