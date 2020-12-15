@@ -155,12 +155,12 @@ export default defineComponent({
         &:hover {
           color: #baedfe !important;
         }
+        .ant-menu-item:after{
+          border: none;
+        }
         .ant-menu {
           color: #baedfe;
           background-color: rgb(14, 139, 235);
-          .ant-menu-item:after{
-            border: none;
-          }
         }
         .ant-menu-submenu-title {
           i {

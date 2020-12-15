@@ -24,8 +24,6 @@
 import { defineComponent } from 'vue'
 import importHistoryDetail from './importHistoryDetail.vue'
 
-
-
 export default defineComponent({
   name: 'importHistory',
   components: {

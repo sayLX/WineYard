@@ -83,7 +83,7 @@ const routes = [
         },
         component: () => import('../views/smsTemplate/smsTemplate.vue')
       },
-    
+
       {
         path: '/sendQuery',
         name: 'sendQuery',

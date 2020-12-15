@@ -4,8 +4,8 @@
       <span class="xm">姓名</span>
       <span class="xb">性别</span>
       <span class="zjlx">证件类型</span>
-      <sapn class="zjhm">证件号码</sapn>
-      <lspani class="ay">案由</lspani>
+      <span class="zjhm">证件号码</span>
+      <span class="ay">案由</span>
       <span class="ajmc">案件名称</span>
       <span class="cbdw">承办单位</span>
       <span class="gkzt">公开状态</span>

@@ -3,7 +3,7 @@ module.exports = {
   env: {
     node: true
   },
-  extends: [
+  'extends': [
     'plugin:vue/vue3-essential',
     // '@vue/standard',
     '@vue/typescript/recommended'
@@ -14,6 +14,7 @@ module.exports = {
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    'no-v-model-argument':0,
     "vue/custom-event-name-casing": ["error", {
       "ignores": ["fooBar", "/^[a-z]+(?:-[a-z]+)*:[a-z]+(?:-[a-z]+)*$/u"]
     }]

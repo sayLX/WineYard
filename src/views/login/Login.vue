@@ -3,11 +3,10 @@
     <div class="login">
 
       <a-form ref="loginFormRef" :rules='loginFormRules' :model="loginForm" :label-col="labelCol" :wrapper-col="wrapperCol">
-        <a-form-item  name='organization'>
-          <i class='fa fa-home'></i>
-          <a-select v-model:value="loginForm.organization" placeholder="请选择单位">
+        <a-form-item  name='organization' class="selectOrg">
+          <HomeOutlined style="color:rgba(0,0,0,.25)"/>
+          <a-select v-model="loginForm.organization" placeholder="请选择单位">
             <a-select-option v-for="(org,index) in orgs" :key="index" :value="org">{{org}}</a-select-option>
-            <!-- <a-select-option value="beijing">Zone two</a-select-option> -->
           </a-select>
         </a-form-item>
         <a-form-item name='username'>
@@ -33,7 +32,7 @@
 </template>
 
 <script>
-import {UserOutlined,LockOutlined } from'@ant-design/icons-vue'
+import {UserOutlined,LockOutlined ,HomeOutlined} from'@ant-design/icons-vue'
 // const loginApi = 'www.baidu.com'
 import { useStore } from 'vuex'
 import { useRouter } from "vue-router"
@@ -42,7 +41,8 @@ export default ({
   name: 'login',
   components: {
     UserOutlined,
-    LockOutlined
+    LockOutlined,
+    HomeOutlined
   },
   setup () {
     const data = reactive({
@@ -54,8 +54,6 @@ export default ({
         organization: '',
         username: '',
         password:'',
-        date1: undefined,
-        delivery: false,
         type: [],
         resource: '',
         desc: '',
@@ -154,19 +152,14 @@ export default ({
       margin-bottom: 5px;
 
       .ant-col{
-        margin: auto;position: relative;
-        i{
+        margin: auto;
+        position: relative;
+        #organization{
           position: absolute;
           left: 10px;
-          top: 3px;
+          top: calc(50% - 5px);
           z-index: 1000;
-          color: rgb(191,191,191);
-        }
-        .ant-select-selector{
-          span{
-            text-indent: 18px;
-          }
-        }
+      }
       }
 
       .ant-input-affix-wrapper,.ant-select-selector{
@@ -191,9 +184,8 @@ export default ({
     }
     .ant-select-selector{
       span{
-        text-align: right;
-        font-size: 12px !important;
-        text-indent: 100px !important;
+        text-align: left;
+        text-indent: 17px;
       }
     }
     // 设置提交按钮

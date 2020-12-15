@@ -3,16 +3,28 @@
         <div class="body">
             <Title title="辩护代理绑定"></Title>
             <ul class="searchBind">
-              <li v-for="(condition,index) in searchConditions"   :key="index">
-                <span>{{condition}}</span>
-                <input type="text" v-model="search" placeholder="请输入">
+              <li>
+                <span>部门受案号</span>
+                <input type="text" v-model="searchConditions.bmsah" placeholder="请输入">
+              </li>
+              <li>
+                <span>案件名称</span>
+                <input type="text" v-model="searchConditions.ajmc" placeholder="请输入">
+              </li>
+              <li>
+                <span>人员姓名</span>
+                <input type="text" v-model="searchConditions.ryxm" placeholder="请输入">
+              </li>
+              <li>
+                <span>案件类型</span>
+                <input type="text" v-model="searchConditions.ajlx" placeholder="请输入">
               </li>
               <li>
                 <span>是否绑定</span>
                 <select class="search" v-model="searchConditions.sfbd">
                   <option disabled>请选择</option>
                   <option >已绑定</option>
-                  <option value=""> 未绑定</option>
+                  <option > 未绑定</option>
                 </select>
                 <button id="search">
                   <i class="fa fa-search"></i>查询
@@ -39,13 +51,13 @@ export default defineComponent({
   data () {
     return {
       searchConditions:{
-      bmsah:'部门受案号',
-      ajmc:'案件名称',
-      ryxm:'人员姓名',
-      ajlx:'案件类型'
+      bmsah:'',
+      ajmc:'',
+      ryxm:'',
+      ajlx:'',
+      sfbd:''
       },
       conditionsLength:Object.keys(searchConditions).length,
-      searchResults:''
     }
   }
 })
@@ -112,11 +124,6 @@ export default defineComponent({
         }
       }
     }
-  // 查询结果
-  ul{
-    list-style: none;
-    clear: both;
-  }
   }
 }
 </style>

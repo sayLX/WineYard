@@ -16,11 +16,10 @@
       v-model:openKeys="openKeys"
       v-model:selectedKeys="selectedKeys"
       mode="inline"
-      @click="handleClick"
     >
       <a-sub-menu key="sub1">
         <template #title>
-          <span><SettingOutlined /><span>犯罪嫌疑人/被告人信息</span></span>
+          <span>犯罪嫌疑人/被告人信息</span>
         </template>
         <a-menu-item key="1" >
           <table>
@@ -45,11 +44,11 @@
           </table>
         </a-menu-item>
       </a-sub-menu>
-      <a-sub-menu key="sub4">
+      <a-sub-menu key="sub2">
         <template #title>
-          <span><SettingOutlined /><span>二审上诉</span></span>
+          <span>二审上诉</span>
         </template>
-        <a-menu-item key="9">
+        <a-menu-item key="1">
           <table>
             <tbody border="1">
               <tr>

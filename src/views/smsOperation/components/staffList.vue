@@ -5,7 +5,7 @@
       <span class="xb">性别</span>
       <span class="gzzh">工作证号</span>
       <span class="lxdh">联系电话</span>
-      <spna class="dzyj">电子邮件</spna>
+      <span class="dzyj">电子邮件</span>
       <span class="cz">操作</span>
     </div>
     <a-menu

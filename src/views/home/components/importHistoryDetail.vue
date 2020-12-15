@@ -20,7 +20,7 @@
     >
       <a-sub-menu key="sub1">
         <template #title>
-          <span><SettingOutlined /><span>犯罪嫌疑人/被告人信息</span></span>
+          <span>犯罪嫌疑人/被告人信息</span>
         </template>
         <a-menu-item key="1" >
           <table>
@@ -47,7 +47,7 @@
       </a-sub-menu>
       <a-sub-menu key="sub2">
         <template #title>
-          <span><SettingOutlined /><span>二审上诉</span></span>
+          <span>二审上诉</span>
         </template>
         <a-menu-item key="2">
           <table>

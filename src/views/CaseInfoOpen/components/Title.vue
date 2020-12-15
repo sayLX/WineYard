@@ -22,6 +22,7 @@ export default defineComponent({
     padding: 5px 10px;
     margin-bottom: 10px;
     .t {
+      padding-left: 10px;
         font-weight: 600;
         border-left: 4px solid #28a2fd;
     }

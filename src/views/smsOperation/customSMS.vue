@@ -15,13 +15,13 @@
           <div class="sms-template">
             <span>短信模板</span>
             <select name="" id="sms-template">
-              <option value=""></option>
-              <option v-for="(templateName,index) in templateNames" :key="index" :value="templateName">{{templateName}}</option>
+              <option disabled>请选择模板</option>
+              <option v-for="(templateName,index) in template" :key="index">{{templateName}}</option>
             </select>
           </div>
           <div class="template-content">
             <span class="template-title">模板内容</span>
-            <textarea cols="10" v-model="templateContent"></textarea>
+            <textarea cols="10" placeholder="请输入短信内容" v-model="templateContent" ></textarea>
           </div>
           <p>注：如果短信内容超过140个字符，将分多个短信发送</p>
           <div class="btns">
@@ -53,7 +53,7 @@
                 </template>
                 <a-collapse-panel key="1" :header="'全部'+receiver" :style="customStyle">
                   <ul class="receivers">
-                    <li v-for="(name,index) in Object.keys(lawyerList)" :key="index">
+                    <li v-for="(name,index) in Object.keys(lawyerList)" :key="index" :tabindex="index">
                       <i class="fa fa-file-alt" style="color:#666"></i>&nbsp;&nbsp;{{name}}&lt;{{lawyerList[name]}}&gt;
                     </li>
                   </ul>
@@ -81,8 +81,8 @@ export default defineComponent({
   data () {
     return {
       value:'',
-      templateNames:['模板1','模板2'],
-      templateContent:'模板内容',
+      template:['模板1','模板2'],
+      templateContent:'',
       tabPosition: 'left',
       activeKey: ['1'],
       receiverList:[],
@@ -256,6 +256,12 @@ export default defineComponent({
               margin-left: 27px;
               list-style: none;
               color: #666;
+              cursor: pointer;
+
+              &:focus{
+                outline: none;
+                background-color: rgb(217,217,217);
+              }
             }
           }
         }

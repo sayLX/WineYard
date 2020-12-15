@@ -111,6 +111,10 @@ export default defineComponent({
       console.log(e.target);
       message.success('成功删除模板');
     },
+    cancel(e) {
+      console.log(e);
+      message.error('Click on No');
+    },
   }
 })
 </script>

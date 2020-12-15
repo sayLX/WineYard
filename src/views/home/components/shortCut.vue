@@ -1,11 +1,11 @@
 <template>
     <ul class="shortcuts">
-      <li class="shortcut caseinfoImport" @click="goTo('caseinfoImport')" :style="background">案件公开信息导入</li>
-      <li class="shortcut AgentInfoImport" @click="goTo('AgentInfoImport')"  :style="background">辩护代理信息导入</li>
-      <li class="shortcut AgentBind" @click="goTo('AgentBind')"  :style="background">辩护代理绑定</li>
-      <li class="shortcut localSMS" @click="goTo('localSMS')"  :style="background">本地通知</li>
-      <li class="shortcut customSMS" @click="goTo('customSMS')"  :style="background">自定义短信</li>
-      <li class="shortcut sendQuery" @click="goTo('sendQuery')"  :style="background">发送记录查询</li>
+      <li class="shortcut caseinfoImport" @click="goTo('caseinfoImport')">案件公开信息导入</li>
+      <li class="shortcut AgentInfoImport" @click="goTo('AgentInfoImport')">辩护代理信息导入</li>
+      <li class="shortcut AgentBind" @click="goTo('AgentBind')">辩护代理绑定</li>
+      <li class="shortcut localSMS" @click="goTo('localSMS')">本地通知</li>
+      <li class="shortcut customSMS" @click="goTo('customSMS')">自定义短信</li>
+      <li class="shortcut sendQuery" @click="goTo('sendQuery')">发送记录查询</li>
     </ul>
 </template>
 
