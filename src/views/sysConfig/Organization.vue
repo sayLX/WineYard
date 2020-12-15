@@ -33,7 +33,8 @@
                   <div class="r-bottom">
                     <div class="title">
                       <span class="text">人员信息</span>
-                      <div class="form">
+                    </div>
+                    <div class="form">
                         <a-form
                             layout="inline"
                         >
@@ -61,8 +62,9 @@
                               </a-button>
                           </a-form-item>
                         </a-form>
-                      </div>
-                      <organization-table></organization-table>
+                    </div>
+                    <div class="table">
+                      <base-table :col="columns" :list="list" :size="7"></base-table>
                     </div>
                   </div>
                 </el-main>
@@ -75,13 +77,20 @@
 import { defineComponent } from 'vue'
 import PageTitle from '../../components/PageTitle.vue'
 import { SearchOutlined } from '@ant-design/icons-vue'
-import OrganizationTable from './components/OrganizationTable.vue'
+import BaseTable from '@/components/BaseTable.vue'
+import TestData from '@/utils/testdata'
 export default defineComponent({
   name: '',
   components: {
     PageTitle,
     SearchOutlined,
-    OrganizationTable
+    BaseTable
+  },
+  setup () {
+    return {
+      columns: TestData.OrgOrg.columns,
+      list: TestData.OrgOrg.dataCol
+    }
   }
 })
 </script>
@@ -166,6 +175,8 @@ export default defineComponent({
               flex: 1;
               margin: 5px;
               margin-top: 0;
+              display: flex;
+              flex-direction: column;
               .form {
                 padding: 5px 20px;
                 display: flex;
@@ -173,6 +184,10 @@ export default defineComponent({
                 .input {
                   width: 250px;
                 }
+              }
+              .table {
+                flex: 1;
+                padding: 10px;
               }
             }
           }

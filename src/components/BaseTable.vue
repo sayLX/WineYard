@@ -2,6 +2,7 @@
   <a-table class="a-table" :columns="columns" :data-source="data"
     :pagination='pagination'
     size="middle"
+    tableLayout='fixed'
     :rowClassName="rowClassName"
   >
     <template #name="{text}">
@@ -10,53 +11,34 @@
   </a-table>
 </template>
 <script lang='ts'>
-import { defineComponent } from 'vue'
-const columns = [
-  {
-    title: '短信模板名称',
-    dataIndex: 'infoName',
-    key: 'infoName'
-  },
-  {
-    title: '接收人姓名',
-    dataIndex: 'name',
-    key: 'name'
-  },
-  {
-    title: '接收人电话号码',
-    dataIndex: 'phone',
-    key: 'phone'
-  }
-]
-
-const dataCol = () => {
-  const arr = []
-  for (let i = 0; i < 500; i++) {
-    arr.push({
-      key: '1',
-      infoName: '自定义模板',
-      name: '张三',
-      phone: 110
-    })
-  }
-  return arr
+import { defineComponent, PropType } from 'vue'
+interface PropCol {
+  title: string;
+  dataIndex: string;
+  key: string;
+  width?: string;
+  align?: string;
 }
-
 export default defineComponent({
-  setup () {
+  props: {
+    list: Array,
+    col: Array as PropType<PropCol[]>,
+    size: Number
+  },
+  setup (props) {
     const rowClassName = (record: object, index: number): string => {
       const className = index % 2 === 0 ? 'shallow_gray' : 'deep_gray'
       return className
     }
     const pagination = {
-      defaultPageSize: 13,
+      defaultPageSize: props.size,
       showTotal: (total: number) => `共 ${total} 条数据`,
-      showQuickJumper: true
+      showQuickJumper: true,
+      position: 'bottom'
     }
-    const data = dataCol()
     return {
-      data,
-      columns,
+      data: props.list,
+      columns: props.col,
       rowClassName,
       pagination
     }
@@ -70,6 +52,19 @@ export default defineComponent({
   }
   .deep_gray {
     background-color: #f8f8fa;
+  }
+  height: 100%;
+  position: relative;
+  .ant-spin-nested-loading {
+    position: static;
+    .ant-spin-container{
+      position: static;
+      .ant-pagination {
+        bottom: 0px;
+        right: 30px;
+        position: absolute;
+      }
+    }
   }
 }
 </style>

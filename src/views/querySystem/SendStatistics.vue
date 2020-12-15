@@ -34,7 +34,7 @@
             <div class="table">
               <page-title title="短信发送记录"></page-title>
               <div class="table-ctx">
-                <statistics-table></statistics-table>
+                <base-table :col="columns" :list="list" :size="5"></base-table>
               </div>
             </div>
         </div>
@@ -45,20 +45,23 @@
 import { defineComponent } from 'vue'
 import PageTitle from '../../components/PageTitle.vue'
 import { SearchOutlined } from '@ant-design/icons-vue'
-import StatisticsTable from './components/StatisticsTable.vue'
+import BaseTable from '@/components/BaseTable.vue'
+import TestData from '@/utils/testdata'
 export default defineComponent({
   name: '',
   components: {
     PageTitle,
     SearchOutlined,
-    StatisticsTable
+    BaseTable
   },
   setup () {
     const labelCol = { span: 6 }
     const wrapperCol = { span: 12 }
     return {
       labelCol,
-      wrapperCol
+      wrapperCol,
+      columns: TestData.StatisticsQuery.columns,
+      list: TestData.StatisticsQuery.data
     }
   }
 })
@@ -99,7 +102,10 @@ export default defineComponent({
           margin: 0 10px;
           margin-bottom: 10px;
           border: solid 1px #e2e2e2;
+          display: flex;
+          flex-direction: column;
           .table-ctx {
+            flex: 1;
             padding: 0 10px;
           }
         }

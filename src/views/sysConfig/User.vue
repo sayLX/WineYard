@@ -26,7 +26,7 @@
                 </a-form>
             </div>
             <div class="column">
-                <user-table></user-table>
+                <base-table :col="columns" :list="list" :size="10"></base-table>
             </div>
         </div>
     </div>
@@ -36,13 +36,20 @@
 import { defineComponent } from 'vue'
 import PageTitle from '../../components/PageTitle.vue'
 import { SearchOutlined } from '@ant-design/icons-vue'
-import UserTable from './components/UserTable.vue'
+import BaseTable from '@/components/BaseTable.vue'
+import TestData from '@/utils/testdata'
 export default defineComponent({
   name: '',
   components: {
     PageTitle,
     SearchOutlined,
-    UserTable
+    BaseTable
+  },
+  setup () {
+    return {
+      columns: TestData.userOrg.columns,
+      list: TestData.userOrg.dataCol
+    }
   }
 })
 </script>

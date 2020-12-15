@@ -146,39 +146,6 @@ export default defineComponent({
     /deep/ .left {
       width: 220px;
       height: 100%;
-      // overflow: auto;
-      .l-menu {
-        width: 100%;
-        height: 100%;
-        color: #baedfe;
-        background-color: rgb(40, 162, 253);
-        &:hover {
-          color: #fff !important;
-        }
-        .ant-menu-submenu:hover {
-          background:rgb(68, 103, 131);
-          color:#fff;
-        }
-        .ant-menu-submenu {
-          margin: 0;
-          .ant-menu-submenu-selected {
-            color: #fff;
-            background:rgb(68, 103, 131);
-          }
-        }
-        .ant-menu {
-          color: #baedfe;
-          background-color: rgb(14, 139, 235);
-          .ant-menu-item:after{
-            border: none;
-          }
-        }
-        .ant-menu-submenu-title {
-          i {
-            display: none;
-          }
-        }
-      }
     }
     .right {
       flex: 1;
