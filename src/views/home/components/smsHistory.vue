@@ -4,6 +4,16 @@
 
 <script>
 import HCharts from 'highcharts'
+import highcharts from 'highcharts'
+// import VueHighCharts from 'vue-highcharts'
+
+// 引入以上两项之后，因为我们需要使用3d图表，还需要引入：
+
+import highcharts3d from 'highcharts/highcharts-3d'
+
+// 调用3d图表：
+
+highcharts3d(highcharts)
 export default {
     name:'smsHistory',
     data () {

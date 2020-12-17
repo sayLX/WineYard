@@ -35,9 +35,10 @@
 <script>
 import {UserOutlined,LockOutlined } from'@ant-design/icons-vue'
 // const loginApi = 'www.baidu.com'
-import { useStore } from 'vuex'
+// import { useStore } from 'vuex'
 import { useRouter } from "vue-router"
 import { reactive, toRefs } from 'vue'
+import { Api } from '@/api/index'
 export default ({
   name: 'login',
   components: {
@@ -74,52 +75,18 @@ export default ({
         ]
       }
     })
-    const store = useStore()
     const router = useRouter()
     const login = () => {
-      console.log(store)
-      console.log(store.getters['isLogin'])
-      store.commit('login')
+      Api.login('test1803','111111','980000').then((res) => {
+        console.log('=====================================')
+        console.log(res)
+      })
       router.push({name: 'homePage'})
-      // new Promise((resolve,reject) => {
-      //   const status = this.$refs.loginFormRef.validate()
-      //   resolve(status)
-      //   reject(status)
-
-      // }).then(function(status){
-      //   console.log(status.username)
-      // })
-      // .catch(function(status){
-      //   console.log(status.outOfDate)
-      // })
     }
     return {
       ...toRefs(data),
       login
     }
-  //   const getmusic = () => {
-  //     axios({
-  //       method:'post',
-  //       url:that.loginUrl,
-  //       data:{
-  //         organization:that.loginForm.organization,
-  //         username:that.loginForm.username,
-  //         password:that.loginForm.password}
-  //       })
-  //       .then(
-  //         (response) => {
-  //           if(respose.success)
-  //             {
-  //               // 将takon储存
-  //               window.sessionStorage.setItem('takon',response.tokon)
-  //               // 登陆成功跳转
-  //               this.$router.push('/homePage')
-  //             }
-  //         },function (err) {
-  //             console.log(err);
-  //         }
-  //     )
-  //  }
   }
 })
 </script>

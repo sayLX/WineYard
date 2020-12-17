@@ -26,15 +26,17 @@
             <div class="chart">
               <div class="chart-item">
                 <page-title title="短信记录"></page-title>
+                <smsHistory ></smsHistory>
               </div>
               <div class="chart-item">
                 <page-title title="案件信息公开"></page-title>
+                <caseInfoOpen></caseInfoOpen>
               </div>
             </div>
             <div class="table">
               <page-title title="短信发送记录"></page-title>
               <div class="table-ctx">
-                <base-table :col="columns" :list="list" :size="5"></base-table>
+                <base-table :col="columns" :list="list" :size="7"></base-table>
               </div>
             </div>
         </div>
@@ -47,12 +49,16 @@ import PageTitle from '../../components/PageTitle.vue'
 import { SearchOutlined } from '@ant-design/icons-vue'
 import BaseTable from '@/components/BaseTable.vue'
 import TestData from '@/utils/testdata'
+import smsHistory from '@/views/home/components/smsHistory.vue'
+import caseInfoOpen from '@/views/home/components/caseInfoOpen.vue'
 export default defineComponent({
   name: '',
   components: {
     PageTitle,
     SearchOutlined,
-    BaseTable
+    BaseTable,
+    smsHistory,
+    caseInfoOpen
   },
   setup () {
     const labelCol = { span: 6 }
@@ -92,9 +98,13 @@ export default defineComponent({
           justify-content: space-between;
           margin: 10px;
           .chart-item {
-            width: 825px;
-            height: 365px;
-            border: solid 1px #e2e2e2;
+            width: calc(50% - 5px);
+            height: 300px;
+            background-color: #ffffff;
+            border: solid 1px #d8d7d7;
+            /deep/ .highcharts-container {
+              height: 220px !important;
+            }
           }
         }
         .table {
@@ -105,6 +115,7 @@ export default defineComponent({
           display: flex;
           flex-direction: column;
           .table-ctx {
+            margin-top: 10px;
             flex: 1;
             padding: 0 10px;
           }

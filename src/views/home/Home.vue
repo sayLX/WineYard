@@ -31,16 +31,6 @@ import smsHistory from './components/smsHistory.vue'
 import caseInfoOpen from './components/caseInfoOpen.vue'
 import importHistory from './components/importHistory.vue'
 
-import highcharts from 'highcharts'
-// import VueHighCharts from 'vue-highcharts'
-
-// 引入以上两项之后，因为我们需要使用3d图表，还需要引入：
-
-import highcharts3d from 'highcharts/highcharts-3d'
-
-// 调用3d图表：
-
-highcharts3d(highcharts)
 export default defineComponent({
   name: 'homePage',
   components: {
@@ -53,7 +43,7 @@ export default defineComponent({
   data() {
       return {
 
-  }
+    }
   }
 })
 </script>

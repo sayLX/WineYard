@@ -3,7 +3,8 @@
     :pagination='pagination'
     size="middle"
     tableLayout='fixed'
-    :rowClassName="rowClassName"
+    :rowClassName="tableColor ? rowClassName : ''"
+    :defaultExpandAllRows='true'
   >
     <template #name="{text}">
       <a>{{ text }}</a>
@@ -23,7 +24,11 @@ export default defineComponent({
   props: {
     list: Array,
     col: Array as PropType<PropCol[]>,
-    size: Number
+    size: Number,
+    tableColor: {
+      type: Boolean,
+      default: true
+    }
   },
   setup (props) {
     const rowClassName = (record: object, index: number): string => {

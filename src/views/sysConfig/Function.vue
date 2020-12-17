@@ -26,7 +26,7 @@
                 </a-form>
             </div>
             <div class="table">
-              <base-table :col="columns" :list="list" :size="10"></base-table>
+              <base-table :col="columns" :list="list" :size="10" :tableColor="false"></base-table>
             </div>
         </div>
     </div>
@@ -48,7 +48,7 @@ export default defineComponent({
   setup () {
     return {
       columns: TestData.FunOrg.columns,
-      list: TestData.FunOrg .dataCol
+      list: TestData.FunOrg.dataCol
     }
   }
 })

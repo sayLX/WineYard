@@ -1,11 +1,6 @@
 import request from "../utils/request";
 
-export class UserApi {
-  private baseUrl: string | undefined
-  constructor(url: string) {
-    this.baseUrl = url;
-  }
-
+class UserApi {
   //注册
   sign(username: string, password: string) {
     return request({
@@ -19,14 +14,17 @@ export class UserApi {
   }
 
   //登陆
-  login(username: string, password: string) {
+  login(dlbm: string, kl: string, zzdwbm: string) {
     return request({
-      url: "/api/user/login/",
+      url: "/organization/user/login",
       method: "post",
       data: {
-        username: username,
-        password: password
+        "dlbm": dlbm,
+        "kl": kl,
+        "zzdwbm": zzdwbm
       }
     });
   }
 }
+
+export const Api = new UserApi()
