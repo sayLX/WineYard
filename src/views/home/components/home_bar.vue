@@ -35,7 +35,7 @@ export default defineComponent({
 })
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 #home_bar {
   $h: 64px;
   width: 100%;
@@ -52,13 +52,15 @@ export default defineComponent({
   img {
     margin-right: 12px;
   }
+
+  // 点击效果
   button,
   button:focus {
     background-color: #1879c4;
     border: none;
     outline: none;
   }
-
+  // logo
   #logo {
     float: left;
     img {
@@ -67,6 +69,7 @@ export default defineComponent({
     font-size: 30px;
   }
 
+  // 用户信息
   #userInfo {
     float: right;
     margin-right: 74px;
@@ -77,6 +80,7 @@ export default defineComponent({
     font-size: 14px;
   }
 
+  // 退出
   #signOut {
     float: right;
     margin-right: 11px;
