@@ -1,5 +1,5 @@
 export default {
-  login: (ctx: any) => {
+  login: (ctx) => {
     ctx.commit('login')
   }
 }

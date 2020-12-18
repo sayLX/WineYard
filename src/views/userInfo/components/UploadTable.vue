@@ -23,7 +23,7 @@
   </a-table>
 </template>
 <script lang='ts'>
-import { defineComponent, reactive, ref, toRefs } from 'vue'
+import { defineComponent, reactive, toRefs } from 'vue'
 const columns = [
   {
     dataIndex: 'infoName',

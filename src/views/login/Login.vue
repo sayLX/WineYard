@@ -62,13 +62,13 @@
   </div>
 </template>
 
-<script>
+<script lang='ts'>
 import {UserOutlined,LockOutlined,HomeOutlined,} from'@ant-design/icons-vue'
-// const loginApi = 'www.baidu.com'
-// import { useStore } from 'vuex'
+import { useStore } from 'vuex'
 import { useRouter } from "vue-router"
 import { reactive, toRefs } from 'vue'
 import { Api } from '@/api/index'
+import { UserInfo } from '@/model/UserInfo'
 export default ({
   name: 'login',
   components: {
@@ -97,12 +97,19 @@ export default ({
       },
     })
     const router = useRouter()
+    const store = useStore()
     const login = () => {
       Api.login('test1803','111111','980000').then((res) => {
-        console.log('=====================================')
-        console.log(res)
+        // 将获取到的信息保存在sessionStorage中
+        sessionStorage.setItem('user_info', res.data)
+        console.log(res.data)
+        // 同时将用户信息保存在vuex中
+        const userInfo: UserInfo = res.data
+        console.log('--------------------')
+        console.log(userInfo)
+        store.commit('login', userInfo)
+        router.push({name: 'homePage'})
       })
-      router.push({name: 'homePage'})
     }
     return {
       ...toRefs(data),
