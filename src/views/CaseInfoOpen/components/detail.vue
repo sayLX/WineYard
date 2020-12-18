@@ -21,25 +21,31 @@
         <template #title>
           <span>犯罪嫌疑人/被告人信息</span>
         </template>
-        <a-menu-item key="1" >
+        <a-menu-item key="sub1" >
           <table>
              <tbody>
               <tr>
                 <td class="name">姓名</td><td class="value">张三</td>
+              </tr>
+              <tr>
                 <td class="name">性别</td><td class="value">男</td>
               </tr>
               <tr>
                 <td class="name">证件类型</td><td class="value"> 居民身份证</td>
+              </tr>
+              <tr>
                 <td class="name">证件号码</td><td class="value">11111111111111</td>
               </tr>
+                <tr>
+                 <td class="name">承办单位编码</td><td class="value">成都</td>
+                </tr>
               <tr>
-                <td class="name">当前强制措施</td><td class="value">拘留</td>
-                <td class="name">当前强制措施日期</td><td class="value">2020-10-10</td>
-              </tr>
-              <tr>
-                <td class="name">当前羁押场所</td><td class="value">成都</td>
                 <td class="name">案由</td><td class="value">睡觉</td>
               </tr>
+              <!-- <tr>
+                <td class="name">当前强制措施</td><td class="value">拘留</td>
+                <td class="name">当前强制措施日期</td><td class="value">2020-10-10</td>
+              </tr> -->
             </tbody>
           </table>
         </a-menu-item>
@@ -85,13 +91,13 @@
                 labelCol: { span: 4 },
                 wrapperCol: { span: 14 },
                 form: {
-                  name: '',
-                  region: undefined,
-                  date1: undefined,
-                  delivery: false,
-                  type: [],
-                  resource: '',
-                  desc: '',
+                  xm:'',
+                  xb:'',
+                  zjlx:'',
+                  zjhm:'',
+                  cbdwbm:'',
+                  ay:''
+
                 },
                 selectedKeys: ['1'],
                 openKeys: ['sub1'],

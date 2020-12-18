@@ -26,11 +26,7 @@
           </el-button>
         </template>
         <el-button size="small" type="success" @click="submitUpload">上传到服务器</el-button>
-        <!-- <template #tip>
-          <div class="el-upload__tip">
-            只能上传 jpg/png 文件，且不超过 500kb
-          </div>
-        </template> -->
+        <span class="tag">注：EXCLE表格*列为必填，否则该行不可导入。</span>
       </el-upload>
       <div class="table">
         <upload-table></upload-table>
@@ -98,7 +94,11 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .modal {
-  padding-top: 0;
+  /deep/ .ant-modal-content {
+    /deep/ .ant-modal-body {
+      padding-bottom: 0;
+    }
+  }
   .upload-demo {
     padding: 0;
     margin-top: -10px;
@@ -126,8 +126,19 @@ export default defineComponent({
     .el-button {
       margin-right: 10px;
     }
+    .tag {
+      width: 250px;
+      font-family: MicrosoftYaHei;
+      font-size: 12px;
+      font-weight: normal;
+      font-stretch: normal;
+      letter-spacing: 0px;
+      color: #f68a3b;
+      margin-left: 100px;
+    }
   }
   .table {
+    height: 430px;
     margin-top: 10px;
   }
 }

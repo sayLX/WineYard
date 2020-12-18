@@ -3,6 +3,7 @@
     :pagination='pagination'
     size="middle"
     :rowClassName="rowClassName"
+    :row-selection="{ selectedRowKeys: selectedRowKeys, onChange: onSelectChange }"
   >
     <template #name="{text}">
       <a>{{ text }}</a>
@@ -22,7 +23,7 @@
   </a-table>
 </template>
 <script lang='ts'>
-import { defineComponent } from 'vue'
+import { defineComponent, reactive, ref, toRefs } from 'vue'
 const columns = [
   {
     dataIndex: 'infoName',
@@ -60,7 +61,7 @@ const dataCol = () => {
   const arr = []
   for (let i = 0; i < 500; i++) {
     arr.push({
-      key: '1',
+      key: i,
       infoName: '5623262622622615166',
       name: '张三',
       sfz: '561616162613135496612',
@@ -84,17 +85,27 @@ export default defineComponent({
       showQuickJumper: true
     }
     const data = dataCol()
+    const selectedData = reactive({
+      selectedRowKeys: []
+    })
+    const onSelectChange = (selectedRowKeys) => {
+      console.log('selectedRowKeys changed: ', selectedRowKeys);
+      selectedData.selectedRowKeys = selectedRowKeys;
+    }
     return {
       data,
       columns,
       rowClassName,
-      pagination
+      pagination,
+      ...toRefs(selectedData),
+      onSelectChange
     }
   }
 })
 </script>
 <style lang="scss">
 .a-table {
+  height: 100%;
   .shallow_gray {
     background-color: #fff;
   }

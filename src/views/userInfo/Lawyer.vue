@@ -34,7 +34,7 @@
               </a-button>
             </div>
             <div class="column">
-              <lawyer-table></lawyer-table>
+              <base-table :col="columns" :list="list" :size="10"></base-table>
             </div>
         </div>
         <add-lawyer v-model:show="show"></add-lawyer>
@@ -46,7 +46,8 @@
 import { defineComponent, reactive, toRefs } from 'vue'
 import PageTitle from '../../components/PageTitle.vue'
 import { FolderOpenOutlined, PlusOutlined } from '@ant-design/icons-vue'
-import LawyerTable from './components/LawyerTable.vue'
+import BaseTable from '@/components/BaseTable.vue'
+import TestData from '@/utils/testdata'
 import AddLawyer from './components/AddLawyer.vue'
 import UploadLawyer from './components/UploadLawyer.vue'
 export default defineComponent({
@@ -54,7 +55,7 @@ export default defineComponent({
   components: {
     FolderOpenOutlined,
     PageTitle,
-    LawyerTable,
+    BaseTable,
     PlusOutlined,
     AddLawyer,
     UploadLawyer
@@ -79,7 +80,9 @@ export default defineComponent({
       showModal,
       showDirModal,
       ...toRefs(modalData),
-      ...toRefs(modalDirData)
+      ...toRefs(modalDirData),
+      columns: TestData.LawyerInfo.columns,
+      list: TestData.LawyerInfo.dataCol
     }
   }
 })

@@ -41,7 +41,7 @@
                     <el-button type="primary" size='mini' icon="el-icon-delete">删除</el-button>
                   </div>
                   <div class="table">
-                    <dictionary-table></dictionary-table>
+                    <base-table :col="columns" :list="list" :size="10"></base-table>
                   </div>
                 </el-main>
             </el-container>
@@ -52,12 +52,13 @@
 <script lang='ts'>
 import { defineComponent, reactive, toRefs } from 'vue'
 import PageTitle from '../../components/PageTitle.vue'
-import DictionaryTable from './components/DictionaryTable.vue'
+import BaseTable from '@/components/BaseTable.vue'
+import TestData from '@/utils/testdata'
 export default defineComponent({
   name: '',
   components: {
     PageTitle,
-    DictionaryTable
+    BaseTable
   },
   setup () {
     const leftList = reactive({
@@ -79,7 +80,9 @@ export default defineComponent({
     return {
       ...toRefs(leftList),
       ...toRefs(flag),
-      ldelete
+      ldelete,
+      columns: TestData.DicOrg.columns,
+      list: TestData.DicOrg.dataCol
     }
   }
 })

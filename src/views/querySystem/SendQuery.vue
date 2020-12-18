@@ -82,7 +82,7 @@
                 </a-form>
             </div>
             <div class="column">
-                <send-table></send-table>
+                <base-table :col="columns" :list="list" :size="10"></base-table>
             </div>
         </div>
     </div>
@@ -92,13 +92,14 @@
 import { defineComponent, reactive, ref } from 'vue'
 import PageTitle from '../../components/PageTitle.vue'
 import { SearchOutlined } from '@ant-design/icons-vue'
-import SendTable from './components/SendTable.vue'
+import BaseTable from '@/components/BaseTable.vue'
+import TestData from '@/utils/testdata'
 export default defineComponent({
   name: '',
   components: {
     PageTitle,
     SearchOutlined,
-    SendTable
+    BaseTable
   },
   setup () {
     const form = reactive({})
@@ -113,7 +114,9 @@ export default defineComponent({
       labelCol,
       wrapperCol,
       startTime,
-      endTime
+      endTime,
+      columns: TestData.SendQuery.columns,
+      list: TestData.SendQuery.data
     }
   }
 })

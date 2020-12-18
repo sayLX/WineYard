@@ -27,13 +27,13 @@
                         </a-form>
                     </div>
                     <div class="mrg">
-                        <leading-table-l></leading-table-l>
+                        <base-table :col="columnsl" :list="listl" :size="10"></base-table>
                     </div>
                 </div>
                 <div class="chart-item">
                     <page-title title="发送记录"></page-title>
                     <div class="mrgr">
-                        <leading-table-r></leading-table-r>
+                        <base-table :col="columnsr" :list="listr" :size="10"></base-table>
                     </div>
                 </div>
             </div>
@@ -44,14 +44,13 @@
 <script lang="ts">
 import { defineComponent, reactive, ref } from 'vue'
 import PageTitle from '../../components/PageTitle.vue'
-import LeadingTableL from './components/LeadingTableL.vue'
-import LeadingTableR from './components/LeadingTableR.vue'
+import BaseTable from '@/components/BaseTable.vue'
+import TestData from '@/utils/testdata'
 export default defineComponent({
   name: '',
   components: {
     PageTitle,
-    LeadingTableL,
-    LeadingTableR
+    BaseTable
   },
   setup () {
     const form = reactive({})
@@ -60,7 +59,11 @@ export default defineComponent({
     return {
       form,
       startTime,
-      endTime
+      endTime,
+      columnsl: TestData.LeadingLQuery.columns,
+      listl: TestData.LeadingLQuery.dataCol,
+      columnsr: TestData.LeadingRQuery.columns,
+      listr: TestData.LeadingRQuery.dataCol
     }
   }
 })
@@ -88,6 +91,8 @@ export default defineComponent({
             .chart-item {
                 width: 825px;
                 border: solid 1px #e2e2e2;
+                display: flex;
+                flex-direction: column;
                 .form {
                     padding: 5px 20px;
                     .input {
@@ -95,9 +100,11 @@ export default defineComponent({
                     }
                 }
                 .mrg {
+                    flex: 1;
                     margin: 0 10px;
                 }
                 .mrgr {
+                    flex: 1;
                     margin: 0 10px;
                     margin-top: 3px;
                 }

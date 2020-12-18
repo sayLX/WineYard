@@ -1,5 +1,5 @@
 import axios from "axios";
-// axios.defaults.baseURL = "/proxy";
+axios.defaults.baseURL = "/api";
 
 const service = axios.create({
   timeout: 10000
@@ -17,14 +17,7 @@ service.interceptors.request.use(
 
 service.interceptors.response.use(
   response => {
-    if (response.status === 200) {
-      if (response.data.code === 401) {
-        console.log("未登陆");
-      }
-      return response.data;
-    } else {
-      Promise.reject(new Error("errorMsg"));
-    }
+    return response.data;
   },
   error => {
     console.log(error);

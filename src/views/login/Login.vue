@@ -8,7 +8,7 @@
         :label-col="labelCol"
         :wrapper-col="wrapperCol"
       >
-        <a-form-item name="organization" class="selectOrg">
+        <!-- <a-form-item name="organization" class="selectOrg">
           <HomeOutlined style="color: rgba(0, 0, 0, 0.25)" />
           <a-select v-model="loginForm.organization" placeholder="请选择单位">
             <a-select-option
@@ -18,22 +18,32 @@
               >{{ org }}</a-select-option
             >
           </a-select>
-        </a-form-item>
-        <a-form-item name="username">
+        </a-form-item> -->
+        <a-form-item name="dlbm">
           <a-input
-            v-model:value="loginForm.username"
-            placeholder="请输入用户名"
+            v-model:value="loginForm.dlbm"
+            placeholder="请输入登录别名"
           >
             <template #prefix
               ><UserOutlined style="color: rgba(0, 0, 0, 0.25)"
             /></template>
           </a-input>
         </a-form-item>
-        <a-form-item name="password">
+        <a-form-item name="zzdwbm">
           <a-input
-            v-model:value="loginForm.password"
+            v-model:value="loginForm.zzdwbm"
+            placeholder="请输入在职单位编码"
+          >
+            <template #prefix
+              ><HomeOutlined style="color: rgba(0, 0, 0, 0.25)"
+            /></template>
+          </a-input>
+        </a-form-item>
+        <a-form-item name="kl">
+          <a-input
+            v-model:value="loginForm.kl"
             type="password"
-            placeholder="请输入密码"
+            placeholder="请输入口令"
           >
             <template #prefix
               ><LockOutlined style="color: rgba(0, 0, 0, 0.25)"
@@ -53,11 +63,13 @@
 </template>
 
 <script>
-import { UserOutlined, LockOutlined, HomeOutlined } from '@ant-design/icons-vue'
-import { useStore } from 'vuex'
-import { useRouter } from 'vue-router'
+import {UserOutlined,LockOutlined,HomeOutlined,} from'@ant-design/icons-vue'
+// const loginApi = 'www.baidu.com'
+// import { useStore } from 'vuex'
+import { useRouter } from "vue-router"
 import { reactive, toRefs } from 'vue'
-export default {
+import { Api } from '@/api/index'
+export default ({
   name: 'login',
   components: {
     UserOutlined,
@@ -66,90 +78,38 @@ export default {
   },
   setup() {
     const data = reactive({
-      orgs: ['北京', '上海', '南京'],
+      // orgs: ['北京', '上海', '南京'],
       labelCol: { span: 4 },
       wrapperCol: { span: 14 },
       loginApi: '',
       loginForm: {
-        organization: '',
-        username: '',
-        password: '',
-        type: [],
-        resource: '',
-        desc: '',
+        dlbm: '',
+        zzdwbm: '',
+        kl: '',
       },
       loginFormRules: {
-        organization: [
-          { required: true, message: '请选择机构', trigger: 'blur' },
-        ],
-        username: [
-          { required: true, message: '请输入用户名', trigger: 'blur' },
-          {
-            min: 2,
-            max: 10,
-            message: '长度在2到10个字符之间',
-            trigger: 'blur',
-          },
-        ],
-        password: [
-          {
-            min: 6,
-            max: 10,
-            message: '长度在6到10个字符之间',
-            trigger: 'blur',
-          },
-          { required: true, message: '请输入密码', trigger: 'blur' },
+        dlbm: [{ required: true, message: '登录别名不能为空', trigger: 'blur' }],
+        zzdwbm: [{required: true, message: '在职单位编码不能为空', trigger: 'blur' }],
+        kl: [
+          {min: 6,max: 10,message: '长度在6到10个字符之间',trigger: 'blur'},
+          {required: true, message: '口令不能为空', trigger: 'blur' },
         ],
       },
     })
-    const store = useStore()
     const router = useRouter()
     const login = () => {
-      console.log(store)
-      console.log(store.getters['isLogin'])
-      store.commit('login')
-      router.push({ name: 'homePage' })
-      // new Promise((resolve,reject) => {
-      //   const status = this.$refs.loginFormRef.validate()
-      //   resolve(status)
-      //   reject(status)
-
-      // }).then(function(status){
-      //   console.log(status.username)
-      // })
-      // .catch(function(status){
-      //   console.log(status.outOfDate)
-      // })
+      Api.login('test1803','111111','980000').then((res) => {
+        console.log('=====================================')
+        console.log(res)
+      })
+      router.push({name: 'homePage'})
     }
     return {
       ...toRefs(data),
       login,
     }
-    //   const getmusic = () => {
-    //     axios({
-    //       method:'post',
-    //       url:that.loginUrl,
-    //       data:{
-    //         organization:that.loginForm.organization,
-    //         username:that.loginForm.username,
-    //         password:that.loginForm.password}
-    //       })
-    //       .then(
-    //         (response) => {
-    //           if(respose.success)
-    //             {
-    //               // 将takon储存
-    //               window.sessionStorage.setItem('takon',response.tokon)
-    //               // 登陆成功跳转
-    //               this.$router.push('/homePage')
-    //             }
-    //         },function (err) {
-    //             console.log(err);
-    //         }
-    //     )
-    //  }
-  },
-}
+  }
+})
 </script>
 
 <style scoped lang='scss'>
