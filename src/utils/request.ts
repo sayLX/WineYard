@@ -1,5 +1,7 @@
 import axios from "axios";
 axios.defaults.baseURL = "/api";
+import store from '@/store/index'
+const sessionToken = sessionStorage.getItem('user_info') ? sessionStorage.getItem('user_info')['token'] : null
 
 const service = axios.create({
   timeout: 10000
@@ -7,6 +9,11 @@ const service = axios.create({
 
 service.interceptors.request.use(
   config => {
+    // 请求时在头部加上token
+    config.headers = {
+      token: store.getters['token'] || sessionToken || ""
+    }
+    console.log(config)
     return config;
   },
   error => {

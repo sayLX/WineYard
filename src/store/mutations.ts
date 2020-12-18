@@ -1,6 +1,6 @@
-
+import { UserInfo } from "@/model/UserInfo"
 export default { 
-    login (state: { isLogin: boolean }) {
-        state.isLogin = true
+    login (state, userInfo: UserInfo) {
+        state.userInfo = userInfo
     }
  }

@@ -5,16 +5,18 @@ import store from "../store/index";
 router.beforeEach((to, from, next) => {
   if (to.matched.some(res => res.meta.isLogin)) {
     //判断是否需要登录
-    if (store.getters['isLogin']) {
-      next();
-    } else {
-      next({
-        path: "/login",
-        query: {
-          redirect: to.fullPath
-        }
-      });
-    }
+    store.getters['isLogin'].then((res) => {
+      if (res) {
+        next();
+      } else {
+        next({
+          path: "/login",
+          query: {
+            redirect: to.fullPath
+          }
+        });
+      }
+    })
   } else {
     next();
   }
