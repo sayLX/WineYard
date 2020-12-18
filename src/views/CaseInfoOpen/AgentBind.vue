@@ -13,25 +13,27 @@
               </li>
               <li>
                 <span>人员姓名</span>
-                <input type="text" v-model="searchConditions.ryxm" placeholder="请输入">
+                <input type="text" v-model="searchConditions.xm" placeholder="请输入">
               </li>
               <li>
-                <span>案件类型</span>
-                <input type="text" v-model="searchConditions.ajlx" placeholder="请输入">
+                <span>人员类型名称</span>
+                <input type="text" v-model="searchConditions.rylxmc" placeholder="请输入">
               </li>
-              <li>
+              <!-- <li>
                 <span>是否绑定</span>
                 <select class="search" v-model="searchConditions.sfbd">
                   <option disabled>请选择</option>
                   <option >已绑定</option>
                   <option > 未绑定</option>
                 </select>
-                <button id="search">
+              </li> -->
+              <li>
+                <button id="search" @click="getStaffList(this.searchConditions)">
                   <i class="fa fa-search"></i>查询
                 </button>
               </li>
             </ul>
-            <bind-result></bind-result>
+            <bind-result :staffList="staffList"></bind-result>
         </div>
     </div>
 </template>
@@ -39,9 +41,9 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import Title from './components/Title.vue'
+// import { Api } from '@/api/index'
 import bindResult from './components/bindResult.vue'
 import '@/assets/font/css/all.css'
-const searchConditions= new Object
 export default defineComponent({
   name: 'AgentBind',
   components: {
@@ -50,16 +52,20 @@ export default defineComponent({
   },
   data () {
     return {
-      searchConditions:{
-      bmsah:'',
-      ajmc:'',
-      ryxm:'',
-      ajlx:'',
-      sfbd:''
-      },
-      conditionsLength:Object.keys(searchConditions).length,
+      searchConditions:{bmsah:'',ajmc:'',xm:'',rylxmc:''},
+      staffList:{name:"sdsf"}
     }
-  }
+  },
+  // methods: {
+  //   getStaffList(data){
+  //     console.log(data)
+  //     Api.getCaseStaffList(data).then(res=>{
+  //       console.log("正在发送请求")
+  //       this.staffList=res
+  //       console.log(res)
+  //     })
+  //   }
+  // }
 })
 </script>
 <style lang="scss" scoped>
@@ -89,13 +95,13 @@ export default defineComponent({
       li{
         float: left;
         margin-bottom: 12px;
-        &:nth-child(3n){
-          margin-right: 0;
-        };
+        // &:nth-child(3n){
+        //   margin-right: 0;
+        // };
         margin-right: 100px;
 
         span{
-          width: 94px;
+          width: 110px;
           padding: 0 12px;
           font-size: 12px;
           line-height: 34px;
@@ -117,7 +123,6 @@ export default defineComponent({
           border: 1px solid #dcdfe6;
           background-color: #1b9cff;
           border-radius: 3px;
-          margin-left: 10px;
           i{
             margin-right: 8px;
           }

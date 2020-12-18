@@ -25,6 +25,25 @@ class UserApi {
       }
     });
   }
+
+  getCaseStaffList(data:object){
+    return request({
+      url:"/public/case/queryAjrylb",
+      method:"post",
+      data:data,
+    });
+  }
+
+  //辩护代理查看详情
+  viewDetail(ajrybh:string){
+    return request({
+      url:"/public/agent/lookdetails",
+      method:"post",
+      data: {
+        ajrybh: ajrybh
+      }
+    })
+  }
 }
 
 export const Api = new UserApi()
