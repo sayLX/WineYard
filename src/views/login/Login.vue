@@ -78,7 +78,6 @@ export default ({
   },
   setup() {
     const data = reactive({
-      // orgs: ['北京', '上海', '南京'],
       labelCol: { span: 4 },
       wrapperCol: { span: 14 },
       loginApi: '',
@@ -102,10 +101,8 @@ export default ({
       Api.login('test1803','111111','980000').then((res) => {
         // 将获取到的信息保存在sessionStorage中
         sessionStorage.setItem('user_info', res.data)
-        console.log(res.data)
         // 同时将用户信息保存在vuex中
         const userInfo: UserInfo = res.data
-        console.log('--------------------')
         console.log(userInfo)
         store.commit('login', userInfo)
         router.push({name: 'homePage'})

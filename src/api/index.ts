@@ -19,31 +19,31 @@ class UserApi {
       url: "/organization/user/login",
       method: "post",
       data: {
-        "dlbm": dlbm,
-        "kl": kl,
-        "zzdwbm": zzdwbm
+        dlbm: dlbm,
+        kl: kl,
+        zzdwbm: zzdwbm
       }
     });
   }
-
-  getCaseStaffList(data:object){
+// 案件代理获取案件人员列表
+  getCaseStaffList(data: object) {
     return request({
-      url:"/public/case/queryAjrylb",
-      method:"post",
-      data:data,
+      url: "/public/case/queryAjrylb",
+      method: "post",
+      data: data
     });
   }
 
   //辩护代理查看详情
-  viewDetail(ajrybh:string){
+  viewDetail(ajrybh: string) {
     return request({
-      url:"/public/agent/lookdetails",
-      method:"post",
+      url: "/public/agent/lookdetails",
+      method: "post",
       data: {
         ajrybh: ajrybh
       }
-    })
+    });
   }
 }
 
-export const Api = new UserApi()
+export const Api = new UserApi();
