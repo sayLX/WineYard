@@ -25,7 +25,23 @@ class UserApi {
       }
     });
   }
-// 案件代理获取案件人员列表
+  // 案件公开信息导入
+  importCaseinfo(file:Object){
+    return request({
+      url:"/public/case/analysis",
+      method:"post",
+      data:file
+    })
+  }
+  // 辩护代理信息导入
+  importAgent(file:Object){
+    return request({
+      url:"/public/agent/analysis",
+      method:"post",
+      data:file
+    })
+  }
+  // 案件代理获取案件人员列表
   getCaseStaffList(data: object) {
     return request({
       url: "/public/case/queryAjrylb",

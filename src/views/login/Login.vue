@@ -8,17 +8,6 @@
         :label-col="labelCol"
         :wrapper-col="wrapperCol"
       >
-        <!-- <a-form-item name="organization" class="selectOrg">
-          <HomeOutlined style="color: rgba(0, 0, 0, 0.25)" />
-          <a-select v-model="loginForm.organization" placeholder="请选择单位">
-            <a-select-option
-              v-for="(org, index) in orgs"
-              :key="index"
-              :value="org"
-              >{{ org }}</a-select-option
-            >
-          </a-select>
-        </a-form-item> -->
         <a-form-item name="dlbm">
           <a-input
             v-model:value="loginForm.dlbm"
@@ -82,9 +71,9 @@ export default ({
       wrapperCol: { span: 14 },
       loginApi: '',
       loginForm: {
-        dlbm: '',
-        zzdwbm: '',
-        kl: '',
+        dlbm: 'test1803',
+        zzdwbm: '980000',
+        kl: '111111',
       },
       loginFormRules: {
         dlbm: [{ required: true, message: '登录别名不能为空', trigger: 'blur' }],

@@ -60,6 +60,7 @@ import Title from './components/Title.vue'
 import { Api } from '@/api/index'
 import bindResult from './components/bindResult.vue'
 import '@/assets/font/css/all.css'
+import { message } from 'ant-design-vue'
 export default ({
   name: 'AgentBind',
   components: {
@@ -150,6 +151,7 @@ export default ({
           this.ajrylb = res.data.entities[0]
         })
         .catch((err) => {
+          message.error(err)
           console.log(err)
         })
     }

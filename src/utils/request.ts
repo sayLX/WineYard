@@ -2,7 +2,6 @@ import axios from "axios";
 axios.defaults.baseURL = "http://192.168.1.19:9990/";
 import store from '@/store/index'
 const sessionToken = sessionStorage.getItem('user_info') ? sessionStorage.getItem('user_info')['token'] : null
-
 const service = axios.create({
   timeout: 10000
 });
