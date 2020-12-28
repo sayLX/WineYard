@@ -89,10 +89,12 @@ export default ({
     const login = () => {
       Api.login('test1803','111111','980000').then((res) => {
         // 将获取到的信息保存在sessionStorage中
-        sessionStorage.setItem('user_info', res.data)
+        window.sessionStorage.setItem('user_info', res.data)
         // 同时将用户信息保存在vuex中
         const userInfo: UserInfo = res.data
-        console.log(userInfo)
+        // 将用户名存在sessionStorage
+        window.sessionStorage.setItem('userName',userInfo.mc)
+
         store.commit('login', userInfo)
         router.push({name: 'homePage'})
       })

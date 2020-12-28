@@ -23,6 +23,7 @@ export default defineComponent({
   .t {
     font-weight: 600;
     border-left: 4px solid #28a2fd;
+    font-size: 16px;
   }
 }
 .ctx {

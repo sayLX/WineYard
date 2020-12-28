@@ -1,6 +1,8 @@
 <template>
   <div>
-    <a-button type="primary" @click="showModal"> 添加 </a-button>
+    <a-button @click="showModal">
+      <template #icon><PlusOutlined /></template>新增
+    </a-button>
     <a-modal
       title="添加短信模板"
       :visible="visible"
@@ -41,8 +43,12 @@
 </template>
 <script>
 import { message } from 'ant-design-vue'
+import { PlusOutlined } from '@ant-design/icons-vue'
 export default {
   name: 'addTemplate',
+  components: {
+    PlusOutlined,
+  },
   data() {
     return {
       test: 'lcdc',

@@ -1,6 +1,8 @@
 <template>
   <div>
-    <a-button type="primary" @click="showModal"> 编辑 </a-button>
+    <a-button @click="showModal">
+      <template #icon><FormOutlined /></template>编辑
+    </a-button>
     <a-modal
       title="编辑短信模板"
       :visible="visible"
@@ -32,8 +34,12 @@
   </div>
 </template>
 <script>
+import { FormOutlined } from '@ant-design/icons-vue'
 export default {
   name: 'editTemplate',
+  components: {
+    FormOutlined,
+  },
   data() {
     return {
       visible: false,

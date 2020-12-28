@@ -81,7 +81,7 @@ const routes = [
         meta: {
           isLogin: true
         },
-        component: () => import('../views/smsTemplate/smsTemplate.vue')
+        component: () => import('../views/smsTemplate/templateCategory.vue')
       },
 
       {
