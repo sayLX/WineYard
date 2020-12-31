@@ -5,7 +5,7 @@
       <div class="operations">
         <div class="module-title"><span>短信模板类别</span></div>
         <div class="operation">
-          <a-button @click="refreshTemplate">
+          <a-button @click="refreshTemplate" :loading=Loading>
             <template #icon><SyncOutlined /></template>刷新
           </a-button>
           <!-- 添加模板组件 -->
@@ -128,6 +128,8 @@ export default {
       selectedKeys: ['1'],
       openKeys: ['sub1'],
       templateListData: {},
+      Loading:false,
+      // Loading:true
     }
   },
 
@@ -142,16 +144,20 @@ export default {
     click(){
       //
     },
+    // 刷新
     refreshTemplate() {
-      message.success('已刷新！')
+      this.Loading=true
+      setTimeout(()=>{this.Loading=false,message.success("刷新成功!")},1500)
     },
+
+    // 弹出确认框是否删除
     confirm(e) {
       console.log(e.target)
-      message.success('成功删除模板')
+      message.success('成功删除模板！')
     },
     cancel(e) {
       console.log(e)
-      message.error('Click on No')
+      message.error('未删除~')
     },
   },
 }
@@ -180,6 +186,7 @@ export default {
       border-bottom: $border;
       overflow: hidden;
       button {
+        color: #1890ff;
         float: left;
         margin-left: 10px;
         padding: 0 10px;

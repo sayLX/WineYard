@@ -39,7 +39,8 @@ export default {
             {
               title: '操作',
               dataIndex: 'cz',
-              key: 'cz'
+              key: 'cz',
+              slots: { customRender: 'cz' }
             }
         ],
         dataCol: (() => {
@@ -54,7 +55,7 @@ export default {
                 gzzh: '0001',
                 lxdh: '110',
                 dzyj: '123',
-                cz: '详情'
+                cz: '详情',
               })
             }
             return arr
@@ -72,7 +73,7 @@ export default {
             lxdh: '110',
             bylxdh: '120',
             lxdz: 'cs',
-            cz: '详情'
+            cz: '详情',
           })
         }
         return arr
