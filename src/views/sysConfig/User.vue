@@ -21,6 +21,10 @@
               <template #icon><SearchOutlined /></template>查询
             </a-button>
           </a-form-item>
+          <a-form-item>
+            <!-- 添加人员 -->
+              <addPerson ></addPerson>
+          </a-form-item>
         </a-form>
       </div>
       <div class="person-list">
@@ -72,16 +76,7 @@
           >
         </a-row>
       </div>
-      <!-- <div class="column">
-        <table>
-          <tr v-for="(item, index1) in personList" :key="index1">
-            <td v-for="(name, index2) in Object.values(item)" :key="index2">
-              {{ name }}
-            </td>
-          </tr>
-        </table>
 
-      </div> -->
     </div>
   </div>
 </template>
@@ -90,11 +85,11 @@
 import { defineComponent, reactive, toRefs } from 'vue'
 import PageTitle from '../../components/PageTitle.vue'
 import { SearchOutlined } from '@ant-design/icons-vue'
-// import BaseTable from '@/components/BaseTable.vue'
 import TestData from '@/utils/testdata'
 import { Api } from '@/api/index.ts'
 import { message } from 'ant-design-vue'
 import editPersonInfo from '@/views/sysConfig/components/editPersonInfo.vue'
+import addPerson from '@/views/sysConfig/components/addPerson.vue'
 
 export default defineComponent({
   name: '',
@@ -103,6 +98,7 @@ export default defineComponent({
     SearchOutlined,
     // BaseTable,
     editPersonInfo,
+    addPerson
   },
   setup() {
     // 获取列表的请求数据
@@ -143,18 +139,21 @@ export default defineComponent({
     // 删除人员
     const deletePersonInfo = (rybm: string,index: number) => {
       // Api.deletePersonInfo(rybm).then((res) => {
-        // if (res['success']) {
+      //   if (res['success']) {
         if (1) {
+          console.log(rybm)
           message.success('人员删除成功！')
           data.personList.splice(index,1)
         } else message.error('人员删除失败！稍后再试！')
       // }).catch(err=>console.log(err))
     }
+
     // 重置人员密码
     const resetPersonPassword = (rybm: string) => {
       // Api.resetPersonPassword(rybm).then((res) => {
       //   if (res['success']) {
         if (1) {
+          console.log(rybm)
           message.success('密码重置成功！')
         } else message.error('密码重置失败！')
       // }).catch(err=>console.log(err))

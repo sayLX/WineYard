@@ -1,5 +1,5 @@
 import request from "../utils/request";
-import store from "@/store"
+import store from "@/store";
 
 class UserApi {
   //注册
@@ -71,33 +71,44 @@ class UserApi {
         curent: data.curent,
         gzzh: data.gzzh,
         mc: data.mc,
-        order:data.order,
-        size:data.size,
-        zzdwbm:store.state["userInfo"]["zzdwbm"]
+        order: data.order,
+        size: data.size,
+        zzdwbm: store.state["userInfo"]["zzdwbm"]
         // zzdwbm: JSON.parse(window.sessionStorage.getItem("store")).userInfo.zzdwbm
       }
     });
   }
-  deletePersonInfo(rybm:string){
+  // 添加人员
+  addPersonInfo(infolist: {}) {
+    return request({
+      url: "/organization/user/add",
+      method: "post",
+      data: infolist
+    });
+  }
+  // 删除人员信息
+  deletePersonInfo(rybm: string) {
     return request({
       url: "/organization/user/delete",
-      method:"post",
-      data:rybm
-    })
+      method: "post",
+      data: rybm
+    });
   }
-  resetPersonPassword(rybm:string){
+  // 重置人员密码
+  resetPersonPassword(rybm: string) {
     return request({
       url: "/organization/user/resetPwd",
-      method:"post",
-      data:rybm
-    })
+      method: "post",
+      data: rybm
+    });
   }
-  editPersonInfo(data:{}){
+  // 编辑人员信息
+  editPersonInfo(data: {}) {
     return request({
       url: "/organization/user/update",
-      method:"post",
-      data:data
-    })
+      method: "post",
+      data: data
+    });
   }
 }
 

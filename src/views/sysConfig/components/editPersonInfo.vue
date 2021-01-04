@@ -22,7 +22,7 @@ import { message } from 'ant-design-vue'
 import {Api} from "@/api/index.ts"
 export default {
   name: 'addTemplate',
-  props: ["personInfo"],
+  props: ["personInfo","title"],
   data() {
     return {
       visible: false,
