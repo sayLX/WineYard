@@ -3,7 +3,7 @@
     :pagination='pagination'
     size="middle"
     tableLayout='fixed'
-    :rowClassName="tableColor ? rowClassName : ''"
+    :rowClassName="MyRowClassName"
     :defaultExpandAllRows='true'
   >
     <template #name="{text}">
@@ -12,7 +12,7 @@
   </a-table>
 </template>
 <script lang='ts'>
-import { defineComponent, PropType } from 'vue'
+import { computed, defineComponent, PropType } from 'vue'
 interface PropCol {
   title: string;
   dataIndex: string;
@@ -35,17 +35,26 @@ export default defineComponent({
       const className = index % 2 === 0 ? 'shallow_gray' : 'deep_gray'
       return className
     }
+    const MyRowClassName = () => {
+      return props.tableColor ? rowClassName : ''
+    }
     const pagination = {
       defaultPageSize: props.size,
       showTotal: (total: number) => `共 ${total} 条数据`,
       showQuickJumper: true,
       position: 'bottom'
     }
+
+    const data = computed(() => {
+      return props.list
+    })
+
     return {
-      data: props.list,
+      data,
       columns: props.col,
       rowClassName,
-      pagination
+      pagination,
+      MyRowClassName
     }
   }
 })

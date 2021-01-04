@@ -13,7 +13,6 @@ service.interceptors.request.use(
     config.headers = {
       token: store.getters['token'] || sessionToken || ""
     }
-    console.log(config)
     return config;
   },
   error => {
