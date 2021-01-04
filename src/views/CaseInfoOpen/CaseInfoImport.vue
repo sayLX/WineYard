@@ -9,7 +9,6 @@
           v-model:name="latestFile"
           :beforeUpload="beforeUpload"
           accept=".zip"
-          showUploadList=false
         >
           <a-button id="search"> 浏览 </a-button>
         </a-upload>
@@ -44,11 +43,10 @@
         </li>
         <li class="fileItem">
           <span>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 嫌疑人/当事人共{{
-              importResult.total
-            }}个， 解析成功{{ importResult.success }}个， 失败{{
-              importResult.fail
-            }}个
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            嫌疑人/当事人共{{importResult["total"]}}个，
+            解析成功{{ importResult["success"] }}个，
+            失败{{importResult["failed"]}}个
           </span>
         </li>
       </ul>
@@ -70,10 +68,10 @@ export default {
       importTime: new Date(),
       latestFile: '',
       // 储存导入的文件名，用来验证是否导入重复文件
-      allFileName:[],
+      allFileName: [],
       fileList: [],
       uploading: false,
-      importResult: { total: '5', success: '5', fail: '0' },
+      importResult: { total: 0, success: 0, failed: 0 },
       headers: {
         authorization: 'authorization-text',
       },
@@ -82,32 +80,33 @@ export default {
   methods: {
     beforeUpload(file) {
       // 判断和前一个文件是否是同一个文件
-      if (!this.fileList.length || this.allFileName.indexOf(file.name)<0) {
+      if (!this.fileList.length || this.allFileName.indexOf(file.name) < 0) {
         this.fileList.push(file)
         this.allFileName.push(file.name)
         // 获得当前选择文件名
         this.latestFile = file.name
-      }
-      else{
-        message.warning("导入重复或重名文件，请重命名后再试！")
+      } else {
+        message.warning('导入重复或重名文件，请重命名后再试！')
       }
       return false
     },
     handleUpload() {
+      this.uploading = true
       const { fileList } = this
       const formData = new FormData()
       fileList.forEach((file) => {
         formData.append('files[]', file)
       })
       this.uploading = true
-      Api.importCaseinfo(formData)
-        .then((res) => {
-          this.importResult = res.data
-          this.fileList = []
+      Api.importCaseinfo({ wjlj: this.latestFile }).then((res) => {
+        if(res.success){
+        // this.importResult = res.data
+        this.importResult.total+=1
+        this.importResult.success+=1
           this.uploading = false
           message.success('上传成功！')
-        })
-        .catch('上传失败！')
+        }
+      })
     },
   },
 }

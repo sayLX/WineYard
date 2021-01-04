@@ -26,7 +26,9 @@
       <div id="notice">
         <p>*仅支持统一业务应用系统案件信息公开导出数据！</p>
         <p>* 导入时，仅解析嫌疑人/当事人信息！</p>
-        <p>* 信息解析完成后，系统将自动把案情变更信息发送到相应辩护代理人手机！</p>
+        <p>
+          * 信息解析完成后，系统将自动把案情变更信息发送到相应辩护代理人手机！
+        </p>
       </div>
       <ul id="fileList" v-show="fileList.length">
         <li id="listTitle">导入列表明细</li>
@@ -41,11 +43,10 @@
         </li>
         <li class="fileItem">
           <span>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 嫌疑人/当事人共{{
-              importResult.total
-            }}个， 解析成功{{ importResult.success }}个， 失败{{
-              importResult.fail
-            }}个
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            嫌疑人/当事人共{{importResult["total"]}}个，
+            解析成功{{ importResult["success"] }}个，
+            失败{{importResult["failed"]}}个
           </span>
         </li>
       </ul>
@@ -56,20 +57,21 @@
 import { message } from 'ant-design-vue'
 import Title from './components/Title.vue'
 import { Api } from '@/api/index'
-const myDate = new Date()
 
 export default {
-  name: 'AgentInfoImport',
+  name: 'AgentImport',
   components: {
     Title,
   },
   data() {
     return {
-      importTime: myDate,
+      importTime: new Date(),
       latestFile: '',
+      // 储存导入的文件名，用来验证是否导入重复文件
+      allFileName: [],
       fileList: [],
       uploading: false,
-      importResult: { total: '5', success: '5', faile: '0' },
+      importResult: { total: 0, success: 0, failed: 0 },
       headers: {
         authorization: 'authorization-text',
       },
@@ -78,32 +80,33 @@ export default {
   methods: {
     beforeUpload(file) {
       // 判断和前一个文件是否是同一个文件
-      if (!this.fileList.length || this.allFileName.indexOf(file.name)<0) {
+      if (!this.fileList.length || this.allFileName.indexOf(file.name) < 0) {
         this.fileList.push(file)
         this.allFileName.push(file.name)
         // 获得当前选择文件名
         this.latestFile = file.name
-      }
-      else{
-        message.warning("导入重复或重名文件，请重命名后再试！")
+      } else {
+        message.warning('导入重复或重名文件，请重命名后再试！')
       }
       return false
     },
     handleUpload() {
+      this.uploading = true
       const { fileList } = this
       const formData = new FormData()
       fileList.forEach((file) => {
         formData.append('files[]', file)
       })
       this.uploading = true
-      Api.importAgent(formData)
-        .then((res) => {
-          this.importResult = res.data
-          this.fileList = []
+      Api.importAgent({ wjlj: this.latestFile }).then((res) => {
+        if(res.success){
+        // this.importResult = res.data
+        this.importResult.total+=1
+        this.importResult.success+=1
           this.uploading = false
           message.success('上传成功！')
-        })
-        .catch('上传失败：' + res.message)
+        }
+      })
     },
   },
 }
