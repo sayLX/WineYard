@@ -123,7 +123,7 @@ export default {
           title: '功能序号',
           dataIndex: 'col1',
           key: 'col1',
-          width: '20%'
+          width: '17%'
         },
         {
           title: '功能名称',
@@ -156,9 +156,11 @@ export default {
           key: 'col7'
         },
         {
-          title: '操作',
+          title: '',
           dataIndex: 'col8',
-          key: 'col8'
+          key: 'col8',
+          slots: { customRender: 'col8' },
+          align: 'right'
         }
       ]
     },

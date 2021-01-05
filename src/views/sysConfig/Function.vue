@@ -37,9 +37,9 @@
                 </a-form>
             </div>
             <div class="table">
-              <base-table :col="columns" :list="list" :size="10" :tableColor="false"></base-table>
+              <fun-table :col="columns" :list="list" :size="10" :showCol8='true' :tableColor="false" @success='itemSuccess'>
+              </fun-table>
             </div>
-            
             <a-modal
               title="添加功能分类"
               :visible="visible"
@@ -47,20 +47,23 @@
               @ok="handleOk"
               @cancel="handleCancel"
             >
-              <a-form :label-col="{ span: 5 }" :wrapper-col="{ span: 12 }" @submit="handleSubmit">
+              <a-form :label-col="{ span: 5 }" :wrapper-col="{ span: 12 }">
                 <a-form-item label="分类名称">
-                  <a-input
+                  <a-input v-model:value="addFlmc"
                   />
                 </a-form-item>
-                <a-form-item label="分类序号">
-                  <a-input
-                  />
-                </a-form-item>
-                <a-form-item :wrapper-col="{ span: 12, offset: 5 }">
-                  <a-button type="primary" html-type="submit">
-                    Submit
-                  </a-button>
-                </a-form-item>
+                <a-form-item label="选择父分类" name="region">
+                      <div  class="input">
+                        <a-select placeholder="请选择" @change='addcheckGnfl'>
+                            <a-select-option :value="null">
+                              无
+                            </a-select-option>
+                            <a-select-option :value="item.flbm" v-for="item in dropdownList" :key="item.flbm">
+                              {{item.flmc}}
+                            </a-select-option>
+                        </a-select>
+                      </div>
+                  </a-form-item>
               </a-form>
             </a-modal>
         </div>
@@ -71,8 +74,9 @@
 import { computed, defineComponent, onMounted, reactive, toRefs } from 'vue'
 import PageTitle from '../../components/PageTitle.vue'
 import { SearchOutlined } from '@ant-design/icons-vue'
-import BaseTable from '@/components/BaseTable.vue'
+import FunTable from './component/FunTable.vue'
 import TestData from '@/utils/testdata'
+import { message } from 'ant-design-vue';
 import { Api } from '@/api/index'
 
 export default defineComponent({
@@ -80,7 +84,7 @@ export default defineComponent({
   components: {
     PageTitle,
     SearchOutlined,
-    BaseTable
+    FunTable
   },
   setup () {
     const data = reactive({
@@ -88,7 +92,8 @@ export default defineComponent({
       myGnfl: null,
       myGnmc: '',
       gnflTree: [],
-      dropdownList: []
+      dropdownList: [],
+      addmyGnfl: null
     })
     const list = computed(() => {
       return data.gnflTree
@@ -204,6 +209,10 @@ export default defineComponent({
       data.myGnfl = value
     }
 
+    const addcheckGnfl = (value) => {
+      data.addmyGnfl = value
+    }
+
     // 查询
     const serach = () => {
       if ( data.myGnfl != null && data.myGnmc == '' ){
@@ -279,25 +288,55 @@ export default defineComponent({
 
     //对话框的数据
     const modalData = reactive({
-      ModalText: 'Content of the modal',
       visible: false,
       confirmLoading: false,
+      addFlmc: ''
     })
-
     const showModal = () => {
       modalData.visible = true;
     }
     const handleOk = () => {
-      modalData.ModalText = 'The modal will be closed after two seconds';
+      // 添加功能分类
       modalData.confirmLoading = true;
-      setTimeout(() => {
-        modalData.visible = false;
+      console.log(data.addmyGnfl)
+      if (modalData.addFlmc != '' && data.addmyGnfl == null) {
+        Api.addGnfl({flmc: modalData.addFlmc}).then((res) => {
+          if ( !res['success'] ) {
+            message.error(res['message'])
+          } else {
+            modalData.confirmLoading = false;
+            modalData.visible = false;
+            setTimeout(() => {
+              getGnflList()
+            },1000)
+          }
+        })
+      } else if (modalData.addFlmc != '' && data.addmyGnfl != null) {
+        Api.addGnfl({flmc: modalData.addFlmc, fflbm: data.addmyGnfl}).then((res) => {
+          if ( !res['success'] ) {
+            message.error(res['message'])
+          } else {
+            modalData.confirmLoading = false;
+            modalData.visible = false;
+            setTimeout(() => {
+              getGnflList()
+            },1000)
+          }
+        })
+      } else {
+        message.error('功能名称不能为空');
         modalData.confirmLoading = false;
-      }, 2000);
+      }
     }
     const handleCancel = () => {
       console.log('Clicked cancel button');
       modalData.visible = false;
+    }
+
+    const itemSuccess = () => {
+      setTimeout(() => {
+        getGnflList()
+      },1000)
     }
 
     return {
@@ -311,7 +350,9 @@ export default defineComponent({
       handleOk,
       handleCancel,
       serach,
-      ...toRefs(modalData)
+      ...toRefs(modalData),
+      itemSuccess,
+      addcheckGnfl
     }
   }
 })

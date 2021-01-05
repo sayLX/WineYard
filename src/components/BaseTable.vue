@@ -28,6 +28,10 @@ export default defineComponent({
     tableColor: {
       type: Boolean,
       default: true
+    },
+    showCol8: {
+      type: Boolean,
+      default: false
     }
   },
   setup (props) {
