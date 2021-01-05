@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a-button type="primary" @click="showModal"> 绑定 </a-button>
+    <a @click="showModal" style="margin-left: 40px"> 绑定 </a>
     <a-modal
       title="辩护代理人（张三）"
       :visible="visible"
@@ -19,64 +19,13 @@
           layout="horizontal"
         >
           <a-row>
-            <a-col :span="12">
-              <a-form-item label="案件人员编号">
-                <a-input placeholder="请输入" v-model:value="form.ajrybh" />
-              </a-form-item>
-            </a-col>
-            <a-col :span="12">
-              <a-form-item label="部门受案号">
-                <a-input placeholder="请输入" v-model:value="form.bmsah" />
-              </a-form-item>
-            </a-col>
-            <a-col :span="12">
-              <a-form-item label="电话号码">
-                <a-input placeholder="请输入" v-model:value="form.dhhm" />
-              </a-form-item>
-            </a-col>
-            <a-col :span="12">
-              <a-form-item label="人员类型编码">
-                <a-input placeholder="请输入" v-model:value="form.rylxbm" />
-              </a-form-item>
-            </a-col>
-            <a-col :span="12">
-              <a-form-item label="人员类型名称">
-                <a-input placeholder="请输入" v-model:value="form.rylxmc" />
-              </a-form-item>
-            </a-col>
-            <a-col :span="12">
-              <a-form-item label="身份类型编码">
-                <a-input placeholder="请输入" v-model:value="form.sflxbm" />
-              </a-form-item>
-            </a-col>
-            <a-col :span="12">
-              <a-form-item label="身份类型名称">
-                <a-input placeholder="请输入" v-model:value="form.sflxmc" />
-              </a-form-item>
-            </a-col>
-            <a-col :span="12">
-              <a-form-item label="姓名">
-                <a-input placeholder="请输入" v-model:value="form.xm" />
-              </a-form-item>
-            </a-col>
-            <a-col :span="12">
-              <a-form-item label="证件号码">
-                <a-input placeholder="请输入" v-model:value="form.zjhm" />
-              </a-form-item>
-            </a-col>
-            <a-col :span="12">
-              <a-form-item label="证件类型名称">
-                <a-input placeholder="请输入" v-model:value="form.zjlxmc" />
-              </a-form-item>
-            </a-col>
-            <a-col :span="12">
-              <a-form-item label="自然人类型编码">
-                <a-input placeholder="请输入" v-model:value="form.zrrlxbm" />
-              </a-form-item>
-            </a-col>
-            <a-col :span="12">
-              <a-form-item label="自然人类型名称">
-                <a-input placeholder="请输入" v-model:value="form.zrrlxmc" />
+            <a-col
+              :span="12"
+              v-for="(Key, index) in Object.keys(form)"
+              :key="index"
+            >
+              <a-form-item :label="tableHead[Key]">
+                <a-input v-model:value="form[Key]" placeholder="请输入" />
               </a-form-item>
             </a-col>
           </a-row>
@@ -86,71 +35,119 @@
   </div>
 </template>
 <script>
+import { Api } from '@/api/index'
 export default {
   name: 'bindBox',
+  props: {
+    detail: Object,
+  },
   data() {
     return {
       visible: false,
       labelCol: { span: 6 },
       wrapperCol: { span: 16 },
+      // 表头
+      tableHead: {
+        ajrybh: '案件人员编号',
+        bmsah: '部门受案号',
+        xm: '姓名',
+        zjhm: '证件号码',
+        zjlxmc: '证件类型名称',
+        dhhm: '电话号码',
+        rylxbm: '人员类型编码',
+        rylxmc: '人员类型名称',
+        sflxbm: '身份类型编码',
+        sflxmc: '身份类型名称',
+        zjlxbm: '证件类型编码',
+        zrrlxbm: '自然人类型编码',
+        zrrlxmc: '自然人类型名称',
+      },
+      // 用户输入数据
+      // form: {
+      //   ajrybh: '',
+      //   bmsah: '',
+      //   xm: '',
+      //   zjhm: '',
+      //   zjlxmc: '',
+      //   dhhm: '',
+      //   rylxbm: '',
+      //   rylxmc: '',
+      //   sflxbm: '',
+      //   sflxmc: '',
+      //   zjlxbm: '',
+      //   zrrlxbm: '',
+      //   zrrlxmc: '',
+      // },
+
       form: {
-        ajrybh: '123445',
-        bmsah: '9807',
-        dhhm: '',
-        rylxbm: '',
-        rylxmc: '',
-        sflxbm: '',
-        sflxmc: '',
-        xm: '哆啦A梦大裤衩',
-        zjhm: '',
-        zjlxmc: '',
-        zrrlxbm: '',
-        zrrlxmc: '',
+        // 测试数据
+        ajrybh: '1452441257411',
+        bmsah: '冷检起诉受[2014]2014075421号',
+        dhhm: '17456988524',
+        rylxbm: '1403187300001',
+        rylxmc: '辩护人',
+        sflxbm: '1404187300003',
+        sflxmc: '律师',
+        xm: '李斯',
+        zjhm: '1452547895412644',
+        zjlxbm: '148851568585885',
+        zjlxmc: '律师执业证',
+        zrrlxbm: '1452145511',
+        zrrlxmc: '嫌疑人',
       },
     }
   },
   methods: {
-    //点击人员列表绑定按钮
+    // 点击人员列表绑定按钮
     showModal() {
       this.visible = true
+      Object.keys(this.detail).forEach((key) => {
+        if (this.form.hasOwnProperty(key)) {
+          this.form[key] = this.detail[key]
+        }
+      })
     },
-    // 检验是否完全填写
+    // 检验表单是否完全填写
     checkForm(form) {
-      console.log(Object.values(form).filter(value=>value !=""))
-      if(Object.values(form).filter(value=>value !="").length < Object.values(form).length){
+      if (
+        Object.values(form).filter((value) => value != '').length <
+        Object.values(form).length
+      ) {
         return false
-      }
-      else return true
+      } else return true
     },
     // 重置form
-    resetForm(){
+    resetForm() {
       for (const key in this.form) {
         if (this.form[key]) {
           this.form[key] = ''
         }
       }
     },
-    //点击弹出框内绑定
+    // 点击弹出框内绑定
     handleOk() {
       if (this.checkForm(this.form)) {
-        this.$message.success('绑定成功！')
-        setTimeout(() => {
-          this.visible = false
-          this.resetForm()
-        }, 10)
+        Api.bindAgent(this.form).then((res) => {
+          if (res.success) {
+            this.$message.success('绑定成功！')
+            this.resetForm()
+            setTimeout(() => {
+              this.visible = false
+            }, 500)
+          } else {
+            this.$message.error(res.message)
+          }
+        })
       } else {
-        this.$message.warning('还有数据未填写！')
+        this.$message.warning('请填写完整所有项目！')
       }
-      // this.$message.error('绑定失败，请稍后再试！');
     },
-    //点击弹出框重置
+    // 关闭弹出框
     handleCancel() {
-      if(confirm("是否重置？")){
-        this.resetForm()
-      }
-        setTimeout(() => {
-          this.visible = false
-        }, 10)
+      this.resetForm()
+      setTimeout(() => {
+        this.visible = false
+      }, 10)
     },
   },
 }

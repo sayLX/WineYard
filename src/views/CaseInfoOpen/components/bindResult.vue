@@ -3,6 +3,7 @@
     <div class="resultTitle">
       <span class="ajgkzt">公开状态</span>
       <span class="ajmc">案件名称</span>
+      <span class="ajrybh">案件人员编号</span>
       <span class="ay">案由</span>
       <span class="bmsah">部门受案号</span>
       <span class="cbdwmc">承办单位</span>
@@ -17,7 +18,6 @@
       v-model:openKeys="openKeys"
       v-model:selectedKeys="selectedKeys"
       mode="inline"
-      @click="handleClick"
       class="result"
     >
       <a-sub-menu key="sub1">
@@ -32,27 +32,10 @@
           >
             {{ item[key] }}</span
           >
-          <BindBox></BindBox>
+          <BindBox :detail="item"></BindBox>
           <Detail :detail="item"></Detail>
         </a-menu-item>
       </a-sub-menu>
-      <!-- <a-sub-menu key="sub2">
-        <template #title>
-          <span><SettingOutlined /><span>刑事申诉案件</span></span>
-        </template>
-        <a-menu-item key="9">
-          <span
-            v-for="(result, index) in resultValues"
-            :key="index"
-            :class="resultNames[index]"
-          >
-            {{ result }}
-          </span>
-          <BindBox></BindBox>
-          <Detail></Detail>
-        </a-menu-item>
-        <a-menu-item key="10">Option 10</a-menu-item>
-      </a-sub-menu> -->
     </a-menu>
   </div>
 </template>
@@ -68,25 +51,12 @@ export default {
     BindBox,
     Detail,
   },
-  props: {ajrylb:Array},
+  props: { ajrylb: Array },
   data() {
     return {
       selectedKeys: ['1'],
       openKeys: ['sub1'],
     }
-  },
-  watch: {
-    openKeys(val) {
-      console.log('openKeys', val)
-    },
-  },
-  methods: {
-    handleClick(e) {
-      console.log('click', e)
-    },
-    titleClick(e) {
-      console.log('titleClick', e)
-    },
   },
 }
 </script>
@@ -127,8 +97,10 @@ export default {
   .cbdwmc {
     width: 100px;
   }
+  .ajrybh{
+    width:200px}
   .ajgkzt {
-    width: 60px;
+    width: 90px;
   }
   .bmsah {
     width: 100px;

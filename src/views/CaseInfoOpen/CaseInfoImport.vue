@@ -39,14 +39,15 @@
             }}&nbsp;&nbsp;{{ importTime.toLocaleTimeString() }}</span
           >
           <span class="fileName">{{ file.name }}</span>
-          <span> {{ uploading ? '上传完成!' : '等待上传...' }}</span>
+          <span> {{ status }}</span>
         </li>
         <li class="fileItem">
           <span>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            嫌疑人/当事人共{{importResult["total"]}}个，
-            解析成功{{ importResult["success"] }}个，
-            失败{{importResult["failed"]}}个
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 嫌疑人/当事人共{{
+              importResult['total']
+            }}个， 解析成功{{ importResult['success'] }}个， 失败{{
+              importResult['failed']
+            }}个
           </span>
         </li>
       </ul>
@@ -71,6 +72,7 @@ export default {
       allFileName: [],
       fileList: [],
       uploading: false,
+      status: '等待上传...',
       importResult: { total: 0, success: 0, failed: 0 },
       headers: {
         authorization: 'authorization-text',
@@ -97,14 +99,19 @@ export default {
       fileList.forEach((file) => {
         formData.append('files[]', file)
       })
-      this.uploading = true
       Api.importCaseinfo({ wjlj: this.latestFile }).then((res) => {
-        if(res.success){
-        // this.importResult = res.data
-        this.importResult.total+=1
-        this.importResult.success+=1
+        this.status = '正在上传...'
+        if (res.success) {
+          // this.importResult = res.data
+          this.importResult.total += 1
+          this.importResult.success += 1
           this.uploading = false
+          this.status = '上传完成！'
           message.success('上传成功！')
+        }
+        else{
+          this.status="上传失败！"
+          message.error("上传失败！")
         }
       })
     },

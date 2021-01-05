@@ -27,25 +27,33 @@ class UserApi {
     });
   }
   // 案件公开信息导入
-  importCaseinfo(file) {
+  importCaseinfo(filepath:string) {
     return request({
       url: "/public/case/analysis",
       method: "post",
-      data: file
+      data: filepath
     });
   }
   // 辩护代理信息导入
-  importAgent(file) {
+  importAgent(filePath:string) {
     return request({
       url: "/public/agent/analysis",
       method: "post",
-      data: file
+      data: filePath
     });
   }
-  // 案件代理获取案件人员列表
+  // 辩护代理获取案件人员列表
   getCaseStaffList(data: object) {
     return request({
       url: "/public/case/queryAjrylb",
+      method: "post",
+      data: data
+    });
+  }
+  // 辩护代理绑定
+  bindAgent(data: object) {
+    return request({
+      url: "/public/agent/binding",
       method: "post",
       data: data
     });
@@ -63,7 +71,7 @@ class UserApi {
   }
 
   // 获取单位人员列表（人员管理）
-  getOrganization(data: any) {
+  getOrganization(data: object) {
     return request({
       url: "/organization/user/query",
       method: "post",

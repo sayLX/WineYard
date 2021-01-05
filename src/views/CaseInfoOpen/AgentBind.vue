@@ -4,18 +4,18 @@
       <Title title="辩护代理绑定"></Title>
       <ul class="searchBind">
         <li>
-          <span>部门受案号</span>
-          <input
-            type="text"
-            v-model="searchConditions.bmsah"
-            placeholder="请输入"
-          />
-        </li>
-        <li>
           <span>案件名称</span>
           <input
             type="text"
             v-model="searchConditions.ajmc"
+            placeholder="请输入"
+          />
+        </li>
+        <li>
+          <span>部门受案号</span>
+          <input
+            type="text"
+            v-model="searchConditions.bmsah"
             placeholder="请输入"
           />
         </li>
@@ -28,22 +28,6 @@
           />
         </li>
         <li>
-          <span>人员类型名称</span>
-          <input
-            type="text"
-            v-model="searchConditions.rylxmc"
-            placeholder="请输入"
-          />
-        </li>
-        <!-- <li>
-                <span>是否绑定</span>
-                <select class="search" v-model="searchConditions.sfbd">
-                  <option disabled>请选择</option>
-                  <option >已绑定</option>
-                  <option > 未绑定</option>
-                </select>
-              </li> -->
-        <li>
           <button id="search" @click="getPersonList(searchConditions)">
             <i class="fa fa-search"></i>查询
           </button>
@@ -55,13 +39,12 @@
 </template>
 
 <script lang="ts">
-// import { defineComponent } from 'vue'
 import Title from './components/Title.vue'
 import { Api } from '@/api/index'
 import bindResult from './components/bindResult.vue'
 import '@/assets/font/css/all.css'
 import { message } from 'ant-design-vue'
-export default ({
+export default {
   name: 'AgentBind',
   components: {
     Title,
@@ -71,43 +54,16 @@ export default ({
     return {
       // 查询条件
       searchConditions: {
-        bmsah: '张某某抢劫案',
+        bmsah: '770000',
         ajmc: '张某某抢劫案',
         xm: '张铁',
-        rylxmc: '检察官',
-      },
-      // 原始响应数据
-      responseData: {
-        code: '',
-        data: {
-          current: 0,
-          entities: [
-            {
-              dhhm: '',
-              dlbm: '',
-              dzyj: '',
-              gzzh: '',
-              mc: '',
-              rybm: '',
-              sflsry: '',
-              sftz: '',
-              sfzh: '',
-              xb: '',
-              xh: 0,
-              zzdwmc: '',
-            },
-          ],
-          size: 0,
-          total: 0,
-        },
-        message: '',
-        success: true,
       },
       // 解析出的案件人员列表
       ajrylb: [
         {
           ajgkzt: 770000,
           ajmc: '张三抢劫案',
+          ajrybh: '11111111111',
           ay: 770000,
           bmsah: 770000,
           cbdwmc: '某某某检察院',
@@ -119,6 +75,7 @@ export default ({
         {
           ajgkzt: 770000,
           ajmc: '李四抢劫案',
+          ajrybh: '11111111111',
           ay: 770000,
           bmsah: 770000,
           cbdwmc: '某某某检察院',
@@ -130,6 +87,7 @@ export default ({
         {
           ajgkzt: 770000,
           ajmc: '王五抢劫案',
+          ajrybh: '11111111111',
           ay: 770000,
           bmsah: 770000,
           cbdwmc: '某某某检察院',
@@ -144,22 +102,21 @@ export default ({
   methods: {
     // 获取案件人员列表
     getPersonList(data) {
-      console.log("正在发起请求")
-      Api.getCaseStaffList(data)
-        .then((res) => {
-      console.log('请求完成')
-          this.ajrylb = res.data.entities[0]
-        })
-        .catch((err) => {
-          message.error(err)
-          console.log(err)
-        })
-    }
+      Api.getCaseStaffList(data).then((res) => {
+        if (res['success']) {
+          if (res.data.length > 0) {
+            this.ajrylb = res.data
+          } else {
+            message.warning('搜索结果为空！')
+          }
+        }
+      })
+    },
   },
   mounted() {
     //
   },
-})
+}
 </script>
 <style lang="scss" scoped>
 .ctx {

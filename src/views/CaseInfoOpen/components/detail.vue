@@ -1,6 +1,6 @@
 <template>
   <div id="floatBox">
-    <a-button type="primary" @click="showModal"> 详情 </a-button>
+    <a @click="showModal" style="margin-left:10px"> 详情 </a>
     <a-modal
       :title="nowtitle"
       :visible="visible"

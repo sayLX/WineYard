@@ -43,10 +43,11 @@
         </li>
         <li class="fileItem">
           <span>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            嫌疑人/当事人共{{importResult["total"]}}个，
-            解析成功{{ importResult["success"] }}个，
-            失败{{importResult["failed"]}}个
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 嫌疑人/当事人共{{
+              importResult['total']
+            }}个， 解析成功{{ importResult['success'] }}个， 失败{{
+              importResult['failed']
+            }}个
           </span>
         </li>
       </ul>
@@ -98,15 +99,24 @@ export default {
         formData.append('files[]', file)
       })
       this.uploading = true
-      Api.importAgent({ wjlj: this.latestFile }).then((res) => {
-        if(res.success){
-        // this.importResult = res.data
-        this.importResult.total+=1
-        this.importResult.success+=1
+      Api.importAgent({ wjlj: this.latestFile })
+        .then((res) => {
+          if (res.success) {
+            this.importResult.total += 1
+            this.importResult.success += 1
+            this.uploading = false
+            message.success('上传成功！')
+          } else {
+            message.error(res.message)
+          }
+        })
+        .catch((err) => {
+          console.log(err)
           this.uploading = false
-          message.success('上传成功！')
-        }
-      })
+          this.importResult.failed+=1
+          this.importResult.total+=1
+          status="上传失败！"
+        })
     },
   },
 }
