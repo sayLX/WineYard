@@ -70,8 +70,13 @@
                       :key="index"
                       :tabindex="index"
                     >
-                      <i class="fa fa-file-alt" style="color: #666"></i
-                      >&nbsp;&nbsp;{{ name }}&lt;{{ lawyerList[name] }}&gt;
+                      <i class="fa fa-file-alt" style="color: #666"></i>
+                      <!-- <a-checkable-tag
+                        v-model:checked="checked"
+                        @change="handleChange(lawyerList[name])"
+                      > -->
+                        &nbsp;&nbsp;{{ name }}&lt;{{ lawyerList[name] }}&gt;
+                      <!-- </a-checkable-tag> -->
                     </li>
                   </ul>
                 </a-collapse-panel>
@@ -103,11 +108,14 @@ export default defineComponent({
       activeKey: ['1'],
       receiverList: [],
       receiver: '律师',
-      lawyerList: { 张三: 13252524569, 李四: 13252963269 },
+      lawyerList: { 张三: 13252524569, 李四: 13252963269 ,王五: 13252963269},
       staffList: [],
       text: `A dog is a type of domesticated animal.Known for its loyalty and faithfulness,it can be found as a welcome guest in many households across the world.`,
       customStyle:
         'background: #fff;border-radius: 4px;margin-bottom: 24px;border: 0;overflow: hidden',
+      checked: false,
+      // 选中的接受者
+      checkedReceiver:[]
     }
   },
   methods: {
@@ -119,6 +127,10 @@ export default defineComponent({
     },
     resetTemplateContent() {
       this.templateContent = ''
+    },
+    // 选择要发送的人
+    handleChange(data) {
+      console.log(data)
     },
   },
 })

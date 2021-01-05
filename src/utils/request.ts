@@ -2,7 +2,6 @@ import axios from "axios";
 axios.defaults.baseURL = "/api";
 import store from '@/store/index'
 const sessionToken = sessionStorage.getItem('user_info') ? sessionStorage.getItem('user_info')['token'] : null
-
 const service = axios.create({
   timeout: 10000
 });

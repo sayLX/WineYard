@@ -10,7 +10,7 @@
     </div>
     <div id="userInfo">
       <img src="@\assets\img\user.png" alt="" />
-      <button>管理员,{{ username }}</button>
+      <button>管理员，{{ userName }}</button>
     </div>
   </div>
 </template>
@@ -20,7 +20,7 @@ export default defineComponent({
   name: 'home_bar',
   data() {
     return {
-      username: '',
+      userName: '',
     }
   },
   methods: {
@@ -31,6 +31,10 @@ export default defineComponent({
       // 跳转到登录页面
       this.$router.push('/login')
     },
+  },
+  mounted() {
+    // 获取用户名显示在顶部
+    this.userName = window.sessionStorage.getItem('userName')
   },
 })
 </script>

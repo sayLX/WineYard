@@ -8,17 +8,6 @@
         :label-col="labelCol"
         :wrapper-col="wrapperCol"
       >
-        <!-- <a-form-item name="organization" class="selectOrg">
-          <HomeOutlined style="color: rgba(0, 0, 0, 0.25)" />
-          <a-select v-model="loginForm.organization" placeholder="请选择单位">
-            <a-select-option
-              v-for="(org, index) in orgs"
-              :key="index"
-              :value="org"
-              >{{ org }}</a-select-option
-            >
-          </a-select>
-        </a-form-item> -->
         <a-form-item name="dlbm">
           <a-input
             v-model:value="loginForm.dlbm"
@@ -78,14 +67,13 @@ export default ({
   },
   setup() {
     const data = reactive({
-      // orgs: ['北京', '上海', '南京'],
       labelCol: { span: 4 },
       wrapperCol: { span: 14 },
       loginApi: '',
       loginForm: {
-        dlbm: '',
-        zzdwbm: '',
-        kl: '',
+        dlbm: 'test1803',
+        zzdwbm: '980000',
+        kl: '111111',
       },
       loginFormRules: {
         dlbm: [{ required: true, message: '登录别名不能为空', trigger: 'blur' }],
@@ -101,12 +89,12 @@ export default ({
     const login = () => {
       Api.login('test1803','111111','980000').then((res) => {
         // 将获取到的信息保存在sessionStorage中
-        sessionStorage.setItem('user_info', res.data)
-        console.log(res.data)
+        window.sessionStorage.setItem('user_info', res.data)
         // 同时将用户信息保存在vuex中
         const userInfo: UserInfo = res.data
-        console.log('--------------------')
-        console.log(userInfo)
+        // 将用户名存在sessionStorage
+        window.sessionStorage.setItem('userName',userInfo.mc)
+
         store.commit('login', userInfo)
         router.push({name: 'homePage'})
       })
