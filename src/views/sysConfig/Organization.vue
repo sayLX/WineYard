@@ -28,12 +28,15 @@ export default defineComponent({
   },
   setup () {
     const leftData = reactive({
-      bm: '',
-      isdw: true
+      dwbm: '',
+      bmbm: '',
+      jsbm: ''
     })
     const clickLeft = (data) => {
-      leftData.bm = data.bm
-      leftData.isdw = data.isdw
+      leftData.dwbm = data.dwbm
+      leftData.bmbm = data.bmbm
+      leftData.jsbm = data.jsbm
+      console.log(leftData)
     }
 
     return {

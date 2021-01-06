@@ -64,13 +64,33 @@ export default defineComponent({
       }).then(() => {
         createTree(fbmbm)
       }).then(() => {
+        // 递归获取角色信息
+        function tree(item) {
+          item.forEach(element => {
+            Api.getJsList(element['bmbm']).then(res => {
+              const jsList = res['data']
+              jsList.map(js => {
+                js.title = js['jsmc']
+                js.key = js['jsbm']
+                return js
+              })
+              if(element.children) {
+                tree(element.children)
+                element.children = [...element.children, ...jsList]
+              } else {
+                element.children = jsList
+              }
+            })
+          });
+        }
+        tree(data.bmList)
+      }).then(() => {
         // 获取单位信息，拼接数据
         Api.getDwInfo().then(res => {
           if(res['success']) {
             const dwinfo = res['data']
             dwinfo.title = dwinfo['dwqc']
             dwinfo.key = dwinfo['dwbm']
-            dwinfo.dwflag = true
             dwinfo.children = data.bmList
             data.bmList = [
               dwinfo
@@ -84,7 +104,7 @@ export default defineComponent({
       const tree = data.bmList
       function digui (tree) {
         tree.forEach(item => {
-          if(item.bmmc == data.input) {
+          if(item.title == data.input) {
             data.bmList = [item]
             return
           }
@@ -101,18 +121,28 @@ export default defineComponent({
     }
     
     const clickData = reactive({
-      bm: '',
-      isdw: true
+      dwbm: '',
+      bmbm: '',
+      jsbm: ''
     })
     // 点击节点
-    const clickNode = (selectedKeys, e: { selected: boolean; selectedNodes; node; event } ) => {
-      if (e.selectedNodes[0]['props']['dwflag']){
-        clickData.bm = e.selectedNodes[0]['props']['dwbm']
-        clickData.isdw = true
-      } else {
-        clickData.bm = e.selectedNodes[0]['props']['bmbm']
-        clickData.isdw = false
+    const clickNode = (selectedKeys, e: { selected: boolean; selectedNodes; node; event } ) => { 
+      if(e.selectedNodes[0]['props']['dwbm']) {
+        clickData.dwbm = e.selectedNodes[0]['props']['dwbm']
+        clickData.bmbm = ''
+        clickData.jsbm = ''
       }
+      if(e.selectedNodes[0]['props']['bmbm']) {
+        clickData.bmbm = e.selectedNodes[0]['props']['bmbm']
+        clickData.dwbm = e.selectedNodes[0]['props']['dwbm']
+        clickData.jsbm = ''
+      }
+      if (e.selectedNodes[0]['props']['jsbm']){
+        clickData.jsbm = e.selectedNodes[0]['props']['jsbm']
+        clickData.bmbm = e.selectedNodes[0]['props']['bmbm']
+        clickData.dwbm = e.selectedNodes[0]['props']['dwbm']
+      }
+      
       ctx.emit('clickleft', clickData)
     }
 

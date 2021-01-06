@@ -308,6 +308,18 @@ class UserApi {
     });
   }
 
+  // 获取单位角色列表
+  getJsList (bmbm) {
+    return request({
+      url: "/organization/role/query",
+      method: "post",
+      data: {
+        dwbm: store.state['userInfo']['zzdwbm'],
+        bmbm
+      }
+    });
+  }
+
 }
 
 export const Api = new UserApi();
