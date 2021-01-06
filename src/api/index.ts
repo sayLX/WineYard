@@ -26,8 +26,9 @@ class UserApi {
       }
     });
   }
+
   // 案件公开信息导入
-  importCaseinfo(filepath:string) {
+  importCaseinfo(filepath: string) {
     return request({
       url: "/public/case/analysis",
       method: "post",
@@ -35,7 +36,7 @@ class UserApi {
     });
   }
   // 辩护代理信息导入
-  importAgent(filePath:string) {
+  importAgent(filePath: string) {
     return request({
       url: "/public/agent/analysis",
       method: "post",
@@ -58,7 +59,6 @@ class UserApi {
       data: data
     });
   }
-
   //辩护代理查看详情
   viewDetail(ajrybh: string) {
     return request({
@@ -82,7 +82,6 @@ class UserApi {
         order: data.order,
         size: data.size,
         zzdwbm: store.state["userInfo"]["zzdwbm"]
-        // zzdwbm: JSON.parse(window.sessionStorage.getItem("store")).userInfo.zzdwbm
       }
     });
   }
@@ -117,6 +116,51 @@ class UserApi {
       method: "post",
       data: data
     });
+  }
+  // 获取模板分类列表
+  getTemplateClassList(data: { dwbm: string; mblbbm: string }) {
+    data.dwbm = store.state["userInfo"]["zzdwbm"];
+    return request({
+      url: "/message/mbfl/query",
+      method: "post",
+      data: data
+    });
+  }
+
+  // 添加模板分类
+  addTemplateClass(data: object) {
+    return request({
+      url: "/message/mbfl/add",
+      method: "post",
+      data: data
+    });
+  }
+
+  // 获取律师列表
+  getLawyerList(data: {lszh: string,pageIndex: number,pageSize: number,startIndex: number,xm: string,zzdw: string,
+  }) {
+    // data.zzdw = store.state["userInfo"]["zzdwmc"];
+    return request({
+      url: "/message/lawyer/query",
+      method: "post",
+      data: data
+    });
+  }
+  // 删除律师
+  deleteLawyer(lsbm:string){
+    return request({
+      url: "/message/lawyer/delete",
+      method: "post",
+      data: lsbm
+    })
+  }
+  // 添加
+  addLawyer(data:{dhhm: '电话号码',dlbm: string,dzyj: string,gzzh: string,mc: string,sflsry: string,sfzh: string,xb: string ,xh: string,zzdwbm: string,zzdwmc: string}){
+    return request({
+      url: "/message/lawyer/add",
+      method: "post",
+      data: data
+    })
   }
 }
 
