@@ -81,12 +81,12 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import PageTitle from '../../components/PageTitle.vue'
-import { FolderOpenOutlined, PlusOutlined } from '@ant-design/icons-vue'
+import { FolderOpenOutlined } from '@ant-design/icons-vue'
 // import TestData from '@/utils/testdata'
 // import AddLawyer from './components/AddLawyer.vue'
 import UploadLawyer from './components/UploadLawyer.vue'
 import AddPerson from './components/AddPerson.vue'
-import EditPerson from './components/EditPerson.vue'
+// import EditPerson from './components/EditPerson.vue'
 import { message } from 'ant-design-vue'
 import { Api } from '@/api/index.ts'
 
@@ -95,11 +95,11 @@ export default defineComponent({
   components: {
     FolderOpenOutlined,
     PageTitle,
-    PlusOutlined,
+    // PlusOutlined,
     // AddLawyer,
     UploadLawyer,
     AddPerson,
-    EditPerson,
+    // EditPerson,
   },
   data() {
     return {
