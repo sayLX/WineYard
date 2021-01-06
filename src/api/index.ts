@@ -59,7 +59,6 @@ class UserApi {
       data: data
     });
   }
-
   //辩护代理查看详情
   viewDetail(ajrybh: string) {
     return request({
@@ -72,19 +71,19 @@ class UserApi {
   }
 
   // 获取单位人员列表（人员管理）
-  getOrganization(data) {
+  getOrganization (data: {curent: number;
+    gzzh: string;
+    mc: string;
+    orders: {asc: boolean; column: string};
+    size: number;
+    zzdwbm: string;}
+    ) {
+      data['zzdwbm']=store.state["userInfo"]["zzdwbm"]
     return request({
       url: "/organization/user/query",
       method: "post",
-      data: {
-        curent: data.curent,
-        gzzh: data.gzzh,
-        mc: data.mc,
-        order: data.order,
-        size: data.size,
-        zzdwbm: store.state["userInfo"]["zzdwbm"]
-        // zzdwbm: JSON.parse(window.sessionStorage.getItem("store")).userInfo.zzdwbm
-      }
+      data: data
+
     });
   }
   // 添加人员
@@ -118,6 +117,42 @@ class UserApi {
       method: "post",
       data: data
     });
+  }
+
+  // 添加模板分类
+  addTemplateClass(data: object) {
+    return request({
+      url: "/message/mbfl/add",
+      method: "post",
+      data: data
+    });
+  }
+
+  // 获取律师列表
+  getLawyerList(data: { lszh: string; pageIndex: number; pageSize: number; startIndex: number; xm: string; zzdw: string;
+  }) {
+    // data.zzdw = store.state["userInfo"]["zzdwmc"];
+    return request({
+      url: "/message/lawyer/query",
+      method: "post",
+      data: data
+    });
+  }
+  // 删除律师
+  deleteLawyer(lsbm: string){
+    return request({
+      url: "/message/lawyer/delete",
+      method: "post",
+      data: lsbm
+    })
+  }
+  // 添加
+  addLawyer ( data: { dhhm: '电话号码'; dlbm: string; dzyj: string; gzzh: string; mc: string; sflsry: string; sfzh: string; xb: string; xh: string; zzdwbm: string; zzdwmc: string }){
+    return request({
+      url: "/message/lawyer/add",
+      method: "post",
+      data: data
+    })
   }
 
   // 获取功能分类列表

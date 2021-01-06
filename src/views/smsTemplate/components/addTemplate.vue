@@ -4,7 +4,7 @@
       <template #icon><PlusOutlined /></template>新增
     </a-button>
     <a-modal
-      title="添加短信模板"
+      title="添加模板"
       :visible="visible"
       :confirm-loading="confirmLoading"
       @ok="handleOk"

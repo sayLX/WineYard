@@ -23,7 +23,7 @@
           </a-form-item>
           <a-form-item>
             <!-- 添加人员 -->
-              <addPerson ></addPerson>
+            <addPerson></addPerson>
           </a-form-item>
         </a-form>
       </div>
@@ -51,13 +51,15 @@
           <a-col :span="3">
             <span>
               <!-- 编辑人员信息 -->
-              <editPersonInfo v-model:personInfo="personList[index1]"></editPersonInfo>
+              <editPersonInfo
+                v-model:personInfo="personList[index1]"
+              ></editPersonInfo>
               <!-- 删除人员信息 -->
               <a-popconfirm
                 title="确认删除用户信息吗?"
                 ok-text="确认"
                 cancel-text="取消"
-                @confirm="deletePersonInfo(item.rybm,index1)"
+                @confirm="deletePersonInfo(item.rybm, index1)"
                 @cancel="cancel"
               >
                 <a href="" style="margin-right: 10px">删除</a>
@@ -76,7 +78,6 @@
           >
         </a-row>
       </div>
-
     </div>
   </div>
 </template>
@@ -98,7 +99,7 @@ export default defineComponent({
     SearchOutlined,
     // BaseTable,
     editPersonInfo,
-    addPerson
+    addPerson,
   },
   setup() {
     // 获取列表的请求数据
@@ -137,14 +138,14 @@ export default defineComponent({
       })
     }
     // 删除人员
-    const deletePersonInfo = (rybm: string,index: number) => {
+    const deletePersonInfo = (rybm: string, index: number) => {
       // Api.deletePersonInfo(rybm).then((res) => {
       //   if (res['success']) {
-        if (1) {
-          console.log(rybm)
-          message.success('人员删除成功！')
-          data.personList.splice(index,1)
-        } else message.error('人员删除失败！稍后再试！')
+      if (1) {
+        console.log(rybm)
+        message.success('人员删除成功！')
+        data.personList.splice(index, 1)
+      } else message.error('人员删除失败！稍后再试！')
       // }).catch(err=>console.log(err))
     }
 
@@ -152,10 +153,10 @@ export default defineComponent({
     const resetPersonPassword = (rybm: string) => {
       // Api.resetPersonPassword(rybm).then((res) => {
       //   if (res['success']) {
-        if (1) {
-          console.log(rybm)
-          message.success('密码重置成功！')
-        } else message.error('密码重置失败！')
+      if (1) {
+        console.log(rybm)
+        message.success('密码重置成功！')
+      } else message.error('密码重置失败！')
       // }).catch(err=>console.log(err))
     }
     // 弹出确认框是否删除
@@ -217,8 +218,8 @@ export default defineComponent({
         line-height: 40px;
         text-indent: 10px;
         border-bottom: $border;
-        &:nth-child(even){
-          background-color: rgb(250,250,250);
+        &:nth-child(even) {
+          background-color: rgb(250, 250, 250);
         }
       }
     }

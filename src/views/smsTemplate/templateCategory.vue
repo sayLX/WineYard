@@ -9,9 +9,9 @@
             <template #icon><SyncOutlined /></template>刷新
           </a-button>
           <!-- 添加模板组件 -->
-          <addTemplate></addTemplate>
+          <add-template-class></add-template-class>
           <!-- 编辑模板组件 -->
-          <editTemplate></editTemplate>
+          <edit-template></edit-template>
           <!-- 删除模板 -->
           <a-button id="delete-template">
             <template #icon><DeleteOutlined /></template>
@@ -99,7 +99,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import Title from './components/Title.vue'
 import {
   SyncOutlined,
@@ -107,9 +107,11 @@ import {
   FolderOutlined,
   FileOutlined,
 } from '@ant-design/icons-vue'
+import AddTemplateClass from './components/addTemplateClass.vue'
 import editTemplate from './components/editTemplate.vue'
 import addTemplate from './components/addTemplate.vue'
 import { message } from 'ant-design-vue'
+import {Api} from "@/api/index"
 export default {
   name: 'smsTemplate',
   components: {
@@ -120,6 +122,7 @@ export default {
     FileOutlined,
     editTemplate,
     addTemplate,
+    AddTemplateClass,
   },
 
   data() {
@@ -129,10 +132,10 @@ export default {
       openKeys: ['sub1'],
       templateListData: {},
       Loading:false,
-      // Loading:true
+      requestData:{zzdw:"",mblbdb:""},
+
     }
   },
-
   watch: {
     openKeys(val, oldVal) {
       this.preOpenKeys = oldVal
@@ -140,6 +143,13 @@ export default {
   },
 
   methods: {
+    // 获取模板分类
+    getTemplateClass(requestData){
+      Api.getTemplateClassList(requestData).then(res=>{
+        console.log(res)
+      })
+    },
+
     // 点击menuItem
     click(){
       //
@@ -149,6 +159,7 @@ export default {
       this.Loading=true
       setTimeout(()=>{this.Loading=false,message.success("刷新成功!")},1500)
     },
+
 
     // 弹出确认框是否删除
     confirm(e) {
