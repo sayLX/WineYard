@@ -1,19 +1,19 @@
 <template>
-  <div class="left">
-    <div class="title">
-      <span class="text">组织机构</span>
-    </div>
+  <div class="title">
+    <span class="text">组织机构</span>
+  </div>
+  <div class="input">
     <el-input
       placeholder="请输入查询关键字"
       suffix-icon="el-icon-search"
       size="small"
       v-model="input1">
     </el-input>
-    <div class="list">
-      <div class="item">高检院</div>
-      <div class="item">高检院</div>
-      <div class="item">高检院</div>
-    </div>
+  </div>
+  <div class="list">
+    <div class="item">高检院</div>
+    <div class="item">高检院</div>
+    <div class="item">高检院</div>
   </div>
 </template>
 
@@ -23,14 +23,8 @@ export default {
 }
 </script>
 
-<style lang='scss' socped>
-.left {
-  width: 100%;
-  border: 0.5px solid #e2e2e2;
-  margin: 7px;
-  margin-right: 0;
-  padding: 0 5px;
-  .title {
+<style lang='scss' scoped>
+.title {
     height: 30px;
     font-size: 12px;
     padding: 0 5px;
@@ -41,9 +35,12 @@ export default {
       border-bottom: 2px solid #28a2fd;
     }
   }
-  .el-input {
-    margin-top: 5px;
-    height: 30px;
+  .input {
+    padding: 0 5px;
+    .el-input {
+      margin-top: 5px;
+      height: 30px;
+    }
   }
   .list {
     .item {
@@ -57,5 +54,4 @@ export default {
       background: #eee;
     }
   }
-}
 </style>
