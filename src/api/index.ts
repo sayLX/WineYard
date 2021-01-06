@@ -283,6 +283,31 @@ class UserApi {
       data: data
     });
   }
+
+  // 获取单位部门列表
+  getBmList (bmmc='', fbmbm='') {
+    return request({
+      url: "/organization/dept/query",
+      method: "post",
+      data: {
+        dwbm: store.state['userInfo']['zzdwbm'],
+        bmmc,
+        fbmbm
+      }
+    });
+  }
+
+  // 获取单位信息
+  getDwInfo () {
+    return request({
+      url: "/organization/unit/get",
+      method: "post",
+      data: {
+        dwbm: store.state['userInfo']['zzdwbm']
+      }
+    });
+  }
+
 }
 
 export const Api = new UserApi();

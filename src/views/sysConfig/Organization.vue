@@ -4,7 +4,7 @@
             <page-title title="组织机构"></page-title>
             <el-container class="container">
                 <el-aside width="230px" class="left">
-                  <org-left></org-left>
+                  <org-left @clickleft='clickLeft'></org-left>
                 </el-aside>
                 <el-main class="right">
                   <org-right></org-right>
@@ -15,9 +15,8 @@
 </template>
 
 <script lang='ts'>
-import { defineComponent } from 'vue'
+import { defineComponent, reactive, toRefs } from 'vue'
 import PageTitle from '../../components/PageTitle.vue'
-import TestData from '@/utils/testdata'
 import OrgRight from './components/OrgRight.vue'
 import OrgLeft from './components/OrgLeft.vue';
 export default defineComponent({
@@ -28,9 +27,18 @@ export default defineComponent({
     OrgLeft
   },
   setup () {
+    const leftData = reactive({
+      bm: '',
+      isdw: true
+    })
+    const clickLeft = (data) => {
+      leftData.bm = data.bm
+      leftData.isdw = data.isdw
+    }
+
     return {
-      columns: TestData.OrgOrg.columns,
-      list: TestData.OrgOrg.dataCol
+      clickLeft,
+      ...toRefs(leftData)
     }
   }
 })

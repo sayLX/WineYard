@@ -12,32 +12,6 @@
     <template #name="{ text }">
       <a>{{ text }}</a>
     </template>
-
-    <template v-slot:cz>
-      <span>
-        <!-- 编辑人员信息 -->
-        <editPersonInfo></editPersonInfo>
-        <!-- 删除人员信息 -->
-        <a-popconfirm
-          title="确认删除用户信息吗?"
-          ok-text="确认"
-          cancel-text="取消"
-          @confirm="confirm"
-          @cancel="cancel"
-        >
-          <a href="" style="margin-right:10px">删除</a>
-        </a-popconfirm>
-        <a-popconfirm
-          title="确认重置用户密码吗?"
-          ok-text="确认"
-          cancel-text="取消"
-          @confirm="confirm"
-          @cancel="cancel"
-        >
-          <a href="">重置密码</a>
-        </a-popconfirm>
-      </span>
-    </template>
   </a-table>
 </template>
 <script lang='ts'>
@@ -57,10 +31,6 @@ export default defineComponent({
     tableColor: {
       type: Boolean,
       default: true
-    },
-    showCol8: {
-      type: Boolean,
-      default: false
     }
   },
   components: {
@@ -81,13 +51,6 @@ export default defineComponent({
       showQuickJumper: true,
       position: 'bottom',
     }
-    //     // 弹出确认框是否删除
-    // const confirm=()=>{
-    //   message.success('已成功处理！')
-    // }
-    // const cancel=()=>{
-    //   message.error('已取消处理！')
-    // }
 
     const data = computed(() => {
       return props.list
