@@ -147,27 +147,27 @@ export default defineComponent({
       width: 220px;
       height: 100%;
       // overflow: auto;
-      .l-menu {
-        width: 100%;
-        height: 100%;
-        color: #baedfe;
-        background-color: rgb(40, 162, 253);
-        &:hover {
-          color: #baedfe !important;
-        }
-        .ant-menu-item:after{
-          border: none;
-        }
-        .ant-menu {
-          color: #baedfe;
-          background-color: rgb(14, 139, 235);
-        }
-        .ant-menu-submenu-title {
-          i {
-            display: none;
-          }
-        }
-      }
+      // .l-menu {
+      //   width: 100%;
+      //   height: 100%;
+      //   color: #baedfe;
+      //   background-color: rgb(40, 162, 253);
+      //   &:hover {
+      //     color: #baedfe !important;
+      //   }
+      //   .ant-menu-item:after{
+      //     border: none;
+      //   }
+      //   .ant-menu {
+      //     color: #baedfe;
+      //     background-color: rgb(14, 139, 235);
+      //   }
+      //   .ant-menu-submenu-title {
+      //     i {
+      //       display: none;
+      //     }
+      //   }
+      // }
     }
     .right {
       flex: 1;

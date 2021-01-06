@@ -142,7 +142,7 @@ export default defineComponent({
                   item.col4 = item.gndz
                   item.col5 = item.gncs
                   item.col6 = item.gntb
-                  item.col7 = item.gmsm
+                  item.col7 = item.gnsm
                   item.col8 = '编辑 删除'
                   item.key = item.gnbm
                 });
@@ -161,7 +161,7 @@ export default defineComponent({
                   item.col4 = item.gndz
                   item.col5 = item.gncs
                   item.col6 = item.gntb
-                  item.col7 = item.gmsm
+                  item.col7 = item.gnsm
                   item.col8 = '编辑 删除'
                   item.key = item.gnbm
                 });

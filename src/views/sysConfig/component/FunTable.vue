@@ -49,6 +49,14 @@
         <a-input v-model:value="gnxsmc"
         />
       </a-form-item>
+      <a-form-item label="功能参数">
+        <a-input v-model:value="gncs"
+        />
+      </a-form-item>
+      <a-form-item label="功能图标">
+        <a-input v-model:value="gntb"
+        />
+      </a-form-item>
       <a-form-item label="是否高检院适用(Y/N)">
         <a-input v-model:value="sfgjysy"
         />
@@ -123,7 +131,9 @@ export default defineComponent({
       sfqxysy: '',
       sfsjysy: '',
       sfsysy: '',
-      flbm: ''
+      flbm: '',
+      gncs: '',
+      gntb: ''
     })
     //添加 对话框的数据
     const addModalData = reactive({
