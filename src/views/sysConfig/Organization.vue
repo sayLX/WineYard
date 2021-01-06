@@ -36,7 +36,7 @@ export default defineComponent({
 })
 </script>
 
-<style lang='scss'>
+<style lang='scss' scoped>
 .ctx {
     width: 100%;
     height: 100%;
@@ -50,12 +50,18 @@ export default defineComponent({
         border: solid 1px #d8d7d7;
         display: flex;
         flex-direction: column;
-        overflow: hidden;
         .container {
           display: flex;
+          width: 100%;
           height: 100%;
+          overflow: hidden;
           .left {
             width: 100%;
+            height: calc(100% - 14px);
+            border: 0.5px solid #e2e2e2;
+            margin: 7px;
+            margin-right: 0;
+            bottom: 7px;
           }
           .right {
             margin: 7px;
