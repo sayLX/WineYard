@@ -97,7 +97,7 @@ class UserApi {
     return request({
       url: "/organization/user/delete",
       method: "post",
-      data: {rybm:rybm}
+      data: { rybm: rybm }
     });
   }
   // 重置人员密码
@@ -105,11 +105,25 @@ class UserApi {
     return request({
       url: "/organization/user/resetPwd",
       method: "post",
-      data:{rybm:rybm}
+      data: { rybm: rybm }
     });
   }
   // 编辑人员信息
-  editPersonInfo(data: {}) {
+  editPersonInfo(data: {
+    dhhm: "13512345678";
+    dlbm: string;
+    dzyj: string;
+    gzzh: string;
+    mc: string;
+    rybm: string;
+    sflsry: string;
+    sftz: string;
+    sfzh: string;
+    xb: string;
+    xh: number;
+    zzdwbm: string;
+  }) {
+    data.zzdwbm = store.state["userInfo"]["zzdwmc"];
     return request({
       url: "/organization/user/update",
       method: "post",

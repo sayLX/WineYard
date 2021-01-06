@@ -126,9 +126,7 @@ export default defineComponent({
     // 获取人员列表，并将性别"1""0"分别转化成"男"""女"
     const getPersonList = () => {
       const mydata=getOrganizationData
-      console.log(mydata+"请求数据")
       Api.getOrganization(mydata).then((res) => {
-        console.log(res.data.entities)
         data.personList = res.data.entities.map((item) => {
           if (item.xb == '0') item.xb = '女'
           else item.xb = '男'

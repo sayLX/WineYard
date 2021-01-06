@@ -9,20 +9,28 @@
     width="740px"
   >
     <div class="sms">
-      <div class="type1" v-for="(Key,index) in Object.keys(personInfoName)" :key="index">
-        <span>*{{personInfoName[Key]}}</span>
-        <input type="text" v-model="personInfo[Key]" style="margin-bottom:5px;text-indent:10px" />
+      <div
+        class="type1"
+        v-for="(Key, index) in Object.keys(personInfoName)"
+        :key="index"
+      >
+        <span>*{{ personInfoName[Key] }}</span>
+        <input
+          type="text"
+          v-model="personInfo[Key]"
+          style="margin-bottom: 5px; text-indent: 10px"
+        />
       </div>
-      <br/>
+      <br />
     </div>
   </a-modal>
 </template>
 <script>
 import { message } from 'ant-design-vue'
-import {Api} from "@/api/index.ts"
+import { Api } from '@/api/index.ts'
 export default {
   name: 'addTemplate',
-  props: ["personInfo","title"],
+  props: ['personInfo', 'title'],
   data() {
     return {
       visible: false,
@@ -52,11 +60,18 @@ export default {
     //点击ok
     handleOk() {
       this.confirmLoading = true
-      setTimeout(() => {
-        this.visible = false
-        this.confirmLoading = false
-        message.success('编辑成功！')
-      }, 100)
+      if (this.personInfo.xb == '男') item.xb = '1'
+      // eslint-disable-next-line vue/no-mutating-props
+      else { this.personInfo.xb = '0' }
+      Api.editPersonInfo(this.personInfo).then((res) => {
+        if (res.success) {
+          setTimeout(() => {
+            this.confirmLoading = false
+            message.success('编辑成功！')
+            this.visible = false
+          }, 1000)
+        }
+      })
     },
     handleCancel() {
       setTimeout(() => {
@@ -64,9 +79,6 @@ export default {
         this.confirmLoading = false
       }, 100)
     },
-    getOrganization(){
-      Api.getOrganization()
-    }
   },
 }
 </script>
@@ -77,7 +89,6 @@ export default {
   background-color: #ffffff;
   border-radius: 5px;
   border: solid 1px #a9c4df;
-
 }
 .sms {
   width: 621px;
@@ -91,7 +102,7 @@ export default {
     text-align: right;
   }
   input,
-  select{
+  select {
     height: 34px;
     width: 400px;
     border: solid 1px #d8d7d7;
