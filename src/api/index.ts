@@ -71,18 +71,19 @@ class UserApi {
   }
 
   // 获取单位人员列表（人员管理）
-  getOrganization(data: object) {
+  getOrganization(data: {curent: number,
+    gzzh: string,
+    mc: string,
+    orders: {asc:boolean,column:string},
+    size: number,
+    zzdwbm:string}
+    ) {
+      data['zzdwbm']=store.state["userInfo"]["zzdwbm"]
     return request({
       url: "/organization/user/query",
       method: "post",
-      data: {
-        curent: data.curent,
-        gzzh: data.gzzh,
-        mc: data.mc,
-        order: data.order,
-        size: data.size,
-        zzdwbm: store.state["userInfo"]["zzdwbm"]
-      }
+      data: data
+
     });
   }
   // 添加人员
