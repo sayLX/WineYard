@@ -5,9 +5,9 @@
     :data-source="data"
     :pagination="pagination"
     size="middle"
-    tableLayout="fixed"
-    :rowClassName="tableColor ? rowClassName : ''"
-    :defaultExpandAllRows="true"
+    tableLayout='fixed'
+    :rowClassName="MyRowClassName"
+    :defaultExpandAllRows='true'
   >
     <template #name="{ text }">
       <a>{{ text }}</a>
@@ -41,10 +41,7 @@
   </a-table>
 </template>
 <script lang='ts'>
-import { defineComponent, PropType } from 'vue'
-import { message } from 'ant-design-vue'
-import editPersonInfo from "@/views/sysConfig/components/editPersonInfo.vue"
-
+import { computed, defineComponent, PropType } from 'vue'
 interface PropCol {
   title: string;
   dataIndex: string;
@@ -59,13 +56,15 @@ export default defineComponent({
     size: Number,
     tableColor: {
       type: Boolean,
-      default: true,
+      default: true
     },
-    personList:Array,
-    total:Number
+    showCol8: {
+      type: Boolean,
+      default: false
+    }
   },
   components: {
-    editPersonInfo
+    // editPersonInfo
   },
 
   setup(props) {
@@ -73,26 +72,33 @@ export default defineComponent({
       const className = index % 2 === 0 ? 'shallow_gray' : 'deep_gray'
       return className
     }
+    const MyRowClassName = () => {
+      return props.tableColor ? rowClassName : ''
+    }
     const pagination = {
       defaultPageSize: props.size,
       showTotal: (total: number) => `共 ${total} 条数据`,
       showQuickJumper: true,
       position: 'bottom',
     }
-        // 弹出确认框是否删除
-    const confirm=()=>{
-      message.success('已成功处理！')
-    }
-    const cancel=()=>{
-      message.error('已取消处理！')
-    }
+    //     // 弹出确认框是否删除
+    // const confirm=()=>{
+    //   message.success('已成功处理！')
+    // }
+    // const cancel=()=>{
+    //   message.error('已取消处理！')
+    // }
+
+    const data = computed(() => {
+      return props.list
+    })
+
     return {
-      data: props.list,
+      data,
       columns: props.col,
       rowClassName,
       pagination,
-      confirm,
-      cancel,
+      MyRowClassName
     }
   },
 })

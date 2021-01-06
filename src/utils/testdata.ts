@@ -123,7 +123,8 @@ export default {
         {
           title: '功能序号',
           dataIndex: 'col1',
-          key: 'col1'
+          key: 'col1',
+          width: '17%'
         },
         {
           title: '功能名称',
@@ -156,88 +157,11 @@ export default {
           key: 'col7'
         },
         {
-          title: '操作',
+          title: '',
           dataIndex: 'col8',
-          key: 'col8'
-        }
-      ],
-      dataCol: [
-        {
-          key: "1",
-          col1: '案件信息公开',
-          children: [
-            {
-              key: '11',
-              col1: '1',
-              col2: '案件公开信息导入',
-              col3: '案件公开信息导入',
-              col4: '/Page',
-              col5: '',
-              col6: 'icon',
-              col7: '',
-              col8: '编辑 删除'
-            },
-            {
-              key: '12',
-              col1: '2',
-              col2: '案件公开信息导入',
-              col3: '案件公开信息导入',
-              col4: '/Page',
-              col5: '',
-              col6: 'icon',
-              col7: '',
-              col8: '编辑 删除'
-            },
-            {
-              key: '13',
-              col1: '3',
-              col2: '案件公开信息导入',
-              col3: '案件公开信息导入',
-              col4: '/Page',
-              col5: '',
-              col6: 'icon',
-              col7: '',
-              col8: '编辑 删除'
-            },{
-              key: '14',
-              col1: '4',
-              col2: '案件公开信息导入',
-              col3: '案件公开信息导入',
-              col4: '/Page',
-              col5: '',
-              col6: 'icon',
-              col7: '',
-              col8: '编辑 删除'
-            }
-          ]
-        },
-        {
-          key: "2",
-          col1: '短信操作',
-          children: [
-            {
-              key: '21',
-              col1: '5',
-              col2: '案件公开信息导入',
-              col3: '案件公开信息导入',
-              col4: '/Page',
-              col5: '',
-              col6: 'icon',
-              col7: '',
-              col8: '编辑 删除'
-            },
-            {
-              key: '22',
-              col1: '6',
-              col2: '案件公开信息导入',
-              col3: '案件公开信息导入',
-              col4: '/Page',
-              col5: '',
-              col6: 'icon',
-              col7: '',
-              col8: '编辑 删除'
-            }
-          ]
+          key: 'col8',
+          slots: { customRender: 'col8' },
+          align: 'right'
         }
       ]
     },

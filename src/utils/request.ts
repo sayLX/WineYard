@@ -1,5 +1,5 @@
 import axios from "axios";
-axios.defaults.baseURL = "http://192.168.1.19:9990/";
+axios.defaults.baseURL = "/api";
 import store from '@/store/index'
 const sessionToken = sessionStorage.getItem('user_info') ? sessionStorage.getItem('user_info')['token'] : null
 const service = axios.create({
@@ -12,7 +12,6 @@ service.interceptors.request.use(
     config.headers = {
       token: store.getters['token'] || sessionToken || ""
     }
-    console.log(config)
     return config;
   },
   error => {
