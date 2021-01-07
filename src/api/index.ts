@@ -166,6 +166,20 @@ class UserApi {
     });
   }
 
+  // 获取模板分类    错误的url
+  getTemplateClassList (requestData) {
+    return request({
+      url: "/permission/gnfl/query",
+      method: "post",
+      data: requestData
+    });
+  }
+
+  /**
+   * @auther 谢云周
+   * @number 13
+   */
+
   // 根据fflbm获取功能分类列表
   getGnflListByFflbm (fflbm) {
     return request({

@@ -13,16 +13,22 @@
     </el-input>
   </div>
   <div class="list">
-    <a-tree @select="clickNode" :tree-data='bmList'></a-tree>
+    <a-tree @select="clickNode" :tree-data='bmList' :showLine='true'>
+      <template #switcherIcon><down-outlined /></template>
+    </a-tree>
   </div>
 </template>
 
 <script lang='ts'>
 import { defineComponent, onMounted, reactive, toRefs } from 'vue'
+import { DownOutlined } from '@ant-design/icons-vue';
 import { Api } from '@/api/index'
 
 export default defineComponent({
   emits: ['clickleft'],
+  components: {
+    DownOutlined
+  },
   setup (props, ctx) {
     const data = reactive({
       input: '',
@@ -64,27 +70,6 @@ export default defineComponent({
       }).then(() => {
         createTree(fbmbm)
       }).then(() => {
-        // 递归获取角色信息
-        function tree(item) {
-          item.forEach(element => {
-            Api.getJsList(element['bmbm']).then(res => {
-              const jsList = res['data']
-              jsList.map(js => {
-                js.title = js['jsmc']
-                js.key = js['jsbm']
-                return js
-              })
-              if(element.children) {
-                tree(element.children)
-                element.children = [...element.children, ...jsList]
-              } else {
-                element.children = jsList
-              }
-            })
-          });
-        }
-        tree(data.bmList)
-      }).then(() => {
         // 获取单位信息，拼接数据
         Api.getDwInfo().then(res => {
           if(res['success']) {
@@ -97,6 +82,29 @@ export default defineComponent({
             ]
           }
         })
+      }).then(() => {
+        // 递归获取角色信息
+        function tree(item) {
+          item.forEach(element => {
+            if (element['bmbm']) {
+              Api.getJsList(element['bmbm']).then(res => {
+                const jsList = res['data']
+                jsList.map(js => {
+                  js.title = js['jsmc']
+                  js.key = js['jsbm']
+                  return js
+                })
+                if(element.children) {
+                  tree(element.children)
+                  element.children = [...element.children, ...jsList]
+                } else {
+                  element.children = jsList
+                }
+              })
+            }
+          });
+        }
+        tree(data.bmList)
       })
     }
     const serach = () => {
