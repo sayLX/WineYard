@@ -135,23 +135,24 @@ export default defineComponent({
     })
     // 点击节点
     const clickNode = (selectedKeys, e: { selected: boolean; selectedNodes; node; event } ) => { 
-      if(e.selectedNodes[0]['props']['dwbm']) {
-        clickData.dwbm = e.selectedNodes[0]['props']['dwbm']
-        clickData.bmbm = ''
-        clickData.jsbm = ''
+      if(selectedKeys.length != 0) {
+        if(e.selectedNodes[0]['props']['dwbm']) {
+          clickData.dwbm = e.selectedNodes[0]['props']['dwbm']
+          clickData.bmbm = ''
+          clickData.jsbm = ''
+        }
+        if(e.selectedNodes[0]['props']['bmbm']) {
+          clickData.bmbm = e.selectedNodes[0]['props']['bmbm']
+          clickData.dwbm = e.selectedNodes[0]['props']['dwbm']
+          clickData.jsbm = ''
+        }
+        if (e.selectedNodes[0]['props']['jsbm']){
+          clickData.jsbm = e.selectedNodes[0]['props']['jsbm']
+          clickData.bmbm = e.selectedNodes[0]['props']['bmbm']
+          clickData.dwbm = e.selectedNodes[0]['props']['dwbm']
+        }
+        ctx.emit('clickleft', clickData)
       }
-      if(e.selectedNodes[0]['props']['bmbm']) {
-        clickData.bmbm = e.selectedNodes[0]['props']['bmbm']
-        clickData.dwbm = e.selectedNodes[0]['props']['dwbm']
-        clickData.jsbm = ''
-      }
-      if (e.selectedNodes[0]['props']['jsbm']){
-        clickData.jsbm = e.selectedNodes[0]['props']['jsbm']
-        clickData.bmbm = e.selectedNodes[0]['props']['bmbm']
-        clickData.dwbm = e.selectedNodes[0]['props']['dwbm']
-      }
-      
-      ctx.emit('clickleft', clickData)
     }
 
     onMounted(() => {
