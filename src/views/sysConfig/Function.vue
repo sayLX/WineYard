@@ -203,9 +203,11 @@ export default defineComponent({
     const checkGnfl = (value) => {
       data.myGnfl = value
     }
+
     const addcheckGnfl = (value) => {
       data.addmyGnfl = value
     }
+
     // 查询
     const serach = () => {
       if ( data.myGnfl != null && data.myGnmc == '' ){

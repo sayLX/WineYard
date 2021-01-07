@@ -220,6 +220,43 @@ class UserApi {
     });
   }
 
+  // 获取单位部门列表
+  getBmList (bmmc='', fbmbm='') {
+    return request({
+      url: "/organization/dept/query",
+      method: "post",
+      data: {
+        dwbm: store.state['userInfo']['zzdwbm'],
+        bmmc,
+        fbmbm
+      }
+    });
+  }
+
+  // 获取单位信息
+  getDwInfo () {
+    return request({
+      url: "/organization/unit/get",
+      method: "post",
+      data: {
+        dwbm: store.state['userInfo']['zzdwbm']
+      }
+    });
+  }
+
+  // 获取单位角色列表
+  getJsList (bmbm) {
+    return request({
+      url: "/organization/role/query",
+      method: "post",
+      data: {
+        dwbm: store.state['userInfo']['zzdwbm'],
+        bmbm
+      }
+    });
+  }
+
+
 
   // 获取功能分类列表
   getGnflList() {
