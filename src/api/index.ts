@@ -26,6 +26,7 @@ class UserApi {
     });
   }
 
+  // 开发人员--刘鑫  共16个接口
   // 案件公开信息导入
   importCaseinfo(filepath: string) {
     return request({
@@ -193,6 +194,32 @@ class UserApi {
       data: data
     });
   }
+  // 组织机构
+  // 添加角色
+  addRole(data: { bmbm: string; dwbm: string; jsmc: string ;jsxh:number;spjsbm:string}) {
+    return request({
+      url: "/organization/role/add",
+      method: "post",
+      data: data
+    });
+  }
+  // 删除角色
+  deleteRole(data: { bmbm: string; dwbm: string; jsbm: string }) {
+    return request({
+      url: "/organization/role/delete",
+      method: "post",
+      data: data
+    });
+  }
+  // 删除部门
+  deleteDeparment(data: { bmbm: string; dwbm: string }) {
+    return request({
+      url: "/organization/dept/delete",
+      method: "post",
+      data: data
+    });
+  }
+
 
   // 获取功能分类列表
   getGnflList() {
@@ -323,7 +350,6 @@ class UserApi {
     });
   }
 
-  // 组织机构获取人员列表
-  get;
+
 }
 export const Api = new UserApi();
