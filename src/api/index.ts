@@ -166,12 +166,12 @@ class UserApi {
     });
   }
 
-  // 获取模板分类    错误的url
-  getTemplateClassList (requestData) {
+  // 获取模板分类列表
+  getTemplateClassList(data: object) {
     return request({
-      url: "/permission/gnfl/query",
+      url: "/message/mbfl/query",
       method: "post",
-      data: requestData
+      data: data
     });
   }
 
