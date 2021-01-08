@@ -1,5 +1,5 @@
 <template>
-  <a-button type="primary" @click="showModal">
+  <a-button type="primary" @click="showModal" :disabled="disabled">
     <template #icon><PlusOutlined /></template>{{title}}
   </a-button>
   <a-modal
@@ -36,7 +36,7 @@ export default {
   components: {
     PlusOutlined,
   },
-  props: ["title","tHead","personInfo","add"],
+  props: ["title","tHead","personInfo","add","disabled"],
   data() {
     return {
       visible: false,
@@ -89,9 +89,8 @@ export default {
       console.log(data)
       if (this.checkForm(data)) {
         // Api.addPersonInfo(data).then((res) => {
-        this.add().then((res) => {
-          parseInt(data.xh)
-          console.log(data)
+        this.add(data).then((res) => {
+          data.hasOwnProperty("xh")&&parseInt(data.xh)
           res.success && message.success('添加成功')&&this.handleCancel()
           !res.success && message.error(res.message)
         })

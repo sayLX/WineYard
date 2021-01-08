@@ -7,7 +7,7 @@
                   <org-left @clickleft='clickLeft'></org-left>
                 </el-aside>
                 <el-main class="right">
-                  <org-right></org-right>
+                  <org-right :organizationType="leftData"></org-right>
                 </el-main>
             </el-container>
         </div>
@@ -41,7 +41,8 @@ export default defineComponent({
 
     return {
       clickLeft,
-      ...toRefs(leftData)
+      ...toRefs(leftData),
+      leftData
     }
   }
 })

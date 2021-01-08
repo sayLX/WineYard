@@ -195,10 +195,85 @@ class UserApi {
     });
   }
   // 组织机构
+  // 获取部门信息
+  getDepartmentInfo(data: { bmbm: string; dwbm: string }) {
+    return request({
+      url: "/organization/dept/get",
+      method: "post",
+      data: data
+    });
+  }
+  // 获取人员角色分配列表
+  getPersonRoleList(data: {
+    bmbm: string;
+    dwbm: string;
+    jsbm: string;
+    mc: string;
+    pageIndex: number;
+    pageSize: number;
+  }) {
+    data.dwbm = store.state["userInfo"]["zzdwbm"];
+    return request({
+      url: "/organization/usergroup/query",
+      method: "post",
+      data: data
+    });
+  }
+  // 获取角色信息
+  getRoleInfo(data: { bmbm: string; dwbm: string; jsbm: string }) {
+    data.dwbm = store.state["userInfo"]["zzdwbm"];
+    return request({
+      url: "/organization/role/get",
+      method: "post",
+      data: data
+    });
+  }
   // 添加角色
-  addRole(data: { bmbm: string; dwbm: string; jsmc: string ;jsxh:number;spjsbm:string}) {
+  addRole(data: {
+    bmbm: string;
+    dwbm: string;
+    jsmc: string;
+    jsxh: number;
+    spjsbm: string;
+  }) {
     return request({
       url: "/organization/role/add",
+      method: "post",
+      data: data
+    });
+  }
+  // 修改角色信息
+  editRole(data: {
+    bmbm: string;
+    dwbm: string;
+    jsbm: string;
+    jsmc: string;
+    jsxh: number;
+    spjsbm: string;
+  }){
+    return request({
+      url: "/organization/role/update",
+      method: "post",
+      data: data
+    });
+  };
+  //查询权限
+  queryRight(data: { bmbm: string; dwbm: string; jsbm: string }) {
+    return request({
+      url: "/permission/role/get",
+      method: "post",
+      data: data
+    });
+  }
+  // 编辑权限
+  editRight(data: 	{
+		"bmbm": string,
+		"dwbm": string,
+		"gnbm": string,
+		"jsbm": string
+	}) {
+    return request({
+      url: "/permission/role/add",
       method: "post",
       data: data
     });
@@ -207,6 +282,34 @@ class UserApi {
   deleteRole(data: { bmbm: string; dwbm: string; jsbm: string }) {
     return request({
       url: "/organization/role/delete",
+      method: "post",
+      data: data
+    });
+  }
+  // 添加部门
+  addDeparment(data: {
+    bmmc: string;
+    dwbm: string;
+    bz: string;
+    bmxh: number;
+    fbmbm: string;
+  }) {
+    return request({
+      url: "/organization/dept/add",
+      method: "post",
+      data: data
+    });
+  }
+  // 编辑部门
+  editDeparment(data: {
+    bmmc: string;
+    dwbm: string;
+    bz: string;
+    bmxh: number;
+    bmbm: string;
+  }) {
+    return request({
+      url: "/organization/dept/update",
       method: "post",
       data: data
     });
@@ -221,12 +324,12 @@ class UserApi {
   }
 
   // 获取单位部门列表
-  getBmList (bmmc='', fbmbm='') {
+  getBmList(bmmc = "", fbmbm = "") {
     return request({
       url: "/organization/dept/query",
       method: "post",
       data: {
-        dwbm: store.state['userInfo']['zzdwbm'],
+        dwbm: store.state["userInfo"]["zzdwbm"],
         bmmc,
         fbmbm
       }
@@ -234,29 +337,27 @@ class UserApi {
   }
 
   // 获取单位信息
-  getDwInfo () {
+  getDwInfo() {
     return request({
       url: "/organization/unit/get",
       method: "post",
       data: {
-        dwbm: store.state['userInfo']['zzdwbm']
+        dwbm: store.state["userInfo"]["zzdwbm"]
       }
     });
   }
 
   // 获取单位角色列表
-  getJsList (bmbm) {
+  getJsList(bmbm) {
     return request({
       url: "/organization/role/query",
       method: "post",
       data: {
-        dwbm: store.state['userInfo']['zzdwbm'],
+        dwbm: store.state["userInfo"]["zzdwbm"],
         bmbm
       }
     });
   }
-
-
 
   // 获取功能分类列表
   getGnflList() {
@@ -386,7 +487,5 @@ class UserApi {
       data: data
     });
   }
-
-
 }
 export const Api = new UserApi();
