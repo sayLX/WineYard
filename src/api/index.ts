@@ -272,10 +272,11 @@ class UserApi {
 		"gnbm": string,
 		"jsbm": string
 	}) {
+    let mydata=[]
     return request({
       url: "/permission/role/add",
       method: "post",
-      data: data
+      data: mydata.push(data)
     });
   }
   // 删除角色
