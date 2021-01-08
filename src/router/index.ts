@@ -17,6 +17,11 @@ const routes = [
     component: () => import('../components/test.vue')
   },
   {
+    path: '/test2',
+    name: 'test2',
+    component: () => import('../components/test2.vue')
+  },
+  {
     path: '/menu',
     name: 'menu',
     meta: {
