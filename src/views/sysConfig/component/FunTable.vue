@@ -1,7 +1,7 @@
 <template>
   <a-table class="a-table" :columns="columns" :data-source="data"
-    :pagination='pagination'
     size="middle"
+    :pagination='false'
     tableLayout='fixed'
     :rowClassName="MyRowClassName"
     :defaultExpandAllRows='true'
@@ -97,6 +97,7 @@ export default defineComponent({
       type: Boolean,
       default: true
     },
+    gnTotle: Number,
     showCol8: {
       type: Boolean,
       default: false

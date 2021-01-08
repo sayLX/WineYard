@@ -37,7 +37,7 @@
                 </a-form>
             </div>
             <div class="table">
-              <fun-table :col="columns" :list="list" :size="10" :showCol8='true' :tableColor="false" @success='itemSuccess'>
+              <fun-table :col="columns" :list="list" :size="4" :gnTotle="gnTotle" :showCol8='true' :tableColor="false" @success='itemSuccess'>
               </fun-table>
             </div>
             <a-modal
@@ -92,7 +92,8 @@ export default defineComponent({
       myGnmc: '',
       gnflTree: [],
       dropdownList: [],
-      addmyGnfl: null
+      addmyGnfl: null,
+      gnTotle: 0
     })
     const list = computed(() => {
       return data.gnflTree
@@ -123,6 +124,7 @@ export default defineComponent({
     }
     // 递归遍历所有的功能分类，查询功能分类下所有的功能
     const getAllGndy = () => {
+      data.gnTotle = 0
       function ergodic (items) {
         items.forEach((item) => {
           // 这里进行格式转换
@@ -132,6 +134,7 @@ export default defineComponent({
             // 也获取一遍功能定义，加到children里面
              Api.getGndyList(item.flbm).then((res) => {
               if(res.data.length != 0) {
+                data.gnTotle = data.gnTotle + res.data.length
                 res.data.forEach(item => {
                   item.col1 = item.gnxh
                   item.col2 = item.gnmc
@@ -151,6 +154,7 @@ export default defineComponent({
             // 请求获取功能定义
             Api.getGndyList(item.flbm).then((res) => {
               if(res.data.length != 0) {
+                data.gnTotle = data.gnTotle + res.data.length
                 res.data.forEach(item => {
                   item.col1 = item.gnxh
                   item.col2 = item.gnmc
@@ -173,6 +177,7 @@ export default defineComponent({
       } else {
         // 直接获取功能就可以了
         Api.getGndyList(data.myGnfl).then((res) => {
+          data.gnTotle = data.gnTotle + res.data.length
           if(res.data.length != 0) {
             res.data.forEach(item => {
               item.col1 = item.gnxh
@@ -354,6 +359,9 @@ export default defineComponent({
     width: 100%;
     height: 100%;
     position: relative;
+    .body::-webkit-scrollbar{
+      display:none
+    }
     .body {
         position: absolute;
         left: 11px;
@@ -363,7 +371,7 @@ export default defineComponent({
         border: solid 1px #d8d7d7;
         display: flex;
         flex-direction: column;
-        overflow: hidden;
+        overflow: auto;
         .form {
           padding: 5px 20px;
           .input {

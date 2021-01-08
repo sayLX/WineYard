@@ -372,6 +372,20 @@ class UserApi {
     });
   }
 
+  // // 获取模板分类列表
+  // getTemplateClassList(data: object) {
+  //   return request({
+  //     url: "/message/mbfl/query",
+  //     method: "post",
+  //     data: data
+  //   });
+  // }
+
+  /**
+   * @auther 谢云周
+   * @number 13
+   */
+
   // 根据fflbm获取功能分类列表
   getGnflListByFflbm(fflbm) {
     return request({

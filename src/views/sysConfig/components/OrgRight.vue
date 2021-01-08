@@ -205,7 +205,7 @@ export default defineComponent({
     watch(props.organizationType, () => {
       console.log('开始监听了')
       // 显示点击对象信息
-      mytype = props.organizationType
+      const mytype = props.organizationType
       if (!!props.organizationType.jsbm) {
         getRoleInfo(mytype).then((res) => {
           organizationInfo.value1 = res.data['jsmc']
