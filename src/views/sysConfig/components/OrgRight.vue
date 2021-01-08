@@ -200,12 +200,14 @@ export default defineComponent({
       return props.organizationType
     })
     // 显示点击对象信息
-    let mytype = { bmbm: '', dwbm: '', jsbm: '' }
+    const mytype = reactive({ bmbm: '', dwbm: '', jsbm: '' })
 
     watch(props.organizationType, () => {
       console.log('开始监听了')
       // 显示点击对象信息
-      const mytype = props.organizationType
+      mytype.bmbm = props.organizationType['bmbm']
+      mytype.dwbm = props.organizationType['dwbm']
+      mytype.jsbm = props.organizationType['jsbm']
       if (!!props.organizationType.jsbm) {
         getRoleInfo(mytype).then((res) => {
           organizationInfo.value1 = res.data['jsmc']
@@ -298,7 +300,7 @@ export default defineComponent({
       bmxh: '部门序号',
       bz: '备注',
       dwbm: '单位编码',
-      fbmbm: '父部门编码',
+      // fbmbm: '父部门编码',
     }
     // 部门信息
     const deptInfo = {
@@ -306,7 +308,7 @@ export default defineComponent({
       bmxh: 1,
       bz: 'wu',
       dwbm: '980000',
-      fbmbm: '770',
+      // fbmbm: '770',
     }
     // 删除部门
     const deleteDeparment = () => {
@@ -328,6 +330,10 @@ export default defineComponent({
     }
     // 添加部门
     const addDeparment = (mydata) => {
+      // deptInfo.fbmbm=mydata["bmbm"]
+      mydata.fbmbm = mytype.bmbm
+      console.log("mydata")
+      console.log(mydata)
       return Api.addDeparment(mydata)
     }
     // 编辑部门
@@ -358,9 +364,6 @@ export default defineComponent({
     }
     // 编辑权限
     const editRight = () => {
-      // if(!!queryRight()){
-      //    rightInfo = queryRight()
-      // }
       console.log('查询数据')
       console.log(rightInfo)
       return Api.editRight(rightInfo)

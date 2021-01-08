@@ -87,9 +87,12 @@ export default {
     handleOk(data) {
       console.log("数据来了")
       console.log(data)
-      if (this.checkForm(data)) {
+      // if (this.checkForm(data)) {
+      if (1) {
         // Api.addPersonInfo(data).then((res) => {
         this.add(data).then((res) => {
+          console.log("asshuc fdsv a111111")
+          console.log(data)
           data.hasOwnProperty("xh")&&parseInt(data.xh)
           res.success && message.success('添加成功')&&this.handleCancel()
           !res.success && message.error(res.message)
