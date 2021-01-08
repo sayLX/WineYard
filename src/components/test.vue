@@ -8,7 +8,6 @@
       :default-selected-keys="['980000000008']"
       :default-open-keys="['980000000008']"
       mode="inline"
-      theme="dark"
       :inline-collapsed="collapsed"
     >
       <template v-for="item in gnflTree" :key="item.key">
@@ -24,76 +23,26 @@
       </template>
     </a-menu>
   </div>
-  <pre>{{gnflTree}}</pre>
 </template>
 
 <script lang='ts'>
 import { Api } from '@/api/index'
+import SubMenu from './SubMenu.vue'
 import {
   PieChartOutlined,
-  MailOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
-} from '@ant-design/icons-vue';
-const SubMenu = {
-  components: {
-    PieChartOutlined,
-    MailOutlined
-  },
-  template: `
-    <a-sub-menu :key="menuInfo.key" v-bind="$attrs">
-      <template #title>
-        <span>
-          <MailOutlined /><span>{{ menuInfo.title }}</span>
-        </span>
-      </template>
-      <template v-for="item in menuInfo.children" :key="item.key">
-        <template v-if="!item.children">
-          <a-menu-item :key="item.key">
-            <PieChartOutlined />
-            <span>{{ item.title }}</span>
-          </a-menu-item>
-        </template>
-        <template v-else>
-          <sub-menu :menu-info="item" :key="item.key" />
-        </template>
-      </template>
-    </a-sub-menu>
-  `,
-  name: 'SubMenu',
-  props: {
-    menuInfo: {
-      type: Object,
-      default: () => ({}),
-    },
-  },
-};
-
+} from '@ant-design/icons-vue'
 export default {
   data () {
     return {
-      gnflList: [
-        {
-          key: '1',
-          title: 'Option 1',
-        },
-        {
-          key: '2',
-          title: 'Navigation 2',
-          children: [
-            {
-              key: '2.1',
-              title: 'Navigation 3',
-              children: [{ key: '2.1.1', title: 'Option 2.1.1' }],
-            },
-          ],
-        },
-      ],
+      gnflList: [],
+      gnflTree: [],
       collapsed: false
     }
   },
   components: {
-    'sub-menu': SubMenu,
+    SubMenu,
     MenuFoldOutlined,
     MenuUnfoldOutlined,
     PieChartOutlined
