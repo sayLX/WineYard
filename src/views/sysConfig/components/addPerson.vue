@@ -1,9 +1,9 @@
 <template>
   <a-button type="primary" @click="showModal">
-    <template #icon><PlusOutlined /></template>添加
+    <template #icon><PlusOutlined /></template>{{title}}
   </a-button>
   <a-modal
-    title="添加人员信息"
+    :title="title"
     :visible="visible"
     ok-text="添加"
     @ok="handleOk(personInfo)"
@@ -13,10 +13,10 @@
     <div class="sms">
       <div
         class="type1"
-        v-for="(Key, index) in Object.keys(personInfoName)"
+        v-for="(Key, index) in Object.keys(tHead)"
         :key="index"
       >
-        <span>*{{ personInfoName[Key] }}</span>
+        <span style="width:150px">*{{ tHead[Key] }}</span>
         <input
           type="text"
           v-model="personInfo[Key]"
@@ -36,36 +36,37 @@ export default {
   components: {
     PlusOutlined,
   },
+  props: ["title","tHead","personInfo","add"],
   data() {
     return {
       visible: false,
       newTemplate: { type: '', name: '', content: '' },
-      personInfoName: {
-        dhhm: '电话号码',
-        dlbm: '登录别名',
-        dzyj: '电子邮件',
-        gzzh: '工作证号',
-        mc: '名称',
-        sflsry: '是否临时人员',
-        sfzh: '身份证号',
-        xb: '性别',
-        xh: '人员序号',
-        zzdwbm:"在职单位编码",
-        zzdwmc: '在职单位名称',
-      },
-      personInfo: {
-        dhhm: '13512345678',
-        dlbm: 'test1803',
-        dzyj: 'hjhk@thtf.com.cn',
-        gzzh: '980000001006',
-        mc: '测试账号1808',
-        sflsry: 'N',
-        sfzh: '510723198903050800',
-        xb: '0',
-        xh: "35",
-        zzdwbm:"980000",
-        zzdwmc: '汉东省院 【内部测试】',
-      },
+      // tHead: {
+      //   dhhm: '电话号码',
+      //   dlbm: '登录别名',
+      //   dzyj: '电子邮件',
+      //   gzzh: '工作证号',
+      //   mc: '名称',
+      //   sflsry: '是否临时人员',
+      //   sfzh: '身份证号',
+      //   xb: '性别',
+      //   xh: '人员序号',
+      //   zzdwbm:"在职单位编码",
+      //   zzdwmc: '在职单位名称',
+      // },
+      // personInfo: {
+      //   dhhm: '13512345678',
+      //   dlbm: 'test1803',
+      //   dzyj: 'hjhk@thtf.com.cn',
+      //   gzzh: '980000001006',
+      //   mc: '测试账号1808',
+      //   sflsry: 'N',
+      //   sfzh: '510723198903050800',
+      //   xb: '0',
+      //   xh: "35",
+      //   zzdwbm:"980000",
+      //   zzdwmc: '汉东省院 【内部测试】',
+      // },
     }
   },
   methods: {
@@ -84,8 +85,11 @@ export default {
     },
     //点击确定
     handleOk(data) {
+      console.log("数据来了")
+      console.log(data)
       if (this.checkForm(data)) {
-        Api.addPersonInfo(data).then((res) => {
+        // Api.addPersonInfo(data).then((res) => {
+        this.add().then((res) => {
           parseInt(data.xh)
           console.log(data)
           res.success && message.success('添加成功')&&this.handleCancel()

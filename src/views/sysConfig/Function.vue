@@ -78,7 +78,6 @@ import FunTable from './component/FunTable.vue'
 import TestData from '@/utils/testdata'
 import { message } from 'ant-design-vue';
 import { Api } from '@/api/index'
-
 export default defineComponent({
   name: '',
   components: {
@@ -99,7 +98,6 @@ export default defineComponent({
     const list = computed(() => {
       return data.gnflTree
     })
-
     // 根据功能分类列表 递归查询所有的功能分类 并生成一颗树
     const getGnflTree = (sfflbm = null) => {
       const fflbms = []
@@ -124,7 +122,6 @@ export default defineComponent({
       }
       data.gnflTree = tree(fflbm)
     }
-
     // 递归遍历所有的功能分类，查询功能分类下所有的功能
     const getAllGndy = () => {
       data.gnTotle = 0
@@ -198,7 +195,6 @@ export default defineComponent({
         })
       }
     }
-
     // 获取功能分类列表 然后获取所有数据
     const getGnflList = () => {
       Api.getGnflList().then((res) => {
@@ -208,7 +204,6 @@ export default defineComponent({
         getAllGndy()
       })
     }
-
     // 选择功能分类
     const checkGnfl = (value) => {
       data.myGnfl = value
@@ -224,7 +219,7 @@ export default defineComponent({
         // 根据分类编码查询功能分类
         Api.getGnflListByFflbm(data.myGnfl).then((res) => {
           if(res.data.length != 0) {
-            // 下面还有子分类 
+            // 下面还有子分类
             data.gnflList = res.data
             getGnflTree(data.myGnfl)
             getAllGndy()
@@ -285,12 +280,10 @@ export default defineComponent({
         getGnflList()
       }
     }
-
     // 初始查询所有
     onMounted(() => {
       getGnflList()
     })
-
     //对话框的数据
     const modalData = reactive({
       visible: false,
@@ -337,13 +330,11 @@ export default defineComponent({
       console.log('Clicked cancel button');
       modalData.visible = false;
     }
-
     const itemSuccess = () => {
       setTimeout(() => {
         getGnflList()
       },1000)
     }
-
     return {
       columns: TestData.FunOrg.columns,
       list,

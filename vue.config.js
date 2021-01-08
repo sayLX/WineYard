@@ -17,7 +17,7 @@ module.exports  = {
                 pathRewrite:{   // 去掉 路径中的  /api  的这一截
                     '^/api':''
                 }
-            },       
+            },
         },
 
     }

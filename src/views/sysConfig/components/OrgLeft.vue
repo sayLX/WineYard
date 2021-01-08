@@ -127,7 +127,7 @@ export default defineComponent({
         getBmList(data.fbmbm)
       }
     }
-    
+
     const clickData = reactive({
       dwbm: '',
       bmbm: '',
