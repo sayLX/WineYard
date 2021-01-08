@@ -1,15 +1,6 @@
 <template>
   <div class="r-top">
     <div class="btn_list">
-      <!-- 下级单位授权 -->
-      <!-- <a-button
-        type="primary"
-        @click="authorize"
-        :disabled="!!organizationType.jsbm"
-      >
-        <template #icon><ClusterOutlined /></template>
-        下级单位授权
-      </a-button> -->
       <!-- 添加部门 -->
       <add-person
         title="添加部门"
@@ -309,11 +300,12 @@ export default defineComponent({
       dwbm: '单位编码',
       fbmbm: '父部门编码',
     }
+    // 部门信息
     const deptInfo = {
       bmmc: '第一检察部',
       bmxh: 1,
       bz: 'wu',
-      dwbm: '770000',
+      dwbm: '980000',
       fbmbm: '770',
     }
     // 删除部门
@@ -379,11 +371,7 @@ export default defineComponent({
     }
     // 编辑角色
     const editRole = () => {
-      getRoleInfo(mytype).then((res) => {
-        const operateInfo = res.data
-        message.success('更改成功')
-        return Api.editRole(operateInfo)
-      })
+      return Api.editRole(Object.assign({},roleInfo,{jsbm:"12345"}))
     }
 
     return {

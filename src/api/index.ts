@@ -273,11 +273,12 @@ class UserApi {
 		"jsbm": string
 	}) {
     let mydata=[]
+    mydata.push(data)
     return request({
       url: "/permission/role/add",
       method: "post",
-      data: mydata.push(data)
-    });
+      data: mydata
+    })
   }
   // 删除角色
   deleteRole(data: { bmbm: string; dwbm: string; jsbm: string }) {
