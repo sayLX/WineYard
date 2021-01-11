@@ -21,9 +21,9 @@
       <!-- 添加角色 -->
       <add-person
         title="添加角色"
-        :tHead="deptThead"
-        :personInfo="deptInfo"
-        :add="addDeparment"
+        :tHead="roleThead"
+        :personInfo="roleInfo"
+        :add="addRole"
         :disabled="!organizationType.bmbm || !!organizationType.jsbm"
       ></add-person>
       <!-- 删除角色 -->
@@ -66,7 +66,7 @@
         <add-person
           title="编辑权限"
           :tHead="rightThead"
-          :personInfo="rightInfo"
+          :personInfo="rightData.rightInfo"
           :add="editRight"
         ></add-person>
       </div>
@@ -143,7 +143,6 @@ import {
 import {
   SearchOutlined,
   DeleteOutlined,
-  ClusterOutlined,
 } from '@ant-design/icons-vue'
 // import BaseTable from '@/components/BaseTable.vue'
 import TestData from '@/utils/testdata'
@@ -156,9 +155,7 @@ export default defineComponent({
   components: {
     SearchOutlined,
     DeleteOutlined,
-    ClusterOutlined,
     AddPerson,
-    // EditPersonInfo,
   },
   props: {
     organizationType: {
@@ -279,22 +276,41 @@ export default defineComponent({
       queryPerson()
       getOrganizationInfo()
     })
-    // 添加角色信息
+    // 角色信息
     const roleThead = {
-      bmbm: '部门编码',
-      dwbm: '单位编码',
+      // dwbm:"单位编码",
+      // bmbm:"部门编码",
       jsmc: '角色名称',
       jsxh: '角色序号',
       spjsbm: '审批角色编码',
     }
     const roleInfo = {
-      bmbm: '0001',
-      dwbm: '980000',
+      // dwbm:mytype.dwbm,
+      // bmbm:mytype.bmbm,
       jsmc: '角色1',
       jsxh: 1,
       spjsbm: '1',
     }
-    // 添加部门信息
+    // 删除角色
+    const deleteRole = () => {
+      const mydata: { dwbm: string; bmbm: string; jsbm: string } = mytype
+      Api.deleteRole(mydata).then((res) => {
+        res['success'] && message.success('删除成功')
+      })
+    }
+    // 添加角色
+    const addRole = (mydata) => {
+      mydata.dwbm=mytype.dwbm
+      mydata.bmbm=mytype.bmbm
+      return Api.addRole(mydata)
+    }
+    // 编辑角色
+    const editRole = () => {
+      const mydata=Object.assign({},roleInfo,{jsbm:"12345"},{bmbm:mytype.bmbm,dwbm:mytype.dwbm})
+      return Api.editRole(mydata)
+    }
+
+    // 部门信息
     const deptThead = {
       bmmc: '部门名称',
       bmxh: '部门序号',
@@ -302,31 +318,18 @@ export default defineComponent({
       dwbm: '单位编码',
       // fbmbm: '父部门编码',
     }
-    // 部门信息
     const deptInfo = {
       bmmc: '第一检察部',
       bmxh: 1,
       bz: 'wu',
       dwbm: '980000',
-      // fbmbm: '770',
     }
     // 删除部门
     const deleteDeparment = () => {
-      const mydata: { dwbm: string; bmbm: string } = Type.value
+      const mydata: { dwbm: string; bmbm: string } = mytype
       Api.deleteDeparment(mydata).then((res) => {
         res['success'] && message.success('删除成功')
       })
-    }
-    // 删除角色
-    const deleteRole = () => {
-      const mydata: { dwbm: string; bmbm: string; jsbm: string } = Type.value
-      Api.deleteRole(mydata).then((res) => {
-        res['success'] && message.success('删除成功')
-      })
-    }
-    // 添加角色
-    const addRole = (mydata) => {
-      return Api.addRole(mydata)
     }
     // 添加部门
     const addDeparment = (mydata) => {
@@ -346,41 +349,29 @@ export default defineComponent({
       gnbm: '功能编码',
       jsbm: '角色编码',
     }
-    const rightInfo = {
-      bmbm: '1234',
-      dwbm: '123456',
-      gnbm: '1111111111',
-      jsbm: '123',
-    }
+    // 权限信息
+    const rightData = reactive({
+      rightInfo:{
+        bmbm: '1234',
+        dwbm: '123456',
+        gnbm: '1111111111',
+        jsbm: '123',
+      }
+    })
     // 查询权限
     const queryRight = () => {
-      let result={}
       Api.queryRight(mytype).then((res) => {
-        console.log('权限数据')
-        console.log(res.data)
-        result=res.data
+        rightData.rightInfo=res.data
       })
-      return result
     }
     // 编辑权限
     const editRight = () => {
-      console.log('查询数据')
-      console.log(rightInfo)
-      return Api.editRight(rightInfo)
-    }
-    // 授权
-    const authorize = () => {
-      //
-    }
-    // 编辑角色
-    const editRole = () => {
-      return Api.editRole(Object.assign({},roleInfo,{jsbm:"12345"}))
+      return Api.editRight(rightData.rightInfo)
     }
 
     return {
       columns: TestData.OrgOrg.columns,
       list: TestData.OrgOrg.dataCol,
-      // organizationType,
       Type,
       mytype,
       roleThead,
@@ -389,11 +380,10 @@ export default defineComponent({
       deptInfo,
       itemName,
       rightThead,
-      rightInfo,
+      rightData,
       ...toRefs(personData),
       ...toRefs(getOrganizationData),
       ...toRefs(organizationInfo),
-
       currentPage,
       getPersonList,
       getOrganizationInfo,
@@ -402,7 +392,6 @@ export default defineComponent({
       deleteDeparment,
       deleteRole,
       editRole,
-      authorize,
       addDeparment,
       editDeparment,
       addRole,
