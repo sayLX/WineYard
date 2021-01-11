@@ -267,12 +267,12 @@ class UserApi {
   }
   // 编辑权限
   editRight(data: 	{
-		"bmbm": string,
-		"dwbm": string,
-		"gnbm": string,
-		"jsbm": string
+		"bmbm": string;
+		"dwbm": string;
+		"gnbm": string;
+		"jsbm": string;
 	}) {
-    let mydata=[]
+    const mydata=[]
     mydata.push(data)
     return request({
       url: "/permission/role/add",

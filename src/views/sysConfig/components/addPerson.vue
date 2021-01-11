@@ -19,7 +19,7 @@
         <span style="width:150px">*{{ tHead[Key] }}</span>
         <input
           type="text"
-          v-model="personInfo[Key]"
+          v-model="person"
           style="margin-bottom: 5px; text-indent: 10px"
         />
       </div>
@@ -37,6 +37,16 @@ export default {
     PlusOutlined,
   },
   props: ["title","tHead","personInfo","add","disabled"],
+  computed: {
+    person: {
+      get: () => {
+        return this.personInfo
+      },
+      set: (value) => {
+        return value
+      }
+    }
+  },
   data() {
     return {
       visible: false,
