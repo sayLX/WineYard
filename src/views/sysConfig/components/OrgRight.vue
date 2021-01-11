@@ -151,8 +151,7 @@ import {
 } from 'vue'
 import {
   SearchOutlined,
-  DeleteOutlined,
-  ClusterOutlined,
+  DeleteOutlined
 } from '@ant-design/icons-vue'
 // import BaseTable from '@/components/BaseTable.vue'
 import TestData from '@/utils/testdata'
@@ -165,7 +164,6 @@ export default defineComponent({
   components: {
     SearchOutlined,
     DeleteOutlined,
-    ClusterOutlined,
     AddPerson,
     // EditPersonInfo,
   },
@@ -209,7 +207,7 @@ export default defineComponent({
       return props.organizationType
     })
     // 显示点击对象信息
-    let mytype = { bmbm: '', dwbm: '', jsbm: '' }
+    const mytype = { bmbm: '', dwbm: '', jsbm: '' }
 
     watch(props.organizationType, () => {
       console.log('开始监听了')
@@ -318,15 +316,15 @@ export default defineComponent({
     }
     // 删除部门
     const deleteDeparment = () => {
-      const mydata: { dwbm: string; bmbm: string } = Type.value
-      Api.deleteDeparment(mydata).then((res) => {
+      const mydata = Type.value
+      Api.deleteDeparment(mydata as { dwbm: string; bmbm: string }).then((res) => {
         res['success'] && message.success('删除成功')
       })
     }
     // 删除角色
     const deleteRole = () => {
-      const mydata: { dwbm: string; bmbm: string; jsbm: string } = Type.value
-      Api.deleteRole(mydata).then((res) => {
+      const mydata = Type.value
+      Api.deleteRole(mydata as { dwbm: string; bmbm: string; jsbm: string }).then((res) => {
         res['success'] && message.success('删除成功')
       })
     }
