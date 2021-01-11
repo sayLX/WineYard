@@ -1,12 +1,12 @@
 <template>
   <a-button type="primary" @click="showModal" :disabled="disabled">
-    <template #icon><PlusOutlined /></template>{{title}}
+    <template #icon><PlusOutlined /></template>{{ title }}
   </a-button>
   <a-modal
     :title="title"
     :visible="visible"
     ok-text="确定"
-    @ok="handleOk(personInfo)"
+    @ok="handleOk(person)"
     @cancel="handleCancel()"
     width="740px"
   >
@@ -16,10 +16,10 @@
         v-for="(Key, index) in Object.keys(tHead)"
         :key="index"
       >
-        <span style="width:150px">*{{ tHead[Key] }}</span>
+        <span style="width: 150px">*{{ tHead[Key] }}</span>
         <input
           type="text"
-          v-model="person"
+          v-model="person[Key]"
           style="margin-bottom: 5px; text-indent: 10px"
         />
       </div>
@@ -37,15 +37,37 @@ export default {
     PlusOutlined,
   },
   props: ["title","tHead","personInfo","add","disabled"],
+  // props: {
+  //   title: {
+  //     type: String,
+  //     default: '',
+  //   },
+  //   tHead:{
+  //     type:Object,
+  //     default:()=>{return {}},
+  //   },
+  //   personInfo:{
+  //     type:Object,
+  //     default:()=>{return {}},
+  //   },
+  //   add:{
+  //     type:Function,
+  //     default:()=>{return Promise},
+  //   },
+  //   disabled:{
+  //     type:Boolean,
+  //     default:true},
+  //   },
+
   computed: {
     person: {
-      get: () => {
+      get: function (){
         return this.personInfo
       },
       set: (value) => {
         return value
-      }
-    }
+      },
+    },
   },
   data() {
     return {
@@ -95,12 +117,12 @@ export default {
     },
     //点击确定
     handleOk(data) {
-      console.log("数据来了")
+      console.log('数据来了')
       if (this.checkForm(data)) {
         console.log(data)
         this.add(data).then((res) => {
-          data.hasOwnProperty("xh")&&parseInt(data.xh)
-          res.success && message.success('操作成功')&&this.handleCancel()
+          data.hasOwnProperty('xh') && parseInt(data.xh)
+          res.success && message.success('操作成功') && this.handleCancel()
           !res.success && message.error(res.message)
         })
       } else {
