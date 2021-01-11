@@ -300,6 +300,8 @@ export default defineComponent({
     }
     // 添加角色
     const addRole = (mydata) => {
+      console.log("mytype")
+      console.log(mytype)
       mydata.dwbm=mytype.dwbm
       mydata.bmbm=mytype.bmbm
       return Api.addRole(mydata)
@@ -335,8 +337,6 @@ export default defineComponent({
     const addDeparment = (mydata) => {
       // deptInfo.fbmbm=mydata["bmbm"]
       mydata.fbmbm = mytype.bmbm
-      console.log("mydata")
-      console.log(mydata)
       return Api.addDeparment(mydata)
     }
     // 编辑部门
