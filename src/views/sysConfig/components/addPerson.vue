@@ -5,7 +5,7 @@
   <a-modal
     :title="title"
     :visible="visible"
-    ok-text="添加"
+    ok-text="确定"
     @ok="handleOk(personInfo)"
     @cancel="handleCancel()"
     width="740px"
@@ -86,12 +86,11 @@ export default {
     //点击确定
     handleOk(data) {
       console.log("数据来了")
-      console.log(data)
       if (this.checkForm(data)) {
-        // Api.addPersonInfo(data).then((res) => {
+        console.log(data)
         this.add(data).then((res) => {
           data.hasOwnProperty("xh")&&parseInt(data.xh)
-          res.success && message.success('添加成功')&&this.handleCancel()
+          res.success && message.success('操作成功')&&this.handleCancel()
           !res.success && message.error(res.message)
         })
       } else {
@@ -102,9 +101,9 @@ export default {
     handleCancel() {
       setTimeout(() => {
         // 清空用户输入的数据
-        for (const key of Object.keys(this.personInfo)) {
-          this.personInfo[key] = ''
-        }
+        // for (const key of Object.keys(this.personInfo)) {
+        //   this.personInfo[key] = ''
+        // }
         this.visible = false
         this.confirmLoading = false
       }, 100)
