@@ -250,13 +250,13 @@ class UserApi {
     jsmc: string;
     jsxh: number;
     spjsbm: string;
-  }){
+  }) {
     return request({
       url: "/organization/role/update",
       method: "post",
       data: data
     });
-  };
+  }
   //查询权限
   queryRight(data: { bmbm: string; dwbm: string; jsbm: string }) {
     return request({
@@ -265,20 +265,32 @@ class UserApi {
       data: data
     });
   }
+  // 获取功能定义信息
+  getGndy(gnbm: string) {
+    return request({
+      url: "/permission/gndy/get",
+      method: "post",
+      data: {gnbm:gnbm}
+    });
+  }
   // 编辑权限
-  editRight(data: 	{
-		"bmbm": string;
-		"dwbm": string;
-		"gnbm": string;
-		"jsbm": string;
-	}) {
-    const mydata=[]
-    mydata.push(data)
+  editRight(
+    data: [
+      {
+        bmbm: string;
+        dwbm: string;
+        gnbm: string;
+        jsbm: string;
+      }
+    ]
+  ) {
+    // const mydata=[]
+    // mydata.push(data)
     return request({
       url: "/permission/role/add",
       method: "post",
-      data: mydata
-    })
+      data: data
+    });
   }
   // 删除角色
   deleteRole(data: { bmbm: string; dwbm: string; jsbm: string }) {
@@ -435,13 +447,13 @@ class UserApi {
   }
 
   // 获取功能定义列表
-  getGndyList(flbm) {
+  getGndyList(flbm: string) {
     return request({
       url: "/permission/gndy/query",
       method: "post",
       data: {
         dwbm: store.state["userInfo"]["zzdwbm"],
-        flbm
+        flbm: flbm
       }
     });
   }

@@ -63,12 +63,7 @@
           :personInfo="roleInfo"
           :add="editRole"
         ></add-person>
-        <add-person
-          title="编辑权限"
-          :tHead="rightThead"
-          :personInfo="rightData.rightInfo"
-          :add="editRight"
-        ></add-person>
+        <edit-right title="编辑权限" :roleInfo="mytype"></edit-right>
       </div>
     </div>
   </div>
@@ -140,14 +135,10 @@ import {
   toRefs,
   watch,
 } from 'vue'
-import {
-  SearchOutlined,
-  DeleteOutlined,
-} from '@ant-design/icons-vue'
-// import BaseTable from '@/components/BaseTable.vue'
+import { SearchOutlined, DeleteOutlined } from '@ant-design/icons-vue'
 import TestData from '@/utils/testdata'
 import AddPerson from '@/views/sysConfig/components/addPerson.vue'
-// import EditPersonInfo from '@/views/sysConfig/components/editPersonInfo.vue'
+import EditRight from '@/views/sysConfig/components/editRight.vue'
 import { Api } from '@/api/index'
 import { message } from 'ant-design-vue'
 export default defineComponent({
@@ -156,6 +147,7 @@ export default defineComponent({
     SearchOutlined,
     DeleteOutlined,
     AddPerson,
+    EditRight,
   },
   props: {
     organizationType: {
@@ -300,15 +292,20 @@ export default defineComponent({
     }
     // 添加角色
     const addRole = (mydata) => {
-      console.log("mytype")
+      console.log('mytype')
       console.log(mytype)
-      mydata.dwbm=mytype.dwbm
-      mydata.bmbm=mytype.bmbm
+      mydata.dwbm = mytype.dwbm
+      mydata.bmbm = mytype.bmbm
       return Api.addRole(mydata)
     }
     // 编辑角色
     const editRole = () => {
-      const mydata=Object.assign({},roleInfo,{jsbm:"12345"},{bmbm:mytype.bmbm,dwbm:mytype.dwbm})
+      const mydata = Object.assign(
+        {},
+        roleInfo,
+        { jsbm: '12345' },
+        { bmbm: mytype.bmbm, dwbm: mytype.dwbm }
+      )
       return Api.editRole(mydata)
     }
 
@@ -351,23 +348,13 @@ export default defineComponent({
     }
     // 权限信息
     const rightData = reactive({
-      rightInfo:{
+      rightInfo: {
         bmbm: '1234',
         dwbm: '123456',
         gnbm: '1111111111',
         jsbm: '123',
-      }
+      },
     })
-    // 查询权限
-    const queryRight = () => {
-      Api.queryRight(mytype).then((res) => {
-        rightData.rightInfo=res.data
-      })
-    }
-    // 编辑权限
-    const editRight = () => {
-      return Api.editRight(rightData.rightInfo)
-    }
 
     return {
       columns: TestData.OrgOrg.columns,
@@ -395,8 +382,6 @@ export default defineComponent({
       addDeparment,
       editDeparment,
       addRole,
-      editRight,
-      queryRight,
     }
   },
 })
