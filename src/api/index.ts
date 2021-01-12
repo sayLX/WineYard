@@ -236,6 +236,7 @@ class UserApi {
     jsxh: number;
     spjsbm: string;
   }) {
+    data.dwbm = store.state["userInfo"]["zzdwbm"];
     return request({
       url: "/organization/role/add",
       method: "post",
@@ -270,7 +271,7 @@ class UserApi {
     return request({
       url: "/permission/gndy/get",
       method: "post",
-      data: {gnbm:gnbm}
+      data: { gnbm: gnbm }
     });
   }
   // 编辑权限
@@ -284,8 +285,6 @@ class UserApi {
       }
     ]
   ) {
-    // const mydata=[]
-    // mydata.push(data)
     return request({
       url: "/permission/role/add",
       method: "post",
@@ -383,15 +382,21 @@ class UserApi {
       }
     });
   }
-
-  // // 获取模板分类列表
-  // getTemplateClassList(data: object) {
-  //   return request({
-  //     url: "/message/mbfl/query",
-  //     method: "post",
-  //     data: data
-  //   });
-  // }
+  // 添加人员角色分配
+  addRolePerson(data: {
+    bmbm: string;
+    dwbm: string;
+    jsbm: string;
+    rybm: string;
+    ryxh: string;
+    zjldbm: string;
+  }) {
+    return request({
+      url: "/organization/usergroup/add",
+      method: "post",
+      data: data
+    });
+  }
 
   /**
    * @auther 谢云周
