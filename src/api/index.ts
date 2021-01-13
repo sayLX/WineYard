@@ -14,15 +14,11 @@ class UserApi {
     });
   }
   //登陆
-  login(dlbm: string, kl: string, zzdwbm: string) {
+  login(data: { dlbm: string; kl: string; zzdwbm: string }) {
     return request({
       url: "/organization/user/login",
       method: "post",
-      data: {
-        dlbm: dlbm,
-        kl: kl,
-        zzdwbm: zzdwbm
-      }
+      data: data
     });
   }
 
@@ -72,7 +68,7 @@ class UserApi {
 
   // 获取单位人员列表（人员管理）
   getOrganization(data: {
-    curent: number;
+    current: number;
     gzzh: string;
     mc: string;
     size: number;

@@ -87,7 +87,7 @@ export default ({
     const router = useRouter()
     const store = useStore()
     const login = () => {
-      Api.login('test1803','111111','980000').then((res) => {
+      Api.login(data.loginForm).then((res) => {
         // 将获取到的信息保存在sessionStorage中
         window.sessionStorage.setItem('user_info', res.data)
         // 同时将用户信息保存在vuex中

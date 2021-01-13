@@ -106,7 +106,7 @@
           :class="item.key"
           >{{ item.value }}
         </a-col>
-        <a-col span="3">操作</a-col>
+        <!-- <a-col span="3">操作</a-col> -->
       </a-row>
       <!-- 列表项 -->
       <a-row
@@ -123,6 +123,10 @@
         </a-col>
       </a-row>
     </div>
+    <a-pagination
+      v-model:current="current"
+      :total="total"
+    />
   </div>
 </template>
 
@@ -149,7 +153,7 @@ export default defineComponent({
     DeleteOutlined,
     AddPerson,
     EditRight,
-    AddRolePerson
+    AddRolePerson,
   },
   props: {
     organizationType: {
@@ -190,11 +194,9 @@ export default defineComponent({
     const Type = computed(() => {
       return props.organizationType
     })
+
     // 显示点击对象信息
     const mytype = reactive({ bmbm: '', dwbm: '', jsbm: '' })
-    const personData = reactive({
-      personList: [],
-    })
 
     // 获取人员列表
     const itemName = [
@@ -205,7 +207,13 @@ export default defineComponent({
       { key: 'zzdwmc', value: '电话号码', span: '4' },
       { key: 'dzyj', value: '电子邮件', span: '4' },
     ]
-    const currentPage = { mc: '', pageSize: 10, pageIndex: 1 }
+    const personData = reactive({
+      personList: [],
+      total:0
+    })
+
+    // 获取角色人员列表
+    const currentPage = { mc: '', pageSize: 5, pageIndex: 1 }
     const getPersonList = () => {
       const mydata = Object.assign({}, mytype, currentPage)
       Api.getPersonRoleList(mydata).then((res) => {
@@ -214,6 +222,7 @@ export default defineComponent({
         }
       })
     }
+
     // 监听当前点击对象
     watch(props.organizationType, () => {
       console.log('开始监听了')
@@ -254,10 +263,10 @@ export default defineComponent({
 
     // 输入框查询人员
     const getOrganizationData = reactive({
-      curent: 1,
+      current: 1,
       gzzh: '',
       mc: '',
-      size: 10,
+      size: 5,
       zzdwbm: '',
     })
     // 获取单位人员列表
@@ -265,8 +274,13 @@ export default defineComponent({
       const mydata = getOrganizationData
       Api.getOrganization(mydata).then((res) => {
         personData.personList = res.data.entities
-        })
-      }
+        personData.total = res.data.total
+      })
+    }
+    // 点击页数时请求新的人员列表
+    watch(getOrganizationData,()=>{
+      queryPerson()
+    })
 
     // 预加载本单位所有人员及单位信息
     onMounted(() => {
@@ -433,6 +447,7 @@ export default defineComponent({
   margin-top: 0;
   display: flex;
   flex-direction: column;
+  position: relative;
   .form {
     padding: 5px 20px;
     display: flex;
@@ -444,6 +459,13 @@ export default defineComponent({
   .person-list {
     flex: 1;
     padding: 10px;
+  }
+  // 分页框
+  .ant-pagination {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
   }
 }
 .title {

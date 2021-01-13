@@ -37,27 +37,6 @@ export default {
     PlusOutlined,
   },
   props: ["title","tHead","personInfo","add","disabled"],
-  // props: {
-  //   title: {
-  //     type: String,
-  //     default: '',
-  //   },
-  //   tHead:{
-  //     type:Object,
-  //     default:()=>{return {}},
-  //   },
-  //   personInfo:{
-  //     type:Object,
-  //     default:()=>{return {}},
-  //   },
-  //   add:{
-  //     type:Function,
-  //     default:()=>{return Promise},
-  //   },
-  //   disabled:{
-  //     type:Boolean,
-  //     default:true},
-  //   },
 
   computed: {
     person: {

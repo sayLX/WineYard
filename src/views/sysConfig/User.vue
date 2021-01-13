@@ -21,7 +21,13 @@
           </a-form-item>
           <a-form-item>
             <!-- 添加人员 -->
-            <addPerson :personInfo="personInfo" :tHead="personInfoName" title="添加人员信息"></addPerson>
+            <addPerson
+              :personInfo="personInfo"
+              :tHead="personInfoName"
+              title="添加人员信息"
+              :add="add"
+              :disabled="false"
+            ></addPerson>
           </a-form-item>
         </a-form>
       </div>
@@ -80,12 +86,13 @@
           >
         </a-row>
       </div>
+      <a-pagination v-model:current="current" :total="total" />
     </div>
   </div>
 </template>
 
 <script lang='ts'>
-import { defineComponent, onMounted, reactive, toRefs } from 'vue'
+import { defineComponent, onMounted, reactive, toRefs, watch } from 'vue'
 import PageTitle from '../../components/PageTitle.vue'
 import { SearchOutlined } from '@ant-design/icons-vue'
 import TestData from '@/utils/testdata'
@@ -99,19 +106,19 @@ export default defineComponent({
   components: {
     PageTitle,
     SearchOutlined,
-    // BaseTable,
     editPersonInfo,
     addPerson,
   },
   setup() {
     // 获取列表的请求数据
     const getOrganizationData = reactive({
-      curent: 1,
+      current: 1,
       gzzh: '',
       mc: '',
       size: 10,
       zzdwbm: '',
     })
+
     // 表头及列宽信息
     const itemName = [
       { key: 'xh', value: '序号', span: '2' },
@@ -167,6 +174,9 @@ export default defineComponent({
         data.total = res.data.total
       })
     }
+    watch(getOrganizationData, () => {
+      getPersonList()
+    })
     // 预加载所有人员
     onMounted(() => {
       getPersonList()
@@ -182,6 +192,9 @@ export default defineComponent({
           } else message.error('人员删除失败！稍后再试！')
         })
         .catch((err) => console.log(err))
+    }
+    const add = (mydata) => {
+      return Api.addPersonInfo(mydata)
     }
     // 重置人员密码
     const resetPersonPassword = (rybm: string) => {
@@ -213,6 +226,7 @@ export default defineComponent({
       resetPersonPassword,
       personInfoName,
       personInfo,
+      add,
       ...toRefs(data),
       ...toRefs(getOrganizationData),
     }
@@ -221,11 +235,11 @@ export default defineComponent({
 </script>
 
 <style lang='scss'>
-.ctx {
+ .ctx {
   width: 100%;
   height: 100%;
   position: relative;
-  .body {
+  /deep/ .body {
     position: absolute;
     left: 11px;
     right: 11px;
@@ -258,6 +272,12 @@ export default defineComponent({
           background-color: rgb(250, 250, 250);
         }
       }
+    }
+    .ant-pagination{
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
     }
   }
 }
