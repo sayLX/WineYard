@@ -73,7 +73,7 @@
 <script>
 import { SearchOutlined, PlusOutlined } from '@ant-design/icons-vue'
 import { Api } from '@/api/index.ts'
-// import { message } from 'ant-design-vue'
+import { message } from 'ant-design-vue'
 export default {
   name: 'addRolePerson',
   components: {
@@ -132,7 +132,7 @@ export default {
       const mydata = Object.assign({}, otherInfo, this.roleInfo)
       Api.addRolePerson(mydata).then((res) => {
         if (res.success) {
-          mess.success('添加成功！')
+          message.success('添加成功！')
           setTimeout(() => {
             this.visible = false
           }, 100)

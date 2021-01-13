@@ -198,8 +198,8 @@ export default defineComponent({
 
     // 获取人员列表
     const itemName = [
-      { key: 'xh', value: '序号', span: '2' },
-      { key: 'mc', value: '姓名', span: '2' },
+      { key: 'xh', value: '序号', span: '1' },
+      { key: 'mc', value: '姓名', span: '4' },
       { key: 'dlbm', value: '登录别名', span: '3' },
       { key: 'gzzh', value: '工作证号', span: '4' },
       { key: 'zzdwmc', value: '电话号码', span: '4' },
@@ -225,7 +225,7 @@ export default defineComponent({
         getRoleInfo(mytype).then((res) => {
           organizationInfo.value1 = res.data['jsmc']
           organizationInfo.value2 = res.data['jsxh']
-          organizationInfo.value3 = res.data['fbmbm']
+          organizationInfo.value3 = res.data['bmbm']
           organizationInfo.key1 = '角色名称'
           organizationInfo.key2 = '角色序号'
           organizationInfo.key3 = '所属部门'
@@ -461,6 +461,7 @@ $border: 1px solid #d8d7d7;
 .person-list {
   padding: 10px;
   padding-top: 0;
+  overflow: auto;
   .list-item {
     height: 40px;
     line-height: 40px;
