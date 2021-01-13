@@ -19,7 +19,7 @@
         <span style="width:150px">*{{ tHead[Key] }}</span>
         <input
           type="text"
-          v-model="person"
+          v-model="person[key]"
           style="margin-bottom: 5px; text-indent: 10px"
         />
       </div>
@@ -39,7 +39,7 @@ export default {
   props: ["title","tHead","personInfo","add","disabled"],
   computed: {
     person: {
-      get: () => {
+      get: function () {
         return this.personInfo
       },
       set: (value) => {

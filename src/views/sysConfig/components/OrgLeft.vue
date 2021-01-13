@@ -91,7 +91,7 @@ export default defineComponent({
                 const jsList = res['data']
                 jsList.map(js => {
                   js.title = js['jsmc']
-                  js.key = js['jsbm']
+                  js.key = js['bmbm'] + js['jsbm']
                   return js
                 })
                 if(element.children) {
