@@ -7,7 +7,7 @@
     </template>
     <template v-for="item in menuInfo.children" :key="item.key">
       <template v-if="!item.children">
-        <a-menu-item :key="item.key">
+        <a-menu-item :key="item.gndz">
           <PieChartOutlined />
           <span>{{ item.title }}</span>
         </a-menu-item>

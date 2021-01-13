@@ -95,6 +95,7 @@ export default ({
         store.commit('login', userInfo)
         store.dispatch('toMenu',userInfo['gnflList'])
         store.commit('toRouter', userInfo['gndyList'])
+        router.addRoute(store.state['myrouter'])
         router.push({name: 'homePage'})
       })
     }

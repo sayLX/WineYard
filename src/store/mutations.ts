@@ -17,6 +17,33 @@ export default {
           component: () => import(`../views${item['gndz']}.vue`)
         }
       })
-      state.myrouter = ll
+      const menu = {
+        path: '/menu',
+        name: 'menu',
+        meta: {
+          isLogin: true
+        },
+        component: () => import('../components/Menu.vue'),
+        children: [
+          {
+            path: '/',
+            name: 'homePage',
+            meta: {
+              isLogin: true
+            },
+            component: () => import('../views/home/Home.vue')
+          },
+          {
+            path: '/homePage',
+            name: 'homePage',
+            meta: {
+              isLogin: true
+            },
+            component: () => import('../views/home/Home.vue')
+          },
+          ...ll
+        ]
+      }
+      state.myrouter = menu
     }
  }
