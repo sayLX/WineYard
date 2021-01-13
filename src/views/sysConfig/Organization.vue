@@ -19,6 +19,8 @@ import { defineComponent, reactive, toRefs } from 'vue'
 import PageTitle from '../../components/PageTitle.vue'
 import OrgRight from './components/OrgRight.vue'
 import OrgLeft from './components/OrgLeft.vue';
+import store from "@/store/index";
+
 export default defineComponent({
   name: '',
   components: {
@@ -33,7 +35,7 @@ export default defineComponent({
       jsbm: ''
     })
     const clickLeft = (data) => {
-      leftData.dwbm = data.dwbm
+      leftData.dwbm = store.state["userInfo"]["zzdwbm"];
       leftData.bmbm = data.bmbm
       leftData.jsbm = data.jsbm
       console.log(leftData)

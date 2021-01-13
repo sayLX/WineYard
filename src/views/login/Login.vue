@@ -71,7 +71,7 @@ export default ({
       wrapperCol: { span: 14 },
       loginApi: '',
       loginForm: {
-        dlbm: 'test1803',
+        dlbm: 'test1813',
         zzdwbm: '980000',
         kl: '111111',
       },
@@ -87,15 +87,14 @@ export default ({
     const router = useRouter()
     const store = useStore()
     const login = () => {
-      Api.login('test1803','111111','980000').then((res) => {
+      Api.login(data.loginForm).then((res) => {
         // 将获取到的信息保存在sessionStorage中
         window.sessionStorage.setItem('user_info', res.data)
         // 同时将用户信息保存在vuex中
         const userInfo: UserInfo = res.data
-        // 将用户名存在sessionStorage
-        window.sessionStorage.setItem('userName',userInfo.mc)
-
         store.commit('login', userInfo)
+        store.dispatch('toMenu',userInfo['gnflList'])
+        store.commit('toRouter', userInfo['gndyList'])
         router.push({name: 'homePage'})
       })
     }

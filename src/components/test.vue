@@ -10,7 +10,7 @@
       mode="inline"
       :inline-collapsed="collapsed"
     >
-      <template v-for="item in gnflTree" :key="item.key">
+      <template v-for="item in this.$store.state['gnflTree']" :key="item.key">
         <template v-if="!item.children">
           <a-menu-item :key="item.key">
             <PieChartOutlined />
@@ -33,6 +33,7 @@ import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
 } from '@ant-design/icons-vue'
+
 export default {
   data () {
     return {
@@ -131,11 +132,9 @@ export default {
 
     // 获取功能分类列表 然后获取所有数据
     getGnflList () {
-      Api.getGnflList().then((res) => {
-        this.gnflList = res.data
-        this.getGnflTree()
-        this.getAllGndy()
-      })
+      this.gnflList = this.$store.state['userInfo']['gnflList']
+      this.getGnflTree()
+      this.getAllGndy()
     }
   }
 }

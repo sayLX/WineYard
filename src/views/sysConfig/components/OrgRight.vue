@@ -63,12 +63,7 @@
           :personInfo="roleInfo"
           :add="editRole"
         ></add-person>
-        <add-person
-          title="编辑权限"
-          :tHead="rightThead"
-          :personInfo="rightData.rightInfo"
-          :add="editRight"
-        ></add-person>
+        <edit-right title="编辑权限" :roleInfo="mytype"></edit-right>
       </div>
     </div>
   </div>
@@ -88,20 +83,20 @@
             <a-input placeholder="请输入" v-model:value="gzzh"> </a-input>
           </div>
         </a-form-item>
-        <a-form-item label="在职单位编码">
+        <!-- <a-form-item label="在职单位编码">
           <div class="input">
             <a-input placeholder="请输入" v-model:value="zzdwbm"> </a-input>
           </div>
-        </a-form-item>
+        </a-form-item> -->
         <a-form-item>
           <a-button type="primary" @click="queryPerson">
             <template #icon><SearchOutlined /></template>查询
           </a-button>
+          <add-role-person :roleInfo="mytype"></add-role-person>
         </a-form-item>
       </a-form>
     </div>
     <div class="person-list">
-      <!-- <base-table :col="columns" :list="list" :size="7"></base-table> -->
       <!-- 表头 -->
       <a-row class="list-head list-item" style="font-weight: bold">
         <a-col
@@ -140,14 +135,11 @@ import {
   toRefs,
   watch,
 } from 'vue'
-import {
-  SearchOutlined,
-  DeleteOutlined,
-} from '@ant-design/icons-vue'
-// import BaseTable from '@/components/BaseTable.vue'
+import { SearchOutlined, DeleteOutlined } from '@ant-design/icons-vue'
 import TestData from '@/utils/testdata'
 import AddPerson from '@/views/sysConfig/components/addPerson.vue'
-// import EditPersonInfo from '@/views/sysConfig/components/editPersonInfo.vue'
+import EditRight from '@/views/sysConfig/components/editRight.vue'
+import AddRolePerson from './addRolePerson.vue'
 import { Api } from '@/api/index'
 import { message } from 'ant-design-vue'
 export default defineComponent({
@@ -156,6 +148,8 @@ export default defineComponent({
     SearchOutlined,
     DeleteOutlined,
     AddPerson,
+    EditRight,
+    AddRolePerson
   },
   props: {
     organizationType: {
@@ -198,45 +192,14 @@ export default defineComponent({
     })
     // 显示点击对象信息
     const mytype = reactive({ bmbm: '', dwbm: '', jsbm: '' })
-
-    watch(props.organizationType, () => {
-      console.log('开始监听了')
-      // 显示点击对象信息
-      mytype.bmbm = props.organizationType['bmbm']
-      mytype.dwbm = props.organizationType['dwbm']
-      mytype.jsbm = props.organizationType['jsbm']
-      if (!!props.organizationType.jsbm) {
-        getRoleInfo(mytype).then((res) => {
-          organizationInfo.value1 = res.data['jsmc']
-          organizationInfo.value2 = res.data['jsxh']
-          organizationInfo.value3 = res.data['fbmbm']
-          organizationInfo.key1 = '角色名称'
-          organizationInfo.key2 = '角色序号'
-          organizationInfo.key3 = '所属部门'
-        })
-      } else if (!!props.organizationType.bmbm) {
-        getDeptInfo({
-          bmbm: mytype.bmbm,
-          dwbm: mytype.dwbm,
-        }).then((res) => {
-          organizationInfo.value1 = res.data['bmmc']
-          organizationInfo.value2 = res.data['bmbm']
-          organizationInfo.value3 = res.data['fbmbm']
-          organizationInfo.key1 = '部门名称'
-          organizationInfo.key2 = '部门编码'
-          organizationInfo.key3 = '父部门编码'
-        })
-      }
-    })
-
     const personData = reactive({
       personList: [],
     })
 
     // 获取人员列表
     const itemName = [
-      { key: 'xh', value: '序号', span: '2' },
-      { key: 'mc', value: '姓名', span: '2' },
+      { key: 'xh', value: '序号', span: '1' },
+      { key: 'mc', value: '姓名', span: '4' },
       { key: 'dlbm', value: '登录别名', span: '3' },
       { key: 'gzzh', value: '工作证号', span: '4' },
       { key: 'zzdwmc', value: '电话号码', span: '4' },
@@ -251,6 +214,43 @@ export default defineComponent({
         }
       })
     }
+    // 监听当前点击对象
+    watch(props.organizationType, () => {
+      console.log('开始监听了')
+      // 获取当前点击对象的信息
+      mytype.dwbm = props.organizationType['dwbm']
+      mytype.bmbm = props.organizationType['bmbm']
+      mytype.jsbm = props.organizationType['jsbm']
+      if (!!props.organizationType.jsbm) {
+        getRoleInfo(mytype).then((res) => {
+          organizationInfo.value1 = res.data['jsmc']
+          organizationInfo.value2 = res.data['jsxh']
+          organizationInfo.value3 = res.data['bmbm']
+          organizationInfo.key1 = '角色名称'
+          organizationInfo.key2 = '角色序号'
+          organizationInfo.key3 = '所属部门'
+        })
+      } else if (!!props.organizationType.bmbm) {
+        getDeptInfo({
+          bmbm: mytype.bmbm,
+          dwbm: mytype.dwbm,
+        }).then((res) => {
+          organizationInfo.value1 = res.data['bmmc']
+          organizationInfo.value2 = res.data['bmbm']
+          if (!!res.data['fbmbm']) {
+            organizationInfo.value3 = res.data['fbmbm']
+          } else {
+            organizationInfo.value3 = res.data['dwbm']
+          }
+          organizationInfo.key1 = '部门名称'
+          organizationInfo.key2 = '部门编码'
+          organizationInfo.key3 = '父部门编码'
+        })
+      } else {
+        getOrganizationInfo()
+      }
+      getPersonList()
+    })
 
     // 输入框查询人员
     const getOrganizationData = reactive({
@@ -260,17 +260,14 @@ export default defineComponent({
       size: 10,
       zzdwbm: '',
     })
-    // 获取人员列表，并将性别"1""0"分别转化成"男"""女"
+    // 获取单位人员列表
     const queryPerson = () => {
       const mydata = getOrganizationData
       Api.getOrganization(mydata).then((res) => {
-        personData.personList = res.data.entities.map((item) => {
-          if (item.xb == '0') item.xb = '女'
-          else item.xb = '男'
-          return item
+        personData.personList = res.data.entities
         })
-      })
-    }
+      }
+
     // 预加载本单位所有人员及单位信息
     onMounted(() => {
       queryPerson()
@@ -300,13 +297,20 @@ export default defineComponent({
     }
     // 添加角色
     const addRole = (mydata) => {
-      mydata.dwbm=mytype.dwbm
-      mydata.bmbm=mytype.bmbm
+      console.log('mytype')
+      console.log(mytype)
+      mydata.dwbm = mytype.dwbm
+      mydata.bmbm = mytype.bmbm
       return Api.addRole(mydata)
     }
     // 编辑角色
     const editRole = () => {
-      const mydata=Object.assign({},roleInfo,{jsbm:"12345"},{bmbm:mytype.bmbm,dwbm:mytype.dwbm})
+      const mydata = Object.assign(
+        {},
+        roleInfo,
+        { jsbm: '12345' },
+        { bmbm: mytype.bmbm, dwbm: mytype.dwbm }
+      )
       return Api.editRole(mydata)
     }
 
@@ -335,8 +339,6 @@ export default defineComponent({
     const addDeparment = (mydata) => {
       // deptInfo.fbmbm=mydata["bmbm"]
       mydata.fbmbm = mytype.bmbm
-      console.log("mydata")
-      console.log(mydata)
       return Api.addDeparment(mydata)
     }
     // 编辑部门
@@ -351,23 +353,13 @@ export default defineComponent({
     }
     // 权限信息
     const rightData = reactive({
-      rightInfo:{
+      rightInfo: {
         bmbm: '1234',
         dwbm: '123456',
         gnbm: '1111111111',
         jsbm: '123',
-      }
+      },
     })
-    // 查询权限
-    const queryRight = () => {
-      Api.queryRight(mytype).then((res) => {
-        rightData.rightInfo=res.data
-      })
-    }
-    // 编辑权限
-    const editRight = () => {
-      return Api.editRight(rightData.rightInfo)
-    }
 
     return {
       columns: TestData.OrgOrg.columns,
@@ -395,8 +387,6 @@ export default defineComponent({
       addDeparment,
       editDeparment,
       addRole,
-      editRight,
-      queryRight,
     }
   },
 })
@@ -471,6 +461,7 @@ $border: 1px solid #d8d7d7;
 .person-list {
   padding: 10px;
   padding-top: 0;
+  overflow: auto;
   .list-item {
     height: 40px;
     line-height: 40px;
