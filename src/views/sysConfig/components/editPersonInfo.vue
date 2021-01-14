@@ -17,7 +17,7 @@
         <span>*{{ personInfoName[Key] }}</span>
         <input
           type="text"
-          v-model="personInfo[Key]"
+          v-model="mypersonInfo[Key]"
           style="margin-bottom: 5px; text-indent: 10px"
         />
       </div>
@@ -36,6 +36,7 @@ export default {
       visible: false,
       confirmLoading: false,
       newTemplate: { type: '', name: '', content: '' },
+      mypersonInfo:this.personInfo,
       personInfoName: {
         dhhm: '电话号码',
         dlbm: '登录别名',
@@ -60,10 +61,10 @@ export default {
     //点击ok
     handleOk() {
       this.confirmLoading = true
-      if (this.personInfo.xb == '男') item.xb = '1'
+      if (this.mypersonInfo.xb == '男') item.xb = '1'
       // eslint-disable-next-line vue/no-mutating-props
-      else { this.personInfo.xb = '0' }
-      Api.editPersonInfo(this.personInfo).then((res) => {
+      else { this.mypersonInfo.xb = '0' }
+      Api.editPersonInfo(this.mypersonInfo).then((res) => {
         if (res.success) {
           setTimeout(() => {
             this.confirmLoading = false
@@ -95,14 +96,13 @@ export default {
   margin: 0 auto;
   margin-top: 25px;
   span {
-    width: 100px;
+    width: 120px;
     line-height: 34px;
     padding-right: 10px;
     display: inline-block;
     text-align: right;
   }
-  input,
-  select {
+  input{
     height: 34px;
     width: 400px;
     border: solid 1px #d8d7d7;
