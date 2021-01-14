@@ -92,7 +92,15 @@
 </template>
 
 <script lang='ts'>
-import { defineComponent, onMounted, reactive, toRefs, watch } from 'vue'
+import {
+  defineComponent,
+  onMounted,
+  reactive,
+  ref,
+  toRefs,
+  watch,
+  watchEffect,
+} from 'vue'
 import PageTitle from '../../components/PageTitle.vue'
 import { SearchOutlined } from '@ant-design/icons-vue'
 import TestData from '@/utils/testdata'
@@ -123,7 +131,7 @@ export default defineComponent({
     const itemName = [
       { key: 'xh', value: '序号', span: '2' },
       { key: 'xb', value: '性别', span: '2' },
-      { key: 'dlbm', value: '登录别名', span: '3' },
+      { key: 'mc', value: '名称', span: '3' },
       { key: 'gzzh', value: '工作证号', span: '4' },
       { key: 'dhhm', value: '电话号码', span: '4' },
       { key: 'dzyj', value: '电子邮件', span: '4' },
@@ -166,17 +174,27 @@ export default defineComponent({
     const getPersonList = () => {
       const mydata = getOrganizationData
       Api.getOrganization(mydata).then((res) => {
-        data.personList = res.data.entities.map((item) => {
-          if (item.xb == '0') item.xb = '女'
-          else item.xb = '男'
-          return item
-        })
-        data.total = res.data.total
+        if (!!res.data.entities) {
+          data.personList = res.data.entities.map((item) => {
+            if (item && item.xb == '0') item.xb = '女'
+            else if (item) {
+              item.xb = '男'
+            }
+            return item
+          })
+          data.total = res.data.total
+        } else {
+          message.warning('查询结果为空！')
+          data.personList=[]
+        }
       })
     }
-    watch(getOrganizationData, () => {
-      getPersonList()
-    })
+    watch(
+      () => getOrganizationData.current,
+      () => {
+        getPersonList()
+      }
+    )
     // 预加载所有人员
     onMounted(() => {
       getPersonList()
@@ -235,7 +253,7 @@ export default defineComponent({
 </script>
 
 <style lang='scss'>
- .ctx {
+.ctx {
   width: 100%;
   height: 100%;
   position: relative;
@@ -273,7 +291,7 @@ export default defineComponent({
         }
       }
     }
-    .ant-pagination{
+    .ant-pagination {
       position: absolute;
       bottom: 20px;
       left: 50%;

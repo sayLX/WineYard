@@ -62,7 +62,6 @@ export default {
     handleOk() {
       this.confirmLoading = true
       if (this.mypersonInfo.xb == '男') item.xb = '1'
-      // eslint-disable-next-line vue/no-mutating-props
       else { this.mypersonInfo.xb = '0' }
       Api.editPersonInfo(this.mypersonInfo).then((res) => {
         if (res.success) {
